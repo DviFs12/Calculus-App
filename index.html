@@ -1,0 +1,2176 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>∂ Calculus — Aprenda Cálculo</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,600;0,9..144,700;1,9..144,300&family=JetBrains+Mono:wght@400;500;700&family=Plus+Jakarta+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --ink: #1a1814;
+  --ink2: #4a4540;
+  --ink3: #8a847e;
+  --paper: #faf8f4;
+  --paper2: #f2ede5;
+  --paper3: #e8e0d4;
+  --line: #ddd5c8;
+  --accent: #c2410c;
+  --accent-bg: #fff3ee;
+  --accent2: #0369a1;
+  --accent2-bg: #f0f9ff;
+  --green: #15803d;
+  --green-bg: #f0fdf4;
+  --gold: #b45309;
+  --gold-bg: #fffbeb;
+  --radius: 12px;
+  --shadow: 0 2px 12px rgba(26,24,20,0.08);
+  --shadow-lg: 0 8px 32px rgba(26,24,20,0.12);
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  background: var(--paper);
+  color: var(--ink);
+  min-height: 100vh;
+  line-height: 1.6;
+}
+
+/* ─── LAYOUT ─── */
+#app {
+  display: grid;
+  grid-template-columns: 260px 1fr;
+  min-height: 100vh;
+}
+
+/* ─── SIDEBAR ─── */
+.sidebar {
+  background: var(--paper2);
+  border-right: 1px solid var(--line);
+  display: flex;
+  flex-direction: column;
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  overflow-y: auto;
+  padding: 0 0 20px;
+}
+
+.sidebar-brand {
+  padding: 28px 24px 20px;
+  border-bottom: 1px solid var(--line);
+  margin-bottom: 8px;
+}
+
+.brand-name {
+  font-family: 'Fraunces', serif;
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--ink);
+  letter-spacing: -0.5px;
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+}
+.brand-name .symbol {
+  color: var(--accent);
+  font-style: italic;
+}
+.brand-sub {
+  font-size: 0.75rem;
+  color: var(--ink3);
+  margin-top: 2px;
+  font-weight: 400;
+}
+
+/* PROGRESS OVERVIEW */
+.sidebar-stats {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+  padding: 12px 16px;
+  margin: 0 8px 8px;
+  background: var(--paper);
+  border-radius: var(--radius);
+  border: 1px solid var(--line);
+}
+.stat-item { text-align: center; }
+.stat-val {
+  font-family: 'Fraunces', serif;
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: var(--ink);
+  display: block;
+}
+.stat-val.orange { color: var(--accent); }
+.stat-val.blue { color: var(--accent2); }
+.stat-lbl { font-size: 0.68rem; color: var(--ink3); text-transform: uppercase; letter-spacing: 0.8px; }
+
+/* NAV UNITS */
+.nav-section-label {
+  font-size: 0.68rem;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  color: var(--ink3);
+  padding: 12px 24px 6px;
+  font-weight: 600;
+}
+
+.nav-unit { margin: 0 8px 2px; }
+
+.nav-unit-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 14px;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: background 0.15s;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--ink2);
+}
+.nav-unit-header:hover { background: var(--paper3); }
+.nav-unit-header.open { color: var(--ink); }
+
+.unit-dot {
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  background: var(--line);
+  flex-shrink: 0;
+  transition: background 0.2s;
+}
+.unit-dot.done { background: var(--green); }
+.unit-dot.active { background: var(--accent); }
+
+.nav-lessons {
+  display: none;
+  padding: 4px 0 4px 28px;
+  flex-direction: column;
+  gap: 1px;
+}
+.nav-lessons.open { display: flex; }
+
+.nav-lesson {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 7px 12px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 0.82rem;
+  color: var(--ink3);
+  transition: all 0.15s;
+}
+.nav-lesson:hover { background: var(--paper3); color: var(--ink2); }
+.nav-lesson.active { background: var(--accent-bg); color: var(--accent); font-weight: 600; }
+.nav-lesson.done { color: var(--ink2); }
+.nav-lesson.locked { opacity: 0.4; cursor: not-allowed; pointer-events: none; }
+
+.lesson-status {
+  width: 16px; height: 16px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.65rem;
+}
+
+/* ─── MAIN ─── */
+.main {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+/* TOP BAR */
+.topbar {
+  background: var(--paper);
+  border-bottom: 1px solid var(--line);
+  padding: 14px 32px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: sticky;
+  top: 0;
+  z-index: 50;
+}
+
+.topbar-breadcrumb {
+  font-size: 0.82rem;
+  color: var(--ink3);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.topbar-breadcrumb .crumb-active {
+  color: var(--ink);
+  font-weight: 500;
+}
+
+.topbar-right { display: flex; align-items: center; gap: 12px; }
+
+.xp-pill {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  background: var(--gold-bg);
+  border: 1px solid #fde68a;
+  border-radius: 100px;
+  padding: 4px 12px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--gold);
+  font-family: 'JetBrains Mono', monospace;
+}
+.streak-pill {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  background: var(--accent-bg);
+  border: 1px solid #fed7aa;
+  border-radius: 100px;
+  padding: 4px 12px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--accent);
+  font-family: 'JetBrains Mono', monospace;
+}
+
+/* ─── CONTENT VIEWS ─── */
+.view { display: none; }
+.view.active { display: block; }
+
+/* HOME */
+.home-view {
+  padding: 40px 48px;
+  max-width: 860px;
+}
+
+.home-greeting {
+  font-family: 'Fraunces', serif;
+  font-size: 2rem;
+  font-weight: 300;
+  color: var(--ink);
+  letter-spacing: -0.5px;
+  margin-bottom: 4px;
+}
+.home-greeting strong { font-weight: 700; }
+
+.home-sub { color: var(--ink3); font-size: 0.9rem; margin-bottom: 32px; }
+
+/* CONTINUE CARD */
+.continue-card {
+  background: var(--ink);
+  color: var(--paper);
+  border-radius: 16px;
+  padding: 28px 32px;
+  margin-bottom: 32px;
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s;
+  box-shadow: var(--shadow-lg);
+}
+.continue-card:hover { transform: translateY(-2px); box-shadow: 0 12px 40px rgba(26,24,20,0.2); }
+
+.continue-icon {
+  font-size: 2.5rem;
+  flex-shrink: 0;
+}
+.continue-info { flex: 1; }
+.continue-tag {
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  opacity: 0.6;
+  margin-bottom: 4px;
+}
+.continue-title {
+  font-family: 'Fraunces', serif;
+  font-size: 1.2rem;
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+.continue-prog-wrap {
+  height: 4px;
+  background: rgba(255,255,255,0.15);
+  border-radius: 100px;
+  width: 200px;
+}
+.continue-prog-fill {
+  height: 100%;
+  background: var(--paper);
+  border-radius: 100px;
+  transition: width 0.5s;
+}
+.continue-arrow {
+  font-size: 1.5rem;
+  opacity: 0.5;
+}
+
+/* UNITS OVERVIEW */
+.units-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 14px;
+  margin-bottom: 32px;
+}
+
+.unit-card {
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 20px;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+.unit-card:hover { border-color: var(--ink3); box-shadow: var(--shadow); }
+.unit-card.locked { opacity: 0.5; cursor: not-allowed; pointer-events: none; }
+
+.unit-card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 12px;
+}
+.unit-emoji { font-size: 1.5rem; }
+.unit-badge {
+  font-size: 0.7rem;
+  padding: 3px 8px;
+  border-radius: 100px;
+  font-weight: 600;
+}
+.unit-badge.done { background: var(--green-bg); color: var(--green); }
+.unit-badge.progress { background: var(--accent-bg); color: var(--accent); }
+.unit-badge.locked-b { background: var(--paper3); color: var(--ink3); }
+
+.unit-card-title {
+  font-family: 'Fraunces', serif;
+  font-size: 1rem;
+  font-weight: 600;
+  margin-bottom: 4px;
+}
+.unit-card-sub { font-size: 0.78rem; color: var(--ink3); margin-bottom: 14px; }
+
+.unit-prog-bar {
+  height: 4px;
+  background: var(--paper3);
+  border-radius: 100px;
+  overflow: hidden;
+}
+.unit-prog-fill {
+  height: 100%;
+  background: var(--accent);
+  border-radius: 100px;
+  transition: width 0.5s;
+}
+.unit-prog-fill.done { background: var(--green); }
+
+/* RECENT ACTIVITY */
+.section-title {
+  font-family: 'Fraunces', serif;
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin-bottom: 14px;
+  color: var(--ink);
+}
+
+/* ─── LESSON VIEW ─── */
+.lesson-view {
+  padding: 0;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.lesson-top {
+  padding: 16px 32px;
+  border-bottom: 1px solid var(--line);
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  background: var(--paper);
+}
+
+.lesson-prog-wrap {
+  flex: 1;
+  height: 6px;
+  background: var(--paper3);
+  border-radius: 100px;
+  overflow: hidden;
+}
+.lesson-prog-fill {
+  height: 100%;
+  background: var(--accent);
+  border-radius: 100px;
+  transition: width 0.4s cubic-bezier(.4,0,.2,1);
+}
+
+.lives { display: flex; gap: 3px; font-size: 0.9rem; }
+
+.lesson-body {
+  flex: 1;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding: 40px 24px;
+  overflow-y: auto;
+}
+
+/* THEORY CARD */
+.theory-card {
+  max-width: 680px;
+  width: 100%;
+  animation: fadeUp 0.3s ease;
+}
+
+.theory-header {
+  margin-bottom: 28px;
+}
+.theory-tag {
+  display: inline-block;
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: var(--accent2);
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+.theory-title {
+  font-family: 'Fraunces', serif;
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: var(--ink);
+  letter-spacing: -0.5px;
+  line-height: 1.2;
+}
+
+.theory-block { margin-bottom: 24px; }
+.theory-block h3 {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--ink2);
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  margin-bottom: 10px;
+}
+.theory-block p {
+  font-size: 0.95rem;
+  color: var(--ink2);
+  line-height: 1.8;
+  font-weight: 300;
+}
+.theory-block p strong { font-weight: 600; color: var(--ink); }
+
+.formula-box {
+  background: var(--ink);
+  color: #e8dfd0;
+  border-radius: 12px;
+  padding: 20px 28px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 1.05rem;
+  line-height: 1.7;
+  white-space: pre-wrap;
+  margin: 16px 0;
+  letter-spacing: 0.3px;
+}
+.formula-box .comment { color: #6e6860; }
+.formula-box .keyword { color: #f97316; }
+.formula-box .value { color: #86efac; }
+
+.callout {
+  display: flex;
+  gap: 12px;
+  background: var(--accent2-bg);
+  border-left: 3px solid var(--accent2);
+  border-radius: 0 10px 10px 0;
+  padding: 14px 18px;
+  margin: 16px 0;
+}
+.callout-icon { font-size: 1rem; flex-shrink: 0; margin-top: 1px; }
+.callout-text { font-size: 0.88rem; color: var(--accent2); line-height: 1.6; }
+
+.callout.warn {
+  background: var(--gold-bg);
+  border-left-color: var(--gold);
+}
+.callout.warn .callout-text { color: var(--gold); }
+
+.callout.tip {
+  background: var(--green-bg);
+  border-left-color: var(--green);
+}
+.callout.tip .callout-text { color: var(--green); }
+
+/* EXAMPLE BOX */
+.example-box {
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  overflow: hidden;
+  margin: 16px 0;
+}
+.example-header {
+  background: var(--paper3);
+  padding: 8px 16px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--ink3);
+}
+.example-body {
+  padding: 16px;
+  font-size: 0.9rem;
+  line-height: 1.7;
+  color: var(--ink2);
+}
+.example-body code {
+  font-family: 'JetBrains Mono', monospace;
+  background: var(--paper3);
+  padding: 1px 5px;
+  border-radius: 4px;
+  font-size: 0.85em;
+}
+
+/* QUESTION CARD */
+.question-card {
+  max-width: 620px;
+  width: 100%;
+  animation: fadeUp 0.3s ease;
+}
+
+.question-card .q-number {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: var(--ink3);
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.q-number::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: var(--line);
+}
+
+.q-formula {
+  background: var(--ink);
+  color: #e8dfd0;
+  border-radius: 12px;
+  padding: 18px 24px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 1rem;
+  line-height: 1.6;
+  margin-bottom: 20px;
+  white-space: pre-wrap;
+}
+
+.q-stem {
+  font-size: 1.05rem;
+  color: var(--ink);
+  margin-bottom: 24px;
+  line-height: 1.7;
+  font-weight: 300;
+}
+.q-stem strong { font-weight: 600; }
+
+/* MCQ OPTIONS */
+.options { display: flex; flex-direction: column; gap: 8px; }
+
+.option {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  background: var(--paper);
+  border: 1.5px solid var(--line);
+  border-radius: 10px;
+  padding: 12px 16px;
+  cursor: pointer;
+  transition: all 0.15s;
+  font-size: 0.92rem;
+  color: var(--ink2);
+}
+.option:hover:not(.disabled) {
+  border-color: var(--accent);
+  color: var(--ink);
+  background: var(--accent-bg);
+}
+.option.selected {
+  border-color: var(--accent);
+  background: var(--accent-bg);
+  color: var(--ink);
+}
+.option.correct {
+  border-color: var(--green);
+  background: var(--green-bg);
+  color: var(--green);
+}
+.option.wrong {
+  border-color: #ef4444;
+  background: #fef2f2;
+  color: #dc2626;
+}
+.option.disabled { cursor: default; }
+
+.opt-letter {
+  width: 28px; height: 28px;
+  border-radius: 7px;
+  background: var(--paper3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.75rem;
+  font-weight: 700;
+  font-family: 'JetBrains Mono', monospace;
+  flex-shrink: 0;
+  transition: all 0.15s;
+}
+.option.selected .opt-letter { background: rgba(194,65,12,0.15); }
+.option.correct .opt-letter { background: rgba(21,128,61,0.15); }
+.option.wrong .opt-letter { background: rgba(220,38,38,0.12); }
+
+/* INPUT QUESTION */
+.input-area { margin-top: 4px; }
+.input-label { font-size: 0.8rem; color: var(--ink3); margin-bottom: 8px; }
+.q-input-row { display: flex; gap: 10px; }
+
+.q-input {
+  flex: 1;
+  background: var(--paper);
+  border: 1.5px solid var(--line);
+  border-radius: 10px;
+  padding: 12px 16px;
+  font-size: 0.95rem;
+  font-family: 'JetBrains Mono', monospace;
+  color: var(--ink);
+  outline: none;
+  transition: border-color 0.15s;
+}
+.q-input:focus { border-color: var(--accent); }
+.q-input.correct { border-color: var(--green); background: var(--green-bg); }
+.q-input.wrong { border-color: #ef4444; background: #fef2f2; }
+.q-input:disabled { cursor: not-allowed; opacity: 0.8; }
+
+/* ORDERING QUESTION */
+.order-items { display: flex; flex-direction: column; gap: 6px; }
+.order-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: var(--paper);
+  border: 1.5px solid var(--line);
+  border-radius: 10px;
+  padding: 11px 16px;
+  font-size: 0.88rem;
+  font-family: 'JetBrains Mono', monospace;
+  color: var(--ink2);
+  cursor: grab;
+  user-select: none;
+  transition: all 0.15s;
+}
+.order-item:hover { border-color: var(--ink3); color: var(--ink); }
+.order-item.dragging { opacity: 0.5; border-color: var(--accent); }
+.order-item.drag-over { border-color: var(--accent); background: var(--accent-bg); }
+.order-handle { color: var(--ink3); font-size: 0.75rem; cursor: grab; }
+
+/* MATCH QUESTION */
+.match-container { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.match-col-title { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 1px; color: var(--ink3); margin-bottom: 8px; font-weight: 600; }
+.match-items { display: flex; flex-direction: column; gap: 6px; }
+.match-item {
+  padding: 10px 14px;
+  border: 1.5px solid var(--line);
+  border-radius: 9px;
+  font-size: 0.85rem;
+  font-family: 'JetBrains Mono', monospace;
+  cursor: pointer;
+  transition: all 0.15s;
+  color: var(--ink2);
+  background: var(--paper);
+}
+.match-item:hover:not(.matched) { border-color: var(--accent); background: var(--accent-bg); }
+.match-item.selected { border-color: var(--accent); background: var(--accent-bg); color: var(--accent); }
+.match-item.matched { border-color: var(--green); background: var(--green-bg); color: var(--green); cursor: default; }
+.match-item.wrong-match { border-color: #ef4444; background: #fef2f2; color: #dc2626; }
+
+/* FEEDBACK BAR */
+.feedback-bar {
+  padding: 16px 32px;
+  border-top: 1px solid var(--line);
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  background: var(--paper);
+  min-height: 72px;
+  transition: background 0.2s, border-color 0.2s;
+}
+.feedback-bar.correct { background: var(--green-bg); border-top-color: #bbf7d0; }
+.feedback-bar.wrong { background: #fef2f2; border-top-color: #fecaca; }
+
+.fb-content { flex: 1; }
+.fb-title {
+  font-weight: 700;
+  font-size: 0.95rem;
+  margin-bottom: 2px;
+}
+.fb-title.correct { color: var(--green); }
+.fb-title.wrong { color: #dc2626; }
+.fb-exp { font-size: 0.83rem; color: var(--ink3); line-height: 1.5; }
+.fb-exp code { font-family: 'JetBrains Mono', monospace; font-size: 0.9em; }
+
+.btn-check {
+  padding: 11px 28px;
+  border-radius: 10px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  border: none;
+  cursor: pointer;
+  transition: all 0.15s;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+.btn-check.idle {
+  background: var(--paper3);
+  color: var(--ink3);
+  cursor: not-allowed;
+}
+.btn-check.ready {
+  background: var(--ink);
+  color: var(--paper);
+}
+.btn-check.ready:hover { background: var(--ink2); }
+.btn-check.next {
+  background: var(--green);
+  color: white;
+}
+.btn-check.next:hover { background: #166534; }
+.btn-check.next-wrong {
+  background: var(--ink);
+  color: var(--paper);
+}
+
+/* COMPLETION */
+.completion-view {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 40px;
+}
+.completion-card {
+  max-width: 480px;
+  width: 100%;
+  text-align: center;
+  animation: fadeUp 0.5s ease;
+}
+.completion-trophy {
+  font-size: 4rem;
+  margin-bottom: 20px;
+  display: block;
+  animation: trophy 0.6s cubic-bezier(.34,1.56,.64,1);
+}
+@keyframes trophy {
+  from { transform: scale(0) rotate(-15deg); opacity: 0; }
+  to { transform: scale(1) rotate(0); opacity: 1; }
+}
+.completion-title {
+  font-family: 'Fraunces', serif;
+  font-size: 2rem;
+  font-weight: 700;
+  letter-spacing: -0.5px;
+  margin-bottom: 8px;
+}
+.completion-sub { color: var(--ink3); margin-bottom: 28px; font-size: 0.9rem; }
+.completion-stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+  margin-bottom: 28px;
+}
+.comp-stat {
+  background: var(--paper2);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: 14px 8px;
+}
+.comp-stat-val {
+  font-family: 'Fraunces', serif;
+  font-size: 1.6rem;
+  font-weight: 700;
+  display: block;
+}
+.comp-stat-val.gold { color: var(--gold); }
+.comp-stat-val.green { color: var(--green); }
+.comp-stat-val.blue { color: var(--accent2); }
+.comp-stat-lbl { font-size: 0.72rem; color: var(--ink3); text-transform: uppercase; letter-spacing: 0.8px; }
+
+.btn-primary {
+  background: var(--ink);
+  color: var(--paper);
+  padding: 13px 32px;
+  border-radius: 10px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  border: none;
+  cursor: pointer;
+  transition: all 0.15s;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  display: inline-block;
+  margin: 4px;
+}
+.btn-primary:hover { background: var(--ink2); }
+.btn-secondary {
+  background: var(--paper3);
+  color: var(--ink2);
+  padding: 13px 32px;
+  border-radius: 10px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  border: none;
+  cursor: pointer;
+  transition: all 0.15s;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  display: inline-block;
+  margin: 4px;
+}
+.btn-secondary:hover { background: var(--line); }
+
+/* GAME OVER */
+.gameover-card {
+  max-width: 440px;
+  width: 100%;
+  text-align: center;
+  animation: fadeUp 0.4s ease;
+}
+
+/* ANIMATIONS */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(16px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* TOAST */
+.toast {
+  position: fixed;
+  bottom: 28px;
+  right: 28px;
+  background: var(--ink);
+  color: var(--paper);
+  padding: 12px 18px;
+  border-radius: 12px;
+  font-size: 0.85rem;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  box-shadow: var(--shadow-lg);
+  transform: translateY(100px);
+  opacity: 0;
+  transition: all 0.3s cubic-bezier(.34,1.56,.64,1);
+  z-index: 9999;
+  pointer-events: none;
+  max-width: 300px;
+}
+.toast.show { transform: translateY(0); opacity: 1; }
+.toast-icon { font-size: 1.1rem; }
+
+/* MOBILE */
+@media (max-width: 768px) {
+  #app { grid-template-columns: 1fr; }
+  .sidebar { display: none; }
+  .home-view { padding: 24px 20px; }
+  .lesson-body { padding: 24px 16px; }
+  .feedback-bar { padding: 14px 20px; }
+  .topbar { padding: 12px 20px; }
+  .units-grid { grid-template-columns: 1fr; }
+  .continue-card { flex-direction: column; align-items: flex-start; }
+}
+
+/* SCROLLBAR */
+::-webkit-scrollbar { width: 5px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: var(--line); border-radius: 3px; }
+
+/* STREAK CALENDAR */
+.streak-section { padding: 0 16px; margin-top: 16px; }
+.streak-section .section-title { font-size: 0.68rem; text-transform: uppercase; letter-spacing: 1.5px; color: var(--ink3); padding: 0 8px; margin-bottom: 8px; }
+.streak-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 3px;
+  padding: 0 8px;
+}
+.streak-cell {
+  aspect-ratio: 1;
+  border-radius: 4px;
+  background: var(--paper3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.55rem;
+  color: var(--ink3);
+}
+.streak-cell.active-day { background: var(--accent); color: white; }
+.streak-cell.done-day { background: var(--ink); color: var(--paper); opacity: 0.6; }
+
+/* SETTINGS */
+.settings-btn {
+  margin: auto 8px 0;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 9px 14px;
+  border-radius: 9px;
+  cursor: pointer;
+  font-size: 0.82rem;
+  color: var(--ink3);
+  transition: all 0.15s;
+  border: none;
+  background: none;
+  width: calc(100% - 16px);
+  font-family: 'Plus Jakarta Sans', sans-serif;
+}
+.settings-btn:hover { background: var(--paper3); color: var(--ink2); }
+
+/* RESET MODAL */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(26,24,20,0.5);
+  z-index: 999;
+  display: none;
+  align-items: center;
+  justify-content: center;
+}
+.modal-overlay.open { display: flex; }
+.modal {
+  background: var(--paper);
+  border-radius: 16px;
+  padding: 28px;
+  max-width: 380px;
+  width: 90%;
+  box-shadow: var(--shadow-lg);
+}
+.modal h3 {
+  font-family: 'Fraunces', serif;
+  font-size: 1.2rem;
+  font-weight: 700;
+  margin-bottom: 8px;
+}
+.modal p { font-size: 0.88rem; color: var(--ink3); margin-bottom: 20px; line-height: 1.6; }
+.modal-btns { display: flex; gap: 8px; justify-content: flex-end; }
+.btn-danger {
+  background: #dc2626;
+  color: white;
+  padding: 9px 20px;
+  border-radius: 8px;
+  font-size: 0.88rem;
+  font-weight: 600;
+  border: none;
+  cursor: pointer;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+}
+.btn-cancel {
+  background: var(--paper3);
+  color: var(--ink2);
+  padding: 9px 20px;
+  border-radius: 8px;
+  font-size: 0.88rem;
+  font-weight: 600;
+  border: none;
+  cursor: pointer;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+}
+</style>
+</head>
+<body>
+
+<div id="app">
+  <!-- ─── SIDEBAR ─── -->
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-brand">
+      <div class="brand-name"><span class="symbol">∂</span> Calculus</div>
+      <div class="brand-sub">Aprenda Cálculo do zero ao avançado</div>
+    </div>
+
+    <div class="sidebar-stats">
+      <div class="stat-item">
+        <span class="stat-val orange" id="sb-xp">0</span>
+        <span class="stat-lbl">XP Total</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-val blue" id="sb-done">0</span>
+        <span class="stat-lbl">Lições</span>
+      </div>
+    </div>
+
+    <div class="nav-section-label">Conteúdo</div>
+    <div id="nav-units"></div>
+
+    <div class="streak-section">
+      <div class="section-title">Atividade — últimos 28 dias</div>
+      <div class="streak-grid" id="streak-grid"></div>
+    </div>
+
+    <button class="settings-btn" onclick="openResetModal()">⚙ Redefinir progresso</button>
+  </aside>
+
+  <!-- ─── MAIN ─── -->
+  <main class="main" id="main">
+    <div class="topbar">
+      <div class="topbar-breadcrumb">
+        <span id="tb-unit">Início</span>
+        <span id="tb-sep" style="display:none">›</span>
+        <span class="crumb-active" id="tb-lesson"></span>
+      </div>
+      <div class="topbar-right">
+        <div class="xp-pill">⭐ <span id="xp-display">0</span></div>
+        <div class="streak-pill">🔥 <span id="streak-display">0</span>d</div>
+      </div>
+    </div>
+
+    <!-- HOME VIEW -->
+    <div class="view active home-view" id="view-home">
+      <div class="home-greeting">Bem-vindo, <strong>estudante</strong>.</div>
+      <div class="home-sub">Escolha uma lição ou continue de onde parou.</div>
+
+      <div id="continue-wrap"></div>
+
+      <div class="section-title">Unidades</div>
+      <div class="units-grid" id="units-grid"></div>
+    </div>
+
+    <!-- LESSON VIEW -->
+    <div class="view lesson-view" id="view-lesson">
+      <div class="lesson-top">
+        <div class="lesson-prog-wrap">
+          <div class="lesson-prog-fill" id="lesson-prog"></div>
+        </div>
+        <div class="lives" id="lives-disp">❤️❤️❤️</div>
+      </div>
+      <div class="lesson-body" id="lesson-body"></div>
+      <div class="feedback-bar" id="feedback-bar">
+        <div class="fb-content" id="fb-content"></div>
+        <button class="btn-check idle" id="btn-check" onclick="handleCheck()">Verificar</button>
+      </div>
+    </div>
+  </main>
+</div>
+
+<!-- TOAST -->
+<div class="toast" id="toast">
+  <span class="toast-icon" id="toast-icon"></span>
+  <span id="toast-text"></span>
+</div>
+
+<!-- RESET MODAL -->
+<div class="modal-overlay" id="reset-modal">
+  <div class="modal">
+    <h3>Redefinir progresso?</h3>
+    <p>Todo o seu progresso, XP e streak serão apagados permanentemente. Esta ação não pode ser desfeita.</p>
+    <div class="modal-btns">
+      <button class="btn-cancel" onclick="closeResetModal()">Cancelar</button>
+      <button class="btn-danger" onclick="confirmReset()">Redefinir tudo</button>
+    </div>
+  </div>
+</div>
+
+<script>
+// ══════════════════════════════════════════
+//  CURRICULUM DATA
+// ══════════════════════════════════════════
+const CURRICULUM = [
+  {
+    id: 'u1', emoji: '📐', title: 'Limites',
+    desc: 'Fundamentos do Cálculo Diferencial',
+    lessons: [
+      {
+        id: 'u1l1', title: 'O que é um Limite?',
+        steps: [
+          {
+            type: 'theory',
+            title: 'O que é um Limite?',
+            blocks: [
+              { type: 'para', heading: 'Intuição',
+                text: 'Um <strong>limite</strong> descreve o valor que uma função <strong>se aproxima</strong> conforme a entrada se aproxima de um certo ponto — independentemente do que acontece exatamente naquele ponto.' },
+              { type: 'formula', text: 'lim  f(x) = L\n x→a\n\n// "O limite de f(x) quando x tende a a é L"' },
+              { type: 'para', heading: 'Exemplo concreto',
+                text: 'Considere <strong>f(x) = (x² − 1) / (x − 1)</strong>. Em x = 1 há uma divisão por zero, então f(1) é indefinida. Mas para x próximo de 1 (seja 0,99 ou 1,01), o valor se aproxima de 2.' },
+              { type: 'example',
+                label: 'Verificando numericamente',
+                body: 'x = 0.9   →  f(x) = (0.81−1)/(0.9−1) = 1.9\nx = 0.99  →  f(x) ≈ 1.99\nx = 0.999 →  f(x) ≈ 1.999\nx = 1.001 →  f(x) ≈ 2.001\n\n⟹  lim(x→1) f(x) = 2' },
+              { type: 'callout', kind: 'info', icon: '💡',
+                text: 'O limite é sobre o comportamento próximo a um ponto, não no ponto. A função pode não estar definida em x = a e ainda ter limite!' }
+            ]
+          },
+          {
+            type: 'mcq',
+            formula: 'lim  (3x + 2)\n x→4',
+            stem: 'Esta função polinomial é contínua em todo ponto. Calcule o limite substituindo x = 4 diretamente.',
+            opts: ['10', '12', '14', '16'],
+            correct: 2,
+            exp: '<code>3(4) + 2 = 12 + 2 = 14</code>. Para funções contínuas (como polinômios), basta substituir.'
+          },
+          {
+            type: 'mcq',
+            formula: 'lim  sin(x) / x\n x→0',
+            stem: 'Este é um dos <strong>limites fundamentais</strong> do Cálculo. Não é possível calcular por substituição direta (0/0). Qual é o valor?',
+            opts: ['0', '1', '∞', 'Não existe'],
+            correct: 1,
+            exp: '<code>lim(x→0) sin(x)/x = 1</code> — resultado provado geometricamente. É um limite que deve ser memorizado!'
+          },
+          {
+            type: 'input',
+            formula: 'lim  x³ − x\n x→2',
+            stem: 'Calcule o limite. A função é um polinômio (contínua), então substitua diretamente. Digite o resultado numérico.',
+            correct: '6',
+            exp: '<code>2³ − 2 = 8 − 2 = 6</code> ✓'
+          },
+          {
+            type: 'mcq',
+            formula: 'lim  1/x\n x→∞',
+            stem: 'O que acontece com 1/x conforme x cresce sem limite (tende ao infinito)?',
+            opts: ['1', '∞', '0', '-1'],
+            correct: 2,
+            exp: 'Quanto maior x, menor é 1/x. Quando x→∞, 1/x→0. Exemplo: 1/1000 = 0.001, 1/1000000 = 0.000001.'
+          }
+        ]
+      },
+      {
+        id: 'u1l2', title: 'Limites Laterais',
+        steps: [
+          {
+            type: 'theory',
+            title: 'Limites pelo Lado Esquerdo e Direito',
+            blocks: [
+              { type: 'para', heading: 'Definição',
+                text: 'Podemos nos aproximar de um ponto por dois lados. O <strong>limite pela esquerda</strong> (x→a⁻) usa valores menores que a; o <strong>limite pela direita</strong> (x→a⁺) usa valores maiores.' },
+              { type: 'formula', text: 'Limite pela esquerda:  lim f(x)  (x→a⁻)\nLimite pela direita:   lim f(x)  (x→a⁺)\n\nO limite existe ⟺ lim(x→a⁻) = lim(x→a⁺)' },
+              { type: 'example', label: 'f(x) = 1/x em x = 0',
+                body: 'Pela DIREITA (x→0⁺): 1/0.1 = 10, 1/0.01 = 100 → +∞\nPela ESQUERDA (x→0⁻): 1/(−0.1) = −10     → −∞\n\nComo +∞ ≠ −∞, o limite NÃO EXISTE.' },
+              { type: 'callout', kind: 'warn', icon: '⚠️',
+                text: 'Se os limites laterais forem diferentes, dizemos que o limite (bilateral) não existe naquele ponto.' }
+            ]
+          },
+          {
+            type: 'mcq',
+            formula: 'f(x) = |x| / x',
+            stem: 'Calcule lim(x→0⁺) f(x). Para x > 0, |x| = x, logo f(x) = x/x.',
+            opts: ['-1', '0', '1', 'Indefinido'],
+            correct: 2,
+            exp: 'Para x > 0: |x|/x = x/x = 1. Portanto lim(x→0⁺) = 1.'
+          },
+          {
+            type: 'mcq',
+            formula: 'f(x) = |x| / x',
+            stem: 'Agora calcule lim(x→0⁻) f(x). Para x < 0, |x| = −x, logo f(x) = −x/x.',
+            opts: ['-1', '0', '1', 'Indefinido'],
+            correct: 0,
+            exp: 'Para x < 0: |x|/x = (−x)/x = −1. Portanto lim(x→0⁻) = −1.'
+          },
+          {
+            type: 'mcq',
+            formula: 'lim |x| / x\n x→0',
+            stem: 'Com base nas duas questões anteriores, o limite bilateral de |x|/x quando x→0 existe?',
+            opts: ['Sim, vale 0', 'Sim, vale 1', 'Não existe', 'Sim, vale −1'],
+            correct: 2,
+            exp: 'lim(x→0⁺) = 1 mas lim(x→0⁻) = −1. Como são diferentes, o limite bilateral NÃO EXISTE.'
+          },
+          {
+            type: 'mcq',
+            formula: 'lim  √x\n x→0⁺',
+            stem: '√x só está definida para x ≥ 0. Qual é o limite de √x quando x→0 pela direita?',
+            opts: ['1', '0', '∞', 'Não existe'],
+            correct: 1,
+            exp: 'Substituindo: √0 = 0. Como a função é contínua para x ≥ 0, o limite lateral direito é 0.'
+          }
+        ]
+      },
+      {
+        id: 'u1l3', title: 'Continuidade',
+        steps: [
+          {
+            type: 'theory',
+            title: 'Funções Contínuas',
+            blocks: [
+              { type: 'para', heading: '3 condições para continuidade',
+                text: 'Uma função f é <strong>contínua em x = a</strong> se e somente se as três condições abaixo forem satisfeitas simultaneamente:' },
+              { type: 'formula', text: '1.  f(a)  está definida (existe)\n2.  lim(x→a) f(x)  existe\n3.  lim(x→a) f(x) = f(a)' },
+              { type: 'para', heading: 'Tipos de descontinuidade',
+                text: '<strong>Removível:</strong> o limite existe, mas f(a) ≠ limite (buraco no gráfico). <strong>De salto:</strong> limites laterais existem mas são diferentes. <strong>Essencial:</strong> pelo menos um limite lateral é ∞.' },
+              { type: 'callout', kind: 'tip', icon: '✅',
+                text: 'Polinômios, sin(x), cos(x), eˣ e ln(x) são contínuos em todo o seu domínio natural.' }
+            ]
+          },
+          {
+            type: 'mcq',
+            formula: 'f(x) = (x² − 4) / (x − 2)',
+            stem: 'A função tem uma descontinuidade em x = 2 (divisão por zero). Qual tipo é esta descontinuidade, sabendo que lim(x→2) = 4?',
+            opts: ['Essencial', 'De salto', 'Removível', 'Não há descontinuidade'],
+            correct: 2,
+            exp: 'O limite existe (= 4), mas f(2) é indefinida. É uma descontinuidade <strong>removível</strong> — pode ser corrigida definindo f(2) = 4.'
+          },
+          {
+            type: 'mcq',
+            formula: 'f(x) = { 1,  se x ≥ 0\n        {-1,  se x < 0',
+            stem: 'Esta função por partes — qual tipo de descontinuidade ela tem em x = 0?',
+            opts: ['Removível', 'De salto', 'Essencial', 'Contínua'],
+            correct: 1,
+            exp: 'lim(x→0⁺) = 1 e lim(x→0⁻) = −1. Os limites laterais existem mas são diferentes → descontinuidade <strong>de salto</strong>.'
+          },
+          {
+            type: 'input',
+            formula: 'f(x) = x² + 5x − 6  em  x = 1',
+            stem: 'Calcule f(1) para verificar que o polinômio é contínuo. Digite o valor.',
+            correct: '0',
+            exp: '<code>f(1) = 1 + 5 − 6 = 0</code>. Como é um polinômio, lim(x→1) = f(1) = 0. Função contínua em x = 1.'
+          },
+          {
+            type: 'mcq',
+            formula: 'f(x) = 1 / (x − 3)',
+            stem: 'Em qual ponto esta função tem uma descontinuidade essencial?',
+            opts: ['x = 0', 'x = 1', 'x = 3', 'x = −3'],
+            correct: 2,
+            exp: 'Em x = 3, temos 1/0 — indefinido. Além disso, lim(x→3⁺) = +∞ e lim(x→3⁻) = −∞ → descontinuidade <strong>essencial</strong>.'
+          }
+        ]
+      },
+      {
+        id: 'u1l4', title: 'Regra de L\'Hôpital',
+        steps: [
+          {
+            type: 'theory',
+            title: 'Regra de L\'Hôpital',
+            blocks: [
+              { type: 'para', heading: 'Formas Indeterminadas',
+                text: 'Às vezes ao calcular um limite encontramos formas como <strong>0/0</strong> ou <strong>∞/∞</strong> — chamadas formas indeterminadas. A substituição direta não funciona. A Regra de L\'Hôpital resolve isso.' },
+              { type: 'formula', text: 'Se  lim f(x)/g(x)  dá  0/0  ou  ∞/∞,\n\nentão:   lim f(x)/g(x) = lim f\'(x)/g\'(x)\n\n(derivamos numerador e denominador separadamente)' },
+              { type: 'example', label: 'Aplicando L\'Hôpital',
+                body: 'lim(x→0) sin(x)/x\n\nSubstituindo: sin(0)/0 = 0/0  → indeterminado!\n\nDerivando:\n  f(x) = sin(x)  →  f\'(x) = cos(x)\n  g(x) = x       →  g\'(x) = 1\n\nlim(x→0) cos(x)/1 = cos(0)/1 = 1' },
+              { type: 'callout', kind: 'warn', icon: '⚠️',
+                text: 'A Regra de L\'Hôpital só se aplica em formas 0/0 ou ∞/∞. Não use em outros casos!' }
+            ]
+          },
+          {
+            type: 'mcq',
+            formula: 'lim  (x² − 1) / (x − 1)\n x→1',
+            stem: 'Substituindo x = 1 dá 0/0. Aplique L\'Hôpital: derive numerador e denominador separadamente.',
+            opts: ['1', '2', '3', '4'],
+            correct: 1,
+            exp: 'f\'(x) = 2x → f\'(1) = 2. g\'(x) = 1. Resultado: 2/1 = 2. Ou: fatore (x²−1) = (x−1)(x+1), cancele e substitua: (1+1) = 2.'
+          },
+          {
+            type: 'mcq',
+            formula: 'lim  (e^x − 1) / x\n x→0',
+            stem: 'Outro limite fundamental. Aplique L\'Hôpital (dá 0/0). Lembre que a derivada de eˣ é eˣ.',
+            opts: ['0', 'e', '1', '∞'],
+            correct: 2,
+            exp: 'f\'(x) = eˣ → f\'(0) = e⁰ = 1. g\'(x) = 1. Resultado: 1/1 = 1. Limite fundamental: lim(x→0) (eˣ−1)/x = 1'
+          },
+          {
+            type: 'mcq',
+            formula: 'lim  ln(x) / (x−1)\n x→1',
+            stem: 'Dá 0/0. Derivada de ln(x) é 1/x. Aplique L\'Hôpital.',
+            opts: ['0', '1', 'ln(1)', '∞'],
+            correct: 1,
+            exp: 'f\'(x) = 1/x → f\'(1) = 1/1 = 1. g\'(x) = 1. Resultado: 1/1 = 1.'
+          },
+          {
+            type: 'input',
+            formula: 'lim  (sin(3x)) / x\n x→0',
+            stem: 'Dica: aplique L\'Hôpital. Derivada de sin(3x) é 3·cos(3x). Avalie em x = 0. Digite o resultado.',
+            correct: '3',
+            exp: 'f\'(x) = 3cos(3x) → f\'(0) = 3cos(0) = 3·1 = 3. g\'(x) = 1. Resultado = 3.'
+          }
+        ]
+      }
+    ]
+  },
+  {
+    id: 'u2', emoji: '📈', title: 'Derivadas',
+    desc: 'Taxas de variação instantânea',
+    lessons: [
+      {
+        id: 'u2l1', title: 'Definição de Derivada',
+        steps: [
+          {
+            type: 'theory',
+            title: 'O que é uma Derivada?',
+            blocks: [
+              { type: 'para', heading: 'Taxa de variação instantânea',
+                text: 'A derivada de f em x = a representa a <strong>taxa de variação instantânea</strong> de f naquele ponto — geometricamente, é a inclinação da reta tangente ao gráfico.' },
+              { type: 'formula', text: 'f\'(a) = lim  [f(a+h) − f(a)] / h\n        h→0\n\n(Definição por limite — "taxa média quando h→0")' },
+              { type: 'para', heading: 'Notações',
+                text: 'Existem várias notações para derivada, todas equivalentes:' },
+              { type: 'formula', text: "f'(x)   (Lagrange)\ndf/dx   (Leibniz)\nDf(x)   (Euler)\ny'      (quando y = f(x))" },
+              { type: 'callout', kind: 'info', icon: '📌',
+                text: 'Se f(x) representa posição no tempo, f\'(x) é a velocidade. Se f(x) é velocidade, f\'(x) é a aceleração.' }
+            ]
+          },
+          {
+            type: 'mcq',
+            formula: 'f(x) = x²\nCalcule f\'(x) pela definição',
+            stem: 'Usando a definição: [f(x+h) − f(x)] / h = [(x+h)² − x²] / h. Expanda e simplifique para h→0.',
+            opts: ['x', '2x', '2x + h', 'x²'],
+            correct: 1,
+            exp: '[(x²+2xh+h²) − x²]/h = (2xh+h²)/h = 2x+h → quando h→0: f\'(x) = 2x ✓'
+          },
+          {
+            type: 'mcq',
+            formula: 'f(x) = c  (constante)',
+            stem: 'Qual é a derivada de uma função constante? Use a definição: [c − c]/h = 0/h.',
+            opts: ['c', '1', '0', 'x'],
+            correct: 2,
+            exp: 'Uma constante não varia — sua taxa de variação é sempre zero. f\'(x) = 0.'
+          },
+          {
+            type: 'input',
+            formula: 'f(x) = x³\nf\'(x) = ?  (use a regra: d/dx xⁿ = n·xⁿ⁻¹)',
+            stem: 'A regra da potência diz: d/dx xⁿ = n·xⁿ⁻¹. Aplique para n = 3. Digite apenas o coeficiente numérico (ex: se for 5x², digite 5).',
+            correct: '3',
+            exp: 'd/dx x³ = 3x². O coeficiente é 3.'
+          },
+          {
+            type: 'mcq',
+            formula: 'f(x) = 5x⁴ − 3x² + 7x − 2',
+            stem: 'Derive cada termo separadamente usando a regra da potência e a linearidade da derivada.',
+            opts: ['20x³ − 6x + 7', '20x³ − 6x', '5x³ − 3x + 7', '20x⁴ − 6x² + 7'],
+            correct: 0,
+            exp: 'd/dx(5x⁴) = 20x³, d/dx(−3x²) = −6x, d/dx(7x) = 7, d/dx(−2) = 0. Total: 20x³ − 6x + 7.'
+          }
+        ]
+      },
+      {
+        id: 'u2l2', title: 'Regras de Derivação',
+        steps: [
+          {
+            type: 'theory',
+            title: 'Regras Principais de Derivação',
+            blocks: [
+              { type: 'formula', text: 'Regra da Potência:   d/dx xⁿ = n·xⁿ⁻¹\n\nRegra do Produto:   d/dx [f·g] = f\'·g + f·g\'\n\nRegra do Quociente: d/dx [f/g] = (f\'·g − f·g\') / g²\n\nRegra da Cadeia:    d/dx [f(g(x))] = f\'(g(x))·g\'(x)' },
+              { type: 'para', heading: 'Derivadas de funções especiais',
+                text: 'Algumas derivadas fundamentais devem ser memorizadas:' },
+              { type: 'formula', text: "d/dx sin(x)  =  cos(x)\nd/dx cos(x)  = −sin(x)\nd/dx eˣ      =  eˣ\nd/dx ln(x)   =  1/x\nd/dx tg(x)   =  sec²(x)" },
+              { type: 'callout', kind: 'tip', icon: '🎯',
+                text: 'A Regra da Cadeia é a mais usada no Cálculo avançado. Pense: "derivada de fora × derivada de dentro".' }
+            ]
+          },
+          {
+            type: 'mcq',
+            formula: 'd/dx [x² · sin(x)]',
+            stem: 'Use a Regra do Produto: d/dx[f·g] = f\'g + fg\'. Aqui f = x² e g = sin(x).',
+            opts: ['2x · cos(x)', 'x² · cos(x)', '2x·sin(x) + x²·cos(x)', '2x·cos(x) − x²·sin(x)'],
+            correct: 2,
+            exp: 'f\'=2x, g\'=cos(x). Produto: (2x)·sin(x) + x²·cos(x) = 2x·sin(x) + x²·cos(x)'
+          },
+          {
+            type: 'mcq',
+            formula: 'd/dx [eˣ / x]',
+            stem: 'Use a Regra do Quociente: (f\'g − fg\') / g². Aqui f = eˣ, g = x.',
+            opts: ['eˣ/x − eˣ/x²', 'eˣ · (1 − 1/x) / x', '(eˣ·x − eˣ) / x²', 'eˣ/x²'],
+            correct: 2,
+            exp: 'f\'=eˣ, g\'=1. Quociente: (eˣ·x − eˣ·1)/x² = eˣ(x−1)/x²'
+          },
+          {
+            type: 'mcq',
+            formula: 'd/dx sin(x²)',
+            stem: 'Use a Regra da Cadeia. "Fora" = sin(u), "dentro" = u = x².',
+            opts: ['cos(x²)', '2x·cos(x)', '2x·cos(x²)', 'sin(2x)'],
+            correct: 2,
+            exp: 'd/du sin(u) = cos(u). d/dx x² = 2x. Cadeia: cos(x²)·2x = 2x·cos(x²)'
+          },
+          {
+            type: 'input',
+            formula: 'd/dx [3x⁵ − 2x³ + x]\nem  x = 1',
+            stem: 'Calcule a derivada e substitua x = 1. Derivada: 15x⁴ − 6x² + 1. Quanto vale em x = 1?',
+            correct: '10',
+            exp: '15(1) − 6(1) + 1 = 15 − 6 + 1 = 10'
+          }
+        ]
+      },
+      {
+        id: 'u2l3', title: 'Máximos e Mínimos',
+        steps: [
+          {
+            type: 'theory',
+            title: 'Encontrando Máximos e Mínimos',
+            blocks: [
+              { type: 'para', heading: 'Pontos críticos',
+                text: 'Um <strong>ponto crítico</strong> ocorre onde f\'(x) = 0 ou f\'(x) não existe. Nesses pontos pode haver máximo local, mínimo local ou ponto de inflexão.' },
+              { type: 'formula', text: 'Teste da Segunda Derivada:\n\nSe f\'(a) = 0, calcule f\'\'(a):\n• f\'\'(a) > 0  →  mínimo local em x = a\n• f\'\'(a) < 0  →  máximo local em x = a\n• f\'\'(a) = 0  →  inconclusivo (use outro teste)' },
+              { type: 'example', label: 'Exemplo: f(x) = x³ − 3x',
+                body: '1. f\'(x) = 3x² − 3 = 0  →  x² = 1  →  x = ±1\n\n2. f\'\'(x) = 6x\n   f\'\'(1)  =  6 > 0  →  mínimo em x = 1\n   f\'\'(−1) = −6 < 0  →  máximo em x = −1\n\n3. Valores: f(1) = −2 (mínimo), f(−1) = 2 (máximo)' }
+            ]
+          },
+          {
+            type: 'mcq',
+            formula: 'f(x) = x² − 6x + 8',
+            stem: 'Para encontrar os pontos críticos, resolva f\'(x) = 0. Qual é o ponto crítico desta parábola?',
+            opts: ['x = 2', 'x = 3', 'x = 4', 'x = 6'],
+            correct: 1,
+            exp: 'f\'(x) = 2x − 6 = 0 → 2x = 6 → x = 3. Este é o vértice da parábola.'
+          },
+          {
+            type: 'mcq',
+            formula: 'f(x) = x² − 6x + 8\nf\'\'(x) = 2',
+            stem: 'Sabendo que x = 3 é ponto crítico e f\'\'(3) = 2 > 0, o que isso indica?',
+            opts: ['Máximo local', 'Mínimo local', 'Ponto de inflexão', 'Inconclusivo'],
+            correct: 1,
+            exp: 'f\'\'(3) = 2 > 0 → a concavidade é para cima → mínimo local em x = 3. f(3) = 9 − 18 + 8 = −1.'
+          },
+          {
+            type: 'input',
+            formula: 'f(x) = −x² + 4x − 1',
+            stem: 'Encontre o ponto crítico (onde f\'(x) = 0) e calcule o valor máximo de f. Digite o valor máximo.',
+            correct: '3',
+            exp: 'f\'(x) = −2x + 4 = 0 → x = 2. f(2) = −4 + 8 − 1 = 3. Como f\'\'(x) = −2 < 0, é máximo local.'
+          },
+          {
+            type: 'mcq',
+            formula: 'f(x) = x³',
+            stem: 'f\'(x) = 3x² = 0 em x = 0. f\'\'(0) = 0 (inconclusivo). O que é x = 0 para esta função?',
+            opts: ['Máximo local', 'Mínimo local', 'Ponto de inflexão', 'Descontinuidade'],
+            correct: 2,
+            exp: 'x = 0 é um ponto de inflexão de f(x) = x³. A função não tem máximo nem mínimo local — ela cresce para sempre.'
+          }
+        ]
+      }
+    ]
+  },
+  {
+    id: 'u3', emoji: '∫', title: 'Integrais',
+    desc: 'Acumulação de áreas e grandezas',
+    lessons: [
+      {
+        id: 'u3l1', title: 'Integral Indefinida',
+        steps: [
+          {
+            type: 'theory',
+            title: 'Antiderivada e Integral Indefinida',
+            blocks: [
+              { type: 'para', heading: 'O que é uma integral?',
+                text: 'Integrar é o processo <strong>inverso</strong> de derivar. A integral indefinida de f(x) é a família de funções F(x) tal que F\'(x) = f(x).' },
+              { type: 'formula', text: '∫ f(x) dx = F(x) + C\n\n// C = constante de integração (sempre inclua!)\n// Porque a derivada de qualquer constante é 0' },
+              { type: 'para', heading: 'Regras principais',
+                text: 'As regras de integração são o espelho das derivadas:' },
+              { type: 'formula', text: '∫ xⁿ dx = xⁿ⁺¹/(n+1) + C    (n ≠ −1)\n∫ eˣ dx = eˣ + C\n∫ 1/x dx = ln|x| + C\n∫ cos(x) dx = sin(x) + C\n∫ sin(x) dx = −cos(x) + C' },
+              { type: 'callout', kind: 'warn', icon: '⚠️',
+                text: 'Nunca esqueça o "+C" na integral indefinida! Representa infinitas antiderivadas (família de funções).' }
+            ]
+          },
+          {
+            type: 'mcq',
+            formula: '∫ x³ dx',
+            stem: 'Use a regra da potência para integrais: ∫xⁿ dx = xⁿ⁺¹/(n+1) + C. Qual é o resultado?',
+            opts: ['x⁴ + C', 'x⁴/4 + C', '3x² + C', '4x⁴ + C'],
+            correct: 1,
+            exp: '∫x³ dx = x³⁺¹/(3+1) + C = x⁴/4 + C. Verifique: d/dx(x⁴/4) = 4x³/4 = x³ ✓'
+          },
+          {
+            type: 'mcq',
+            formula: '∫ (6x² + 4x − 3) dx',
+            stem: 'Integre cada termo separadamente usando a linearidade da integral.',
+            opts: ['2x³ + 2x² − 3x + C', '2x³ + 2x + C', '12x + 4 + C', '6x³ + 4x² − 3x + C'],
+            correct: 0,
+            exp: '∫6x²dx = 6x³/3 = 2x³; ∫4x dx = 4x²/2 = 2x²; ∫−3 dx = −3x. Total: 2x³ + 2x² − 3x + C'
+          },
+          {
+            type: 'mcq',
+            formula: '∫ eˣ dx',
+            stem: 'eˣ é especial: sua integral é igual a ela mesma (mais +C). Qual é o resultado?',
+            opts: ['eˣ⁺¹/(x+1) + C', 'x·eˣ + C', 'eˣ + C', '1/eˣ + C'],
+            correct: 2,
+            exp: '∫eˣ dx = eˣ + C. Verifique: d/dx(eˣ) = eˣ ✓. Esta é a única função que é sua própria derivada!'
+          },
+          {
+            type: 'input',
+            formula: '∫ cos(x) dx = ?·sin(x) + C\n\n(a derivada de sin(x) é cos(x))',
+            stem: 'Qual é o coeficiente na frente de sin(x)? Digite o número.',
+            correct: '1',
+            exp: '∫cos(x)dx = sin(x) + C. Coeficiente = 1. Verifique: d/dx(sin(x)) = cos(x) ✓'
+          }
+        ]
+      },
+      {
+        id: 'u3l2', title: 'Integral Definida',
+        steps: [
+          {
+            type: 'theory',
+            title: 'Integral Definida e Área',
+            blocks: [
+              { type: 'para', heading: 'Área sob a curva',
+                text: 'A integral definida de f(x) de a até b representa a <strong>área (com sinal) sob a curva</strong> f(x) no intervalo [a, b]. É calculada usando o Teorema Fundamental do Cálculo.' },
+              { type: 'formula', text: '∫[a,b] f(x) dx = F(b) − F(a)\n\n// Onde F\'(x) = f(x)\n// Notação: [F(x)]ₐᵇ = F(b) − F(a)' },
+              { type: 'example', label: 'Calculando ∫[0,2] x² dx',
+                body: '1. Antiderivada de x² é F(x) = x³/3\n\n2. Avaliar nos limites:\n   F(2) = 8/3\n   F(0) = 0\n\n3. Resultado: F(2) − F(0) = 8/3 − 0 = 8/3 ≈ 2.67' },
+              { type: 'callout', kind: 'info', icon: '📐',
+                text: 'Se f(x) < 0 no intervalo, a integral fica negativa (área abaixo do eixo x). A área geométrica usa |∫f dx|.' }
+            ]
+          },
+          {
+            type: 'mcq',
+            formula: '∫[1,3] 2x dx',
+            stem: 'Antiderivada de 2x é x². Calcule F(3) − F(1).',
+            opts: ['4', '6', '8', '12'],
+            correct: 2,
+            exp: 'F(x) = x². F(3) − F(1) = 9 − 1 = 8. Geometricamente: área do trapézio com f(1)=2, f(3)=6, base=2 → (2+6)·2/2 = 8 ✓'
+          },
+          {
+            type: 'input',
+            formula: '∫[0,π] sin(x) dx',
+            stem: 'Antiderivada de sin(x) é −cos(x). Calcule −cos(π) − (−cos(0)). Lembre: cos(π) = −1, cos(0) = 1. Digite o resultado.',
+            correct: '2',
+            exp: '−cos(π) − (−cos(0)) = −(−1) − (−1) = 1 + 1 = 2. Representa a área do arco de seno entre 0 e π.'
+          },
+          {
+            type: 'mcq',
+            formula: '∫[−1,1] x³ dx',
+            stem: 'x³ é uma função ímpar (f(−x) = −f(x)). O que acontece com a integral de uma função ímpar num intervalo simétrico como [−1, 1]?',
+            opts: ['2/4 = 0.5', '1', '0', '−1'],
+            correct: 2,
+            exp: 'Para funções ímpares, ∫[−a,a] f(x) dx = 0, pois as áreas acima e abaixo do eixo se cancelam. Confirme: [x⁴/4]₋₁¹ = 1/4 − 1/4 = 0.'
+          },
+          {
+            type: 'mcq',
+            formula: '∫[0,1] eˣ dx',
+            stem: 'Antiderivada de eˣ é eˣ. Calcule e¹ − e⁰. Sabendo que e ≈ 2.718 e e⁰ = 1.',
+            opts: ['e − 1', 'e', 'e + 1', '1'],
+            correct: 0,
+            exp: '[eˣ]₀¹ = e¹ − e⁰ = e − 1 ≈ 1.718. Esta área representa o crescimento exponencial de 0 a 1.'
+          }
+        ]
+      },
+      {
+        id: 'u3l3', title: 'Técnicas de Integração',
+        steps: [
+          {
+            type: 'theory',
+            title: 'Substituição e Integração por Partes',
+            blocks: [
+              { type: 'para', heading: 'Substituição (regra da cadeia invertida)',
+                text: 'Quando o integrando contém uma função composta, fazemos u = função interna e substituímos:' },
+              { type: 'formula', text: '∫ f(g(x))·g\'(x) dx\n\nu = g(x),  du = g\'(x) dx\n\n= ∫ f(u) du  =  F(u) + C  =  F(g(x)) + C' },
+              { type: 'example', label: '∫ 2x·cos(x²) dx',
+                body: 'u = x²  →  du = 2x dx\n\n∫ cos(u) du = sin(u) + C = sin(x²) + C\n\nVerifique: d/dx sin(x²) = cos(x²)·2x ✓' },
+              { type: 'para', heading: 'Integração por partes (produto → integral)',
+                text: 'Para integrais de produtos de funções de tipos diferentes:' },
+              { type: 'formula', text: '∫ u dv = u·v − ∫ v du\n\nEscolha u: LIATE (Log, Inverso, Algébrico,\n                  Trigon., Exponencial)' }
+            ]
+          },
+          {
+            type: 'mcq',
+            formula: '∫ 3x² · (x³ + 1)⁴ dx',
+            stem: 'Use substituição. Faça u = x³ + 1. Qual é du/dx?',
+            opts: ['x²', '3x²', '3x³', 'x³'],
+            correct: 1,
+            exp: 'Se u = x³ + 1, então du/dx = 3x². Logo du = 3x² dx. A integral vira ∫u⁴ du = u⁵/5 + C = (x³+1)⁵/5 + C'
+          },
+          {
+            type: 'mcq',
+            formula: '∫ x · eˣ dx',
+            stem: 'Use integração por partes: ∫u dv = uv − ∫v du. Escolha u = x (algébrico) e dv = eˣ dx.',
+            opts: ['x·eˣ + C', 'eˣ(x − 1) + C', 'x·eˣ + eˣ + C', 'eˣ/x + C'],
+            correct: 1,
+            exp: 'u=x, du=dx; dv=eˣdx, v=eˣ. Partes: x·eˣ − ∫eˣdx = x·eˣ − eˣ + C = eˣ(x−1) + C'
+          },
+          {
+            type: 'mcq',
+            formula: '∫ sin(x) · cos(x) dx',
+            stem: 'Faça u = sin(x). Então du = cos(x) dx. A integral se torna ∫u du. Qual é o resultado?',
+            opts: ['sin²(x) + C', 'sin²(x)/2 + C', '−cos²(x) + C', 'cos(x)·sin(x) + C'],
+            correct: 1,
+            exp: '∫u du = u²/2 + C = sin²(x)/2 + C. (Equivalente a −cos(2x)/4 + C pela identidade trigonométrica.)'
+          },
+          {
+            type: 'input',
+            formula: '∫ ln(x) dx = x·ln(x) − x + C\n\nVerifique: d/dx [x·ln(x) − x] = ?',
+            stem: 'Usando a regra do produto para derivar: d/dx[x·ln(x)] = ln(x) + x·(1/x) = ln(x) + 1. Subtraindo d/dx[x] = 1. O resultado é ln(x) + 1 − 1 = ?. Digite.',
+            correct: 'ln(x)',
+            exp: 'ln(x) + 1 − 1 = ln(x). A derivada de x·ln(x) − x é de fato ln(x). Verificação correta!'
+          }
+        ]
+      }
+    ]
+  }
+];
+
+// ══════════════════════════════════════════
+//  STATE & PERSISTENCE
+// ══════════════════════════════════════════
+const STORAGE_KEY = 'calculus_progress_v2';
+
+function loadState() {
+  try {
+    const raw = localStorage.getItem(STORAGE_KEY);
+    if (raw) return JSON.parse(raw);
+  } catch(e) {}
+  return {
+    xp: 0,
+    streak: 0,
+    lastStudyDate: null,
+    completedLessons: {},  // { lessonId: { xp, accuracy, date } }
+    activityLog: []        // array of date strings 'YYYY-MM-DD'
+  };
+}
+
+function saveState() {
+  try {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(STATE));
+  } catch(e) {}
+}
+
+let STATE = loadState();
+
+// Update streak on load
+function updateStreak() {
+  const today = new Date().toISOString().slice(0, 10);
+  if (STATE.lastStudyDate !== today) {
+    // check if yesterday
+    const yesterday = new Date(Date.now() - 86400000).toISOString().slice(0, 10);
+    if (STATE.lastStudyDate === yesterday) {
+      STATE.streak = (STATE.streak || 0) + 1;
+    } else if (STATE.lastStudyDate !== today) {
+      STATE.streak = 0;
+    }
+  }
+}
+updateStreak();
+
+// ══════════════════════════════════════════
+//  LESSON ENGINE STATE
+// ══════════════════════════════════════════
+let LESSON = {
+  unitId: null, lessonId: null,
+  steps: [], stepIdx: 0,
+  lives: 3, correct: 0, total: 0,
+  answered: false, chosen: null
+};
+
+// ══════════════════════════════════════════
+//  SIDEBAR BUILD
+// ══════════════════════════════════════════
+function buildSidebar() {
+  const nav = document.getElementById('nav-units');
+  nav.innerHTML = '';
+  const completedCount = Object.keys(STATE.completedLessons).length;
+  document.getElementById('sb-xp').textContent = STATE.xp;
+  document.getElementById('sb-done').textContent = completedCount;
+  document.getElementById('xp-display').textContent = STATE.xp;
+  document.getElementById('streak-display').textContent = STATE.streak;
+
+  let totalLessons = 0;
+  let prevUnitDone = true;
+
+  CURRICULUM.forEach((unit, ui) => {
+    const unitDone = unit.lessons.every(l => STATE.completedLessons[l.id]);
+    const unitProgress = unit.lessons.filter(l => STATE.completedLessons[l.id]).length;
+    const unitLocked = ui > 0 && !CURRICULUM[ui-1].lessons.every(l => STATE.completedLessons[l.id]);
+
+    const wrap = document.createElement('div');
+    wrap.className = 'nav-unit';
+
+    let dotClass = 'unit-dot';
+    if (unitDone) dotClass += ' done';
+    else if (unitProgress > 0) dotClass += ' active';
+
+    wrap.innerHTML = `
+      <div class="nav-unit-header ${unitLocked ? 'locked' : ''}" onclick="${unitLocked ? '' : `toggleUnit('${unit.id}')`}" style="${unitLocked ? 'opacity:.4;cursor:not-allowed' : ''}">
+        <div class="${dotClass}"></div>
+        <span>${unit.emoji} ${unit.title}</span>
+      </div>
+      <div class="nav-lessons" id="nav-lessons-${unit.id}">
+      ${unit.lessons.map((lesson, li) => {
+        const done = !!STATE.completedLessons[lesson.id];
+        const prevDone = li === 0 ? !unitLocked : !!STATE.completedLessons[unit.lessons[li-1].id];
+        const locked = !prevDone && !done;
+        const statusIcon = done ? '✓' : locked ? '🔒' : '○';
+        const cls = done ? 'done' : locked ? 'locked' : '';
+        return `<div class="nav-lesson ${cls}" onclick="${locked ? '' : `startLesson('${unit.id}','${lesson.id}')`}">
+          <div class="lesson-status">${statusIcon}</div>
+          ${lesson.title}
+        </div>`;
+      }).join('')}
+      </div>
+    `;
+    nav.appendChild(wrap);
+    totalLessons += unit.lessons.length;
+  });
+
+  // Auto-open first non-completed unit
+  CURRICULUM.forEach(unit => {
+    const hasActive = unit.lessons.some(l => !STATE.completedLessons[l.id]);
+    const allDone = unit.lessons.every(l => STATE.completedLessons[l.id]);
+    if (hasActive && !allDone) {
+      const el = document.getElementById(`nav-lessons-${unit.id}`);
+      if (el) el.classList.add('open');
+    }
+  });
+
+  buildStreakGrid();
+}
+
+function toggleUnit(uid) {
+  const el = document.getElementById(`nav-lessons-${uid}`);
+  if (!el) return;
+  el.classList.toggle('open');
+}
+
+function buildStreakGrid() {
+  const grid = document.getElementById('streak-grid');
+  grid.innerHTML = '';
+  const today = new Date();
+  for (let i = 27; i >= 0; i--) {
+    const d = new Date(today);
+    d.setDate(d.getDate() - i);
+    const ds = d.toISOString().slice(0, 10);
+    const cell = document.createElement('div');
+    cell.className = 'streak-cell';
+    if (ds === today.toISOString().slice(0, 10)) {
+      cell.className += ' active-day';
+    } else if (STATE.activityLog && STATE.activityLog.includes(ds)) {
+      cell.className += ' done-day';
+    }
+    cell.title = ds;
+    grid.appendChild(cell);
+  }
+}
+
+// ══════════════════════════════════════════
+//  HOME VIEW
+// ══════════════════════════════════════════
+function buildHome() {
+  // Continue card
+  const wrap = document.getElementById('continue-wrap');
+  const nextLesson = findNextLesson();
+  if (nextLesson) {
+    const unit = CURRICULUM.find(u => u.id === nextLesson.unitId);
+    const lesson = unit.lessons.find(l => l.id === nextLesson.lessonId);
+    const doneInLesson = 0; // steps not tracked individually
+    wrap.innerHTML = `
+      <div class="continue-card" onclick="startLesson('${unit.id}','${lesson.id}')">
+        <div class="continue-icon">${unit.emoji}</div>
+        <div class="continue-info">
+          <div class="continue-tag">Continuar · ${unit.title}</div>
+          <div class="continue-title">${lesson.title}</div>
+          <div class="continue-prog-wrap"><div class="continue-prog-fill" style="width:${STATE.completedLessons[lesson.id] ? 100 : 0}%"></div></div>
+        </div>
+        <div class="continue-arrow">→</div>
+      </div>
+    `;
+  } else {
+    wrap.innerHTML = `<div class="continue-card" style="cursor:default">
+      <div class="continue-icon">🎓</div>
+      <div class="continue-info">
+        <div class="continue-tag">Concluído!</div>
+        <div class="continue-title">Você completou todo o conteúdo!</div>
+      </div>
+    </div>`;
+  }
+
+  // Units grid
+  const grid = document.getElementById('units-grid');
+  grid.innerHTML = '';
+  CURRICULUM.forEach((unit, ui) => {
+    const done = unit.lessons.filter(l => STATE.completedLessons[l.id]).length;
+    const total = unit.lessons.length;
+    const locked = ui > 0 && !CURRICULUM[ui-1].lessons.every(l => STATE.completedLessons[l.id]);
+    const allDone = done === total;
+    const pct = (done / total) * 100;
+
+    let badgeClass = 'locked-b', badgeText = 'Bloqueado';
+    if (allDone) { badgeClass = 'done'; badgeText = 'Concluído'; }
+    else if (done > 0) { badgeClass = 'progress'; badgeText = `${done}/${total} lições`; }
+    else if (!locked) { badgeClass = 'progress'; badgeText = 'Disponível'; }
+
+    const card = document.createElement('div');
+    card.className = `unit-card${locked ? ' locked' : ''}`;
+    card.innerHTML = `
+      <div class="unit-card-header">
+        <div class="unit-emoji">${unit.emoji}</div>
+        <div class="unit-badge ${badgeClass}">${badgeText}</div>
+      </div>
+      <div class="unit-card-title">${unit.title}</div>
+      <div class="unit-card-sub">${unit.desc} · ${total} lições</div>
+      <div class="unit-prog-bar">
+        <div class="unit-prog-fill ${allDone ? 'done' : ''}" style="width:${pct}%"></div>
+      </div>
+    `;
+    if (!locked) {
+      const firstUnfinished = unit.lessons.find(l => !STATE.completedLessons[l.id]);
+      const target = firstUnfinished || unit.lessons[0];
+      card.onclick = () => startLesson(unit.id, target.id);
+    }
+    grid.appendChild(card);
+  });
+}
+
+function findNextLesson() {
+  for (const unit of CURRICULUM) {
+    // check if unit is unlocked
+    const unitIdx = CURRICULUM.indexOf(unit);
+    if (unitIdx > 0 && !CURRICULUM[unitIdx - 1].lessons.every(l => STATE.completedLessons[l.id])) continue;
+    for (const lesson of unit.lessons) {
+      if (!STATE.completedLessons[lesson.id]) {
+        return { unitId: unit.id, lessonId: lesson.id };
+      }
+    }
+  }
+  return null;
+}
+
+// ══════════════════════════════════════════
+//  LESSON ENGINE
+// ══════════════════════════════════════════
+function startLesson(unitId, lessonId) {
+  const unit = CURRICULUM.find(u => u.id === unitId);
+  const lesson = unit.lessons.find(l => l.id === lessonId);
+
+  LESSON = {
+    unitId, lessonId,
+    steps: lesson.steps,
+    stepIdx: 0,
+    lives: 3, correct: 0, total: 0,
+    answered: false, chosen: null
+  };
+
+  // Topbar
+  document.getElementById('tb-unit').textContent = unit.emoji + ' ' + unit.title;
+  document.getElementById('tb-lesson').textContent = lesson.title;
+  document.getElementById('tb-sep').style.display = 'inline';
+
+  showView('view-lesson');
+  document.getElementById('feedback-bar').style.display = 'flex';
+  renderStep();
+}
+
+function renderStep() {
+  LESSON.answered = false;
+  LESSON.chosen = null;
+
+  const step = LESSON.steps[LESSON.stepIdx];
+  const pct = (LESSON.stepIdx / LESSON.steps.length) * 100;
+  document.getElementById('lesson-prog').style.width = pct + '%';
+
+  const livesEl = document.getElementById('lives-disp');
+  livesEl.innerHTML = '❤️'.repeat(Math.max(0, LESSON.lives)) + (LESSON.lives < 3 ? '🖤'.repeat(Math.max(0, 3 - LESSON.lives)) : '');
+
+  const fb = document.getElementById('feedback-bar');
+  fb.className = 'feedback-bar';
+  document.getElementById('fb-content').innerHTML = '';
+  const btn = document.getElementById('btn-check');
+  btn.className = 'btn-check idle';
+  btn.textContent = 'Verificar';
+
+  if (step.type === 'theory') renderTheory(step);
+  else if (step.type === 'mcq') renderMCQ(step);
+  else if (step.type === 'input') renderInput(step);
+}
+
+function renderTheory(step) {
+  let html = '<div class="theory-card">';
+  html += `<div class="theory-header"><div class="theory-tag">📖 Teoria</div><div class="theory-title">${step.title}</div></div>`;
+  step.blocks.forEach(b => {
+    if (b.type === 'para') {
+      html += `<div class="theory-block">${b.heading ? `<h3>${b.heading}</h3>` : ''}<p>${b.text}</p></div>`;
+    } else if (b.type === 'formula') {
+      html += `<div class="formula-box">${escapeHtml(b.text)}</div>`;
+    } else if (b.type === 'callout') {
+      const cls = b.kind === 'warn' ? 'warn' : b.kind === 'tip' ? 'tip' : '';
+      html += `<div class="callout ${cls}"><div class="callout-icon">${b.icon}</div><div class="callout-text">${b.text}</div></div>`;
+    } else if (b.type === 'example') {
+      html += `<div class="example-box"><div class="example-header">${b.label}</div><div class="example-body" style="white-space:pre-wrap;font-family:'JetBrains Mono',monospace;font-size:0.82rem">${escapeHtml(b.body)}</div></div>`;
+    }
+  });
+  html += '</div>';
+  document.getElementById('lesson-body').innerHTML = html;
+
+  const btn = document.getElementById('btn-check');
+  btn.className = 'btn-check ready';
+  btn.textContent = 'Entendido →';
+  btn.onclick = () => advanceStep();
+}
+
+function renderMCQ(step) {
+  const letters = ['A', 'B', 'C', 'D'];
+  let html = `<div class="question-card">
+    <div class="q-number">Questão ${LESSON.stepIdx} de ${LESSON.steps.length - 1}</div>
+    ${step.formula ? `<div class="q-formula">${escapeHtml(step.formula)}</div>` : ''}
+    <div class="q-stem">${step.stem}</div>
+    <div class="options" id="q-opts">
+      ${step.opts.map((o, i) => `
+        <div class="option" data-idx="${i}" onclick="selectOpt(${i})">
+          <div class="opt-letter">${letters[i]}</div>
+          <span>${o}</span>
+        </div>`).join('')}
+    </div>
+  </div>`;
+  document.getElementById('lesson-body').innerHTML = html;
+}
+
+function renderInput(step) {
+  let html = `<div class="question-card">
+    <div class="q-number">Questão ${LESSON.stepIdx} de ${LESSON.steps.length - 1}</div>
+    ${step.formula ? `<div class="q-formula">${escapeHtml(step.formula)}</div>` : ''}
+    <div class="q-stem">${step.stem}</div>
+    <div class="input-area">
+      <div class="input-label">Sua resposta</div>
+      <div class="q-input-row">
+        <input class="q-input" id="q-input" type="text" autocomplete="off" placeholder="Digite aqui…"
+          oninput="onInput()" onkeydown="if(event.key==='Enter')handleCheck()">
+      </div>
+    </div>
+  </div>`;
+  document.getElementById('lesson-body').innerHTML = html;
+  setTimeout(() => document.getElementById('q-input')?.focus(), 60);
+}
+
+function selectOpt(idx) {
+  if (LESSON.answered) return;
+  LESSON.chosen = idx;
+  document.querySelectorAll('.option').forEach((el, i) => {
+    el.classList.toggle('selected', i === idx);
+  });
+  const btn = document.getElementById('btn-check');
+  btn.className = 'btn-check ready';
+  btn.textContent = 'Verificar';
+  btn.onclick = handleCheck;
+}
+
+function onInput() {
+  const val = document.getElementById('q-input')?.value?.trim();
+  const btn = document.getElementById('btn-check');
+  btn.className = val ? 'btn-check ready' : 'btn-check idle';
+  btn.textContent = 'Verificar';
+  btn.onclick = handleCheck;
+}
+
+function handleCheck() {
+  const step = LESSON.steps[LESSON.stepIdx];
+  if (step.type === 'theory') { advanceStep(); return; }
+  if (LESSON.answered) { advanceStep(); return; }
+
+  if (step.type === 'mcq') {
+    if (LESSON.chosen === null) return;
+    LESSON.answered = true;
+    LESSON.total++;
+    const correct = LESSON.chosen === step.correct;
+    if (correct) LESSON.correct++;
+    showMCQResult(correct, step);
+  } else if (step.type === 'input') {
+    const inp = document.getElementById('q-input');
+    if (!inp?.value?.trim()) return;
+    LESSON.answered = true;
+    LESSON.total++;
+    const val = inp.value.trim().toLowerCase().replace(/\s/g, '');
+    const expected = step.correct.toLowerCase().replace(/\s/g, '');
+    const correct = val === expected;
+    if (correct) LESSON.correct++;
+    inp.disabled = true;
+    inp.classList.add(correct ? 'correct' : 'wrong');
+    showFeedback(correct, step.exp);
+    if (!correct) LESSON.lives--;
+    updateLives();
+    if (LESSON.lives <= 0) setTimeout(showGameOver, 1200);
+  }
+}
+
+function showMCQResult(correct, step) {
+  document.querySelectorAll('.option').forEach((el, i) => {
+    el.classList.add('disabled');
+    if (i === step.correct) el.classList.add('correct');
+    else if (i === LESSON.chosen && !correct) el.classList.add('wrong');
+  });
+  showFeedback(correct, step.exp);
+  if (!correct) LESSON.lives--;
+  updateLives();
+  if (LESSON.lives <= 0) setTimeout(showGameOver, 1400);
+}
+
+function showFeedback(correct, exp) {
+  const fb = document.getElementById('feedback-bar');
+  fb.className = 'feedback-bar ' + (correct ? 'correct' : 'wrong');
+
+  const earnedXP = correct ? 15 : 0;
+  if (correct) {
+    STATE.xp += earnedXP;
+    showXpToast(earnedXP);
+  }
+
+  document.getElementById('fb-content').innerHTML = `
+    <div class="fb-title ${correct ? 'correct' : 'wrong'}">${correct ? '✅ Correto!' : '❌ Incorreto'}</div>
+    <div class="fb-exp">${exp}</div>
+  `;
+
+  const btn = document.getElementById('btn-check');
+  btn.className = correct ? 'btn-check next' : 'btn-check next-wrong';
+  btn.textContent = 'Continuar →';
+  btn.onclick = advanceStep;
+}
+
+function updateLives() {
+  const el = document.getElementById('lives-disp');
+  el.innerHTML = '❤️'.repeat(Math.max(0, LESSON.lives)) + (LESSON.lives < 3 ? '🖤'.repeat(Math.max(0, 3 - LESSON.lives)) : '');
+  document.getElementById('lesson-prog').style.width = ((LESSON.stepIdx / LESSON.steps.length) * 100) + '%';
+}
+
+function advanceStep() {
+  LESSON.stepIdx++;
+  if (LESSON.stepIdx >= LESSON.steps.length) {
+    completeLesson();
+  } else {
+    renderStep();
+  }
+}
+
+function completeLesson() {
+  const acc = LESSON.total > 0 ? Math.round((LESSON.correct / LESSON.total) * 100) : 100;
+  const xpEarned = Math.round(80 + LESSON.correct * 10 + (acc === 100 ? 20 : 0));
+  STATE.xp += xpEarned;
+
+  // Mark lesson done
+  STATE.completedLessons[LESSON.lessonId] = {
+    xp: xpEarned, accuracy: acc, date: new Date().toISOString()
+  };
+
+  // Update streak
+  const today = new Date().toISOString().slice(0, 10);
+  if (STATE.lastStudyDate !== today) {
+    const yesterday = new Date(Date.now() - 86400000).toISOString().slice(0, 10);
+    STATE.streak = (STATE.lastStudyDate === yesterday) ? (STATE.streak || 0) + 1 : 1;
+    STATE.lastStudyDate = today;
+  }
+  if (!STATE.activityLog) STATE.activityLog = [];
+  if (!STATE.activityLog.includes(today)) STATE.activityLog.push(today);
+
+  saveState();
+  document.getElementById('xp-display').textContent = STATE.xp;
+  document.getElementById('streak-display').textContent = STATE.streak;
+
+  // Show completion
+  document.getElementById('lesson-prog').style.width = '100%';
+  document.getElementById('feedback-bar').style.display = 'none';
+  document.getElementById('lesson-body').innerHTML = `
+    <div class="completion-view" style="padding:0">
+      <div class="completion-card">
+        <span class="completion-trophy">🏆</span>
+        <div class="completion-title">Lição concluída!</div>
+        <div class="completion-sub">Você completou <strong>${findLessonTitle(LESSON.lessonId)}</strong></div>
+        <div class="completion-stats">
+          <div class="comp-stat">
+            <span class="comp-stat-val gold">+${xpEarned}</span>
+            <div class="comp-stat-lbl">XP ganhos</div>
+          </div>
+          <div class="comp-stat">
+            <span class="comp-stat-val green">${acc}%</span>
+            <div class="comp-stat-lbl">Precisão</div>
+          </div>
+          <div class="comp-stat">
+            <span class="comp-stat-val blue">${LESSON.lives}</span>
+            <div class="comp-stat-lbl">Vidas</div>
+          </div>
+        </div>
+        <button class="btn-primary" onclick="goHome()">Continuar →</button>
+        <button class="btn-secondary" onclick="replayLesson()">Repetir lição</button>
+      </div>
+    </div>
+  `;
+}
+
+function showGameOver() {
+  document.getElementById('feedback-bar').style.display = 'none';
+  document.getElementById('lesson-body').innerHTML = `
+    <div class="completion-view" style="padding:0">
+      <div class="gameover-card">
+        <div style="font-size:3.5rem;margin-bottom:20px">💔</div>
+        <div class="completion-title" style="color:#dc2626">Sem vidas!</div>
+        <div class="completion-sub" style="margin-bottom:28px">Sem problemas — erre, aprenda e tente de novo. É assim que o Cálculo se aprende.</div>
+        <button class="btn-primary" onclick="replayLesson()">Tentar de novo</button>
+        <button class="btn-secondary" onclick="goHome()">Voltar ao início</button>
+      </div>
+    </div>
+  `;
+}
+
+function replayLesson() {
+  startLesson(LESSON.unitId, LESSON.lessonId);
+}
+
+function goHome() {
+  document.getElementById('feedback-bar').style.display = 'flex';
+  document.getElementById('tb-sep').style.display = 'none';
+  document.getElementById('tb-lesson').textContent = '';
+  document.getElementById('tb-unit').textContent = 'Início';
+  showView('view-home');
+  buildSidebar();
+  buildHome();
+}
+
+// ══════════════════════════════════════════
+//  HELPERS
+// ══════════════════════════════════════════
+function showView(id) {
+  document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+}
+
+function findLessonTitle(lid) {
+  for (const u of CURRICULUM) {
+    const l = u.lessons.find(l => l.id === lid);
+    if (l) return l.title;
+  }
+  return '';
+}
+
+function escapeHtml(str) {
+  return str.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+}
+
+let toastTimer;
+function showXpToast(amount) {
+  const toast = document.getElementById('toast');
+  document.getElementById('toast-icon').textContent = '⭐';
+  document.getElementById('toast-text').textContent = `+${amount} XP`;
+  toast.classList.add('show');
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => toast.classList.remove('show'), 2200);
+}
+
+function showToast(icon, text) {
+  const toast = document.getElementById('toast');
+  document.getElementById('toast-icon').textContent = icon;
+  document.getElementById('toast-text').textContent = text;
+  toast.classList.add('show');
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => toast.classList.remove('show'), 2500);
+}
+
+function openResetModal() {
+  document.getElementById('reset-modal').classList.add('open');
+}
+function closeResetModal() {
+  document.getElementById('reset-modal').classList.remove('open');
+}
+function confirmReset() {
+  localStorage.removeItem(STORAGE_KEY);
+  STATE = loadState();
+  closeResetModal();
+  buildSidebar();
+  buildHome();
+  showToast('✅', 'Progresso redefinido');
+}
+
+// ══════════════════════════════════════════
+//  INIT
+// ══════════════════════════════════════════
+buildSidebar();
+buildHome();
+</script>
+</body>
+</html>
