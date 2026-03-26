@@ -1,0 +1,179 @@
+{
+  "id": "u2",
+  "emoji": "📈",
+  "title": "Derivadas",
+  "desc": "Taxas de variação instantânea",
+  "lessons": [
+    {
+      "id": "u2l1",
+      "title": "Definição de Derivada",
+      "steps": [
+        {
+          "type": "theory",
+          "title": "O que é uma Derivada?",
+          "blocks": [
+            {
+              "type": "para",
+              "heading": "Taxa de variação instantânea",
+              "text": "A derivada de f em x = a representa a <strong>taxa de variação instantânea</strong> de f naquele ponto — geometricamente, é a inclinação da reta tangente ao gráfico."
+            },
+            { "type": "formula", "text": "f'(a) = lim  [f(a+h) − f(a)] / h\n        h→0\n\n(Definição por limite — \"taxa média quando h→0\")" },
+            {
+              "type": "para",
+              "heading": "Notações",
+              "text": "Existem várias notações para derivada, todas equivalentes:"
+            },
+            { "type": "formula", "text": "f'(x)   (Lagrange)\ndf/dx   (Leibniz)\nDf(x)   (Euler)\ny'      (quando y = f(x))" },
+            {
+              "type": "callout",
+              "kind": "info",
+              "icon": "📌",
+              "text": "Se f(x) representa posição no tempo, f'(x) é a velocidade. Se f(x) é velocidade, f'(x) é a aceleração."
+            }
+          ]
+        },
+        {
+          "type": "mcq",
+          "formula": "f(x) = x²\nCalcule f'(x) pela definição",
+          "stem": "Usando a definição: [f(x+h) − f(x)] / h = [(x+h)² − x²] / h. Expanda e simplifique para h→0.",
+          "opts": ["x", "2x", "2x + h", "x²"],
+          "correct": 1,
+          "exp": "[(x²+2xh+h²) − x²]/h = (2xh+h²)/h = 2x+h → quando h→0: f'(x) = 2x ✓"
+        },
+        {
+          "type": "mcq",
+          "formula": "f(x) = c  (constante)",
+          "stem": "Qual é a derivada de uma função constante? Use a definição: [c − c]/h = 0/h.",
+          "opts": ["c", "1", "0", "x"],
+          "correct": 2,
+          "exp": "Uma constante não varia — sua taxa de variação é sempre zero. f'(x) = 0."
+        },
+        {
+          "type": "input",
+          "formula": "f(x) = x³\nf'(x) = ?  (use a regra: d/dx xⁿ = n·xⁿ⁻¹)",
+          "stem": "A regra da potência diz: d/dx xⁿ = n·xⁿ⁻¹. Aplique para n = 3. Digite apenas o coeficiente numérico (ex: se for 5x², digite 5).",
+          "correct": "3",
+          "exp": "d/dx x³ = 3x². O coeficiente é 3."
+        },
+        {
+          "type": "mcq",
+          "formula": "f(x) = 5x⁴ − 3x² + 7x − 2",
+          "stem": "Derive cada termo separadamente usando a regra da potência e a linearidade da derivada.",
+          "opts": ["20x³ − 6x + 7", "20x³ − 6x", "5x³ − 3x + 7", "20x⁴ − 6x² + 7"],
+          "correct": 0,
+          "exp": "d/dx(5x⁴) = 20x³, d/dx(−3x²) = −6x, d/dx(7x) = 7, d/dx(−2) = 0. Total: 20x³ − 6x + 7."
+        }
+      ]
+    },
+    {
+      "id": "u2l2",
+      "title": "Regras de Derivação",
+      "steps": [
+        {
+          "type": "theory",
+          "title": "Regras Principais de Derivação",
+          "blocks": [
+            { "type": "formula", "text": "Regra da Potência:   d/dx xⁿ = n·xⁿ⁻¹\n\nRegra do Produto:   d/dx [f·g] = f'·g + f·g'\n\nRegra do Quociente: d/dx [f/g] = (f'·g − f·g') / g²\n\nRegra da Cadeia:    d/dx [f(g(x))] = f'(g(x))·g'(x)" },
+            {
+              "type": "para",
+              "heading": "Derivadas de funções especiais",
+              "text": "Algumas derivadas fundamentais devem ser memorizadas:"
+            },
+            { "type": "formula", "text": "d/dx sin(x)  =  cos(x)\nd/dx cos(x)  = −sin(x)\nd/dx eˣ      =  eˣ\nd/dx ln(x)   =  1/x\nd/dx tg(x)   =  sec²(x)" },
+            {
+              "type": "callout",
+              "kind": "tip",
+              "icon": "🎯",
+              "text": "A Regra da Cadeia é a mais usada no Cálculo avançado. Pense: \"derivada de fora × derivada de dentro\"."
+            }
+          ]
+        },
+        {
+          "type": "mcq",
+          "formula": "d/dx [x² · sin(x)]",
+          "stem": "Use a Regra do Produto: d/dx[f·g] = f'g + fg'. Aqui f = x² e g = sin(x).",
+          "opts": ["2x · cos(x)", "x² · cos(x)", "2x·sin(x) + x²·cos(x)", "2x·cos(x) − x²·sin(x)"],
+          "correct": 2,
+          "exp": "f'=2x, g'=cos(x). Produto: (2x)·sin(x) + x²·cos(x) = 2x·sin(x) + x²·cos(x)"
+        },
+        {
+          "type": "mcq",
+          "formula": "d/dx [eˣ / x]",
+          "stem": "Use a Regra do Quociente: (f'g − fg') / g². Aqui f = eˣ, g = x.",
+          "opts": ["eˣ/x − eˣ/x²", "eˣ · (1 − 1/x) / x", "(eˣ·x − eˣ) / x²", "eˣ/x²"],
+          "correct": 2,
+          "exp": "f'=eˣ, g'=1. Quociente: (eˣ·x − eˣ·1)/x² = eˣ(x−1)/x²"
+        },
+        {
+          "type": "mcq",
+          "formula": "d/dx sin(x²)",
+          "stem": "Use a Regra da Cadeia. \"Fora\" = sin(u), \"dentro\" = u = x².",
+          "opts": ["cos(x²)", "2x·cos(x)", "2x·cos(x²)", "sin(2x)"],
+          "correct": 2,
+          "exp": "d/du sin(u) = cos(u). d/dx x² = 2x. Cadeia: cos(x²)·2x = 2x·cos(x²)"
+        },
+        {
+          "type": "input",
+          "formula": "d/dx [3x⁵ − 2x³ + x]\nem  x = 1",
+          "stem": "Calcule a derivada e substitua x = 1. Derivada: 15x⁴ − 6x² + 1. Quanto vale em x = 1?",
+          "correct": "10",
+          "exp": "15(1) − 6(1) + 1 = 15 − 6 + 1 = 10"
+        }
+      ]
+    },
+    {
+      "id": "u2l3",
+      "title": "Máximos e Mínimos",
+      "steps": [
+        {
+          "type": "theory",
+          "title": "Encontrando Máximos e Mínimos",
+          "blocks": [
+            {
+              "type": "para",
+              "heading": "Pontos críticos",
+              "text": "Um <strong>ponto crítico</strong> ocorre onde f'(x) = 0 ou f'(x) não existe. Nesses pontos pode haver máximo local, mínimo local ou ponto de inflexão."
+            },
+            { "type": "formula", "text": "Teste da Segunda Derivada:\n\nSe f'(a) = 0, calcule f''(a):\n• f''(a) > 0  →  mínimo local em x = a\n• f''(a) < 0  →  máximo local em x = a\n• f''(a) = 0  →  inconclusivo (use outro teste)" },
+            {
+              "type": "example",
+              "label": "Exemplo: f(x) = x³ − 3x",
+              "body": "1. f'(x) = 3x² − 3 = 0  →  x² = 1  →  x = ±1\n\n2. f''(x) = 6x\n   f''(1)  =  6 > 0  →  mínimo em x = 1\n   f''(−1) = −6 < 0  →  máximo em x = −1\n\n3. Valores: f(1) = −2 (mínimo), f(−1) = 2 (máximo)"
+            }
+          ]
+        },
+        {
+          "type": "mcq",
+          "formula": "f(x) = x² − 6x + 8",
+          "stem": "Para encontrar os pontos críticos, resolva f'(x) = 0. Qual é o ponto crítico desta parábola?",
+          "opts": ["x = 2", "x = 3", "x = 4", "x = 6"],
+          "correct": 1,
+          "exp": "f'(x) = 2x − 6 = 0 → 2x = 6 → x = 3. Este é o vértice da parábola."
+        },
+        {
+          "type": "mcq",
+          "formula": "f(x) = x² − 6x + 8\nf''(x) = 2",
+          "stem": "Sabendo que x = 3 é ponto crítico e f''(3) = 2 > 0, o que isso indica?",
+          "opts": ["Máximo local", "Mínimo local", "Ponto de inflexão", "Inconclusivo"],
+          "correct": 1,
+          "exp": "f''(3) = 2 > 0 → a concavidade é para cima → mínimo local em x = 3. f(3) = 9 − 18 + 8 = −1."
+        },
+        {
+          "type": "input",
+          "formula": "f(x) = −x² + 4x − 1",
+          "stem": "Encontre o ponto crítico (onde f'(x) = 0) e calcule o valor máximo de f. Digite o valor máximo.",
+          "correct": "3",
+          "exp": "f'(x) = −2x + 4 = 0 → x = 2. f(2) = −4 + 8 − 1 = 3. Como f''(x) = −2 < 0, é máximo local."
+        },
+        {
+          "type": "mcq",
+          "formula": "f(x) = x³",
+          "stem": "f'(x) = 3x² = 0 em x = 0. f''(0) = 0 (inconclusivo). O que é x = 0 para esta função?",
+          "opts": ["Máximo local", "Mínimo local", "Ponto de inflexão", "Descontinuidade"],
+          "correct": 2,
+          "exp": "x = 0 é um ponto de inflexão de f(x) = x³. A função não tem máximo nem mínimo local — ela cresce para sempre."
+        }
+      ]
+    }
+  ]
+}

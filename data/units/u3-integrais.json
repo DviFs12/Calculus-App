@@ -1,0 +1,189 @@
+{
+  "id": "u3",
+  "emoji": "∫",
+  "title": "Integrais",
+  "desc": "Acumulação de áreas e grandezas",
+  "lessons": [
+    {
+      "id": "u3l1",
+      "title": "Integral Indefinida",
+      "steps": [
+        {
+          "type": "theory",
+          "title": "Antiderivada e Integral Indefinida",
+          "blocks": [
+            {
+              "type": "para",
+              "heading": "O que é uma integral?",
+              "text": "Integrar é o processo <strong>inverso</strong> de derivar. A integral indefinida de f(x) é a família de funções F(x) tal que F'(x) = f(x)."
+            },
+            { "type": "formula", "text": "∫ f(x) dx = F(x) + C\n\n// C = constante de integração (sempre inclua!)\n// Porque a derivada de qualquer constante é 0" },
+            {
+              "type": "para",
+              "heading": "Regras principais",
+              "text": "As regras de integração são o espelho das derivadas:"
+            },
+            { "type": "formula", "text": "∫ xⁿ dx = xⁿ⁺¹/(n+1) + C    (n ≠ −1)\n∫ eˣ dx = eˣ + C\n∫ 1/x dx = ln|x| + C\n∫ cos(x) dx = sin(x) + C\n∫ sin(x) dx = −cos(x) + C" },
+            {
+              "type": "callout",
+              "kind": "warn",
+              "icon": "⚠️",
+              "text": "Nunca esqueça o \"+C\" na integral indefinida! Representa infinitas antiderivadas (família de funções)."
+            }
+          ]
+        },
+        {
+          "type": "mcq",
+          "formula": "∫ x³ dx",
+          "stem": "Use a regra da potência para integrais: ∫xⁿ dx = xⁿ⁺¹/(n+1) + C. Qual é o resultado?",
+          "opts": ["x⁴ + C", "x⁴/4 + C", "3x² + C", "4x⁴ + C"],
+          "correct": 1,
+          "exp": "∫x³ dx = x³⁺¹/(3+1) + C = x⁴/4 + C. Verifique: d/dx(x⁴/4) = 4x³/4 = x³ ✓"
+        },
+        {
+          "type": "mcq",
+          "formula": "∫ (6x² + 4x − 3) dx",
+          "stem": "Integre cada termo separadamente usando a linearidade da integral.",
+          "opts": ["2x³ + 2x² − 3x + C", "2x³ + 2x + C", "12x + 4 + C", "6x³ + 4x² − 3x + C"],
+          "correct": 0,
+          "exp": "∫6x²dx = 6x³/3 = 2x³; ∫4x dx = 4x²/2 = 2x²; ∫−3 dx = −3x. Total: 2x³ + 2x² − 3x + C"
+        },
+        {
+          "type": "mcq",
+          "formula": "∫ eˣ dx",
+          "stem": "eˣ é especial: sua integral é igual a ela mesma (mais +C). Qual é o resultado?",
+          "opts": ["eˣ⁺¹/(x+1) + C", "x·eˣ + C", "eˣ + C", "1/eˣ + C"],
+          "correct": 2,
+          "exp": "∫eˣ dx = eˣ + C. Verifique: d/dx(eˣ) = eˣ ✓. Esta é a única função que é sua própria derivada!"
+        },
+        {
+          "type": "input",
+          "formula": "∫ cos(x) dx = ?·sin(x) + C\n\n(a derivada de sin(x) é cos(x))",
+          "stem": "Qual é o coeficiente na frente de sin(x)? Digite o número.",
+          "correct": "1",
+          "exp": "∫cos(x)dx = sin(x) + C. Coeficiente = 1. Verifique: d/dx(sin(x)) = cos(x) ✓"
+        }
+      ]
+    },
+    {
+      "id": "u3l2",
+      "title": "Integral Definida",
+      "steps": [
+        {
+          "type": "theory",
+          "title": "Integral Definida e Área",
+          "blocks": [
+            {
+              "type": "para",
+              "heading": "Área sob a curva",
+              "text": "A integral definida de f(x) de a até b representa a <strong>área (com sinal) sob a curva</strong> f(x) no intervalo [a, b]. É calculada usando o Teorema Fundamental do Cálculo."
+            },
+            { "type": "formula", "text": "∫[a,b] f(x) dx = F(b) − F(a)\n\n// Onde F'(x) = f(x)\n// Notação: [F(x)]ₐᵇ = F(b) − F(a)" },
+            {
+              "type": "example",
+              "label": "Calculando ∫[0,2] x² dx",
+              "body": "1. Antiderivada de x² é F(x) = x³/3\n\n2. Avaliar nos limites:\n   F(2) = 8/3\n   F(0) = 0\n\n3. Resultado: F(2) − F(0) = 8/3 − 0 = 8/3 ≈ 2.67"
+            },
+            {
+              "type": "callout",
+              "kind": "info",
+              "icon": "📐",
+              "text": "Se f(x) < 0 no intervalo, a integral fica negativa (área abaixo do eixo x). A área geométrica usa |∫f dx|."
+            }
+          ]
+        },
+        {
+          "type": "mcq",
+          "formula": "∫[1,3] 2x dx",
+          "stem": "Antiderivada de 2x é x². Calcule F(3) − F(1).",
+          "opts": ["4", "6", "8", "12"],
+          "correct": 2,
+          "exp": "F(x) = x². F(3) − F(1) = 9 − 1 = 8. Geometricamente: área do trapézio com f(1)=2, f(3)=6, base=2 → (2+6)·2/2 = 8 ✓"
+        },
+        {
+          "type": "input",
+          "formula": "∫[0,π] sin(x) dx",
+          "stem": "Antiderivada de sin(x) é −cos(x). Calcule −cos(π) − (−cos(0)). Lembre: cos(π) = −1, cos(0) = 1. Digite o resultado.",
+          "correct": "2",
+          "exp": "−cos(π) − (−cos(0)) = −(−1) − (−1) = 1 + 1 = 2. Representa a área do arco de seno entre 0 e π."
+        },
+        {
+          "type": "mcq",
+          "formula": "∫[−1,1] x³ dx",
+          "stem": "x³ é uma função ímpar (f(−x) = −f(x)). O que acontece com a integral de uma função ímpar num intervalo simétrico como [−1, 1]?",
+          "opts": ["2/4 = 0.5", "1", "0", "−1"],
+          "correct": 2,
+          "exp": "Para funções ímpares, ∫[−a,a] f(x) dx = 0, pois as áreas acima e abaixo do eixo se cancelam."
+        },
+        {
+          "type": "mcq",
+          "formula": "∫[0,1] eˣ dx",
+          "stem": "Antiderivada de eˣ é eˣ. Calcule e¹ − e⁰. Sabendo que e ≈ 2.718 e e⁰ = 1.",
+          "opts": ["e − 1", "e", "e + 1", "1"],
+          "correct": 0,
+          "exp": "[eˣ]₀¹ = e¹ − e⁰ = e − 1 ≈ 1.718. Esta área representa o crescimento exponencial de 0 a 1."
+        }
+      ]
+    },
+    {
+      "id": "u3l3",
+      "title": "Técnicas de Integração",
+      "steps": [
+        {
+          "type": "theory",
+          "title": "Substituição e Integração por Partes",
+          "blocks": [
+            {
+              "type": "para",
+              "heading": "Substituição (regra da cadeia invertida)",
+              "text": "Quando o integrando contém uma função composta, fazemos u = função interna e substituímos:"
+            },
+            { "type": "formula", "text": "∫ f(g(x))·g'(x) dx\n\nu = g(x),  du = g'(x) dx\n\n= ∫ f(u) du  =  F(u) + C  =  F(g(x)) + C" },
+            {
+              "type": "example",
+              "label": "∫ 2x·cos(x²) dx",
+              "body": "u = x²  →  du = 2x dx\n\n∫ cos(u) du = sin(u) + C = sin(x²) + C\n\nVerifique: d/dx sin(x²) = cos(x²)·2x ✓"
+            },
+            {
+              "type": "para",
+              "heading": "Integração por partes (produto → integral)",
+              "text": "Para integrais de produtos de funções de tipos diferentes:"
+            },
+            { "type": "formula", "text": "∫ u dv = u·v − ∫ v du\n\nEscolha u: LIATE (Log, Inverso, Algébrico,\n                  Trigon., Exponencial)" }
+          ]
+        },
+        {
+          "type": "mcq",
+          "formula": "∫ 3x² · (x³ + 1)⁴ dx",
+          "stem": "Use substituição. Faça u = x³ + 1. Qual é du/dx?",
+          "opts": ["x²", "3x²", "3x³", "x³"],
+          "correct": 1,
+          "exp": "Se u = x³ + 1, então du/dx = 3x². Logo du = 3x² dx. A integral vira ∫u⁴ du = u⁵/5 + C = (x³+1)⁵/5 + C"
+        },
+        {
+          "type": "mcq",
+          "formula": "∫ x · eˣ dx",
+          "stem": "Use integração por partes: ∫u dv = uv − ∫v du. Escolha u = x (algébrico) e dv = eˣ dx.",
+          "opts": ["x·eˣ + C", "eˣ(x − 1) + C", "x·eˣ + eˣ + C", "eˣ/x + C"],
+          "correct": 1,
+          "exp": "u=x, du=dx; dv=eˣdx, v=eˣ. Partes: x·eˣ − ∫eˣdx = x·eˣ − eˣ + C = eˣ(x−1) + C"
+        },
+        {
+          "type": "mcq",
+          "formula": "∫ sin(x) · cos(x) dx",
+          "stem": "Faça u = sin(x). Então du = cos(x) dx. A integral se torna ∫u du. Qual é o resultado?",
+          "opts": ["sin²(x) + C", "sin²(x)/2 + C", "−cos²(x) + C", "cos(x)·sin(x) + C"],
+          "correct": 1,
+          "exp": "∫u du = u²/2 + C = sin²(x)/2 + C. (Equivalente a −cos(2x)/4 + C pela identidade trigonométrica.)"
+        },
+        {
+          "type": "input",
+          "formula": "∫ ln(x) dx = x·ln(x) − x + C\n\nVerifique: d/dx [x·ln(x) − x] = ?",
+          "stem": "Usando a regra do produto para derivar: d/dx[x·ln(x)] = ln(x) + x·(1/x) = ln(x) + 1. Subtraindo d/dx[x] = 1. O resultado é ln(x) + 1 − 1 = ?. Digite.",
+          "correct": "ln(x)",
+          "exp": "ln(x) + 1 − 1 = ln(x). A derivada de x·ln(x) − x é de fato ln(x). Verificação correta!"
+        }
+      ]
+    }
+  ]
+}

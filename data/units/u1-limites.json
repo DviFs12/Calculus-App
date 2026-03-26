@@ -1,0 +1,259 @@
+{
+  "id": "u1",
+  "emoji": "📐",
+  "title": "Limites",
+  "desc": "Fundamentos do Cálculo Diferencial",
+  "lessons": [
+    {
+      "id": "u1l1",
+      "title": "O que é um Limite?",
+      "steps": [
+        {
+          "type": "theory",
+          "title": "O que é um Limite?",
+          "blocks": [
+            {
+              "type": "para",
+              "heading": "Intuição",
+              "text": "Um <strong>limite</strong> descreve o valor que uma função <strong>se aproxima</strong> conforme a entrada se aproxima de um certo ponto — independentemente do que acontece exatamente naquele ponto."
+            },
+            { "type": "formula", "text": "lim  f(x) = L\n x→a\n\n// \"O limite de f(x) quando x tende a a é L\"" },
+            {
+              "type": "image",
+              "src": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e5/Limit_of_a_function_at_a_point.svg/600px-Limit_of_a_function_at_a_point.svg.png",
+              "caption": "Visualização geométrica de um limite: f(x) se aproxima de L quando x → a, mesmo que f(a) seja indefinida.",
+              "alt": "Gráfico mostrando o conceito de limite"
+            },
+            {
+              "type": "para",
+              "heading": "Exemplo concreto",
+              "text": "Considere <strong>f(x) = (x² − 1) / (x − 1)</strong>. Em x = 1 há uma divisão por zero, então f(1) é indefinida. Mas para x próximo de 1 (seja 0,99 ou 1,01), o valor se aproxima de 2."
+            },
+            {
+              "type": "example",
+              "label": "Verificando numericamente",
+              "body": "x = 0.9   →  f(x) = (0.81−1)/(0.9−1) = 1.9\nx = 0.99  →  f(x) ≈ 1.99\nx = 0.999 →  f(x) ≈ 1.999\nx = 1.001 →  f(x) ≈ 2.001\n\n⟹  lim(x→1) f(x) = 2"
+            },
+            {
+              "type": "callout",
+              "kind": "info",
+              "icon": "💡",
+              "text": "O limite é sobre o comportamento próximo a um ponto, não no ponto. A função pode não estar definida em x = a e ainda ter limite!"
+            }
+          ]
+        },
+        {
+          "type": "mcq",
+          "formula": "lim  (3x + 2)\n x→4",
+          "stem": "Esta função polinomial é contínua em todo ponto. Calcule o limite substituindo x = 4 diretamente.",
+          "opts": ["10", "12", "14", "16"],
+          "correct": 2,
+          "exp": "<code>3(4) + 2 = 12 + 2 = 14</code>. Para funções contínuas (como polinômios), basta substituir."
+        },
+        {
+          "type": "mcq",
+          "formula": "lim  sin(x) / x\n x→0",
+          "stem": "Este é um dos <strong>limites fundamentais</strong> do Cálculo. Não é possível calcular por substituição direta (0/0). Qual é o valor?",
+          "opts": ["0", "1", "∞", "Não existe"],
+          "correct": 1,
+          "exp": "<code>lim(x→0) sin(x)/x = 1</code> — resultado provado geometricamente. É um limite que deve ser memorizado!"
+        },
+        {
+          "type": "input",
+          "formula": "lim  x³ − x\n x→2",
+          "stem": "Calcule o limite. A função é um polinômio (contínua), então substitua diretamente. Digite o resultado numérico.",
+          "correct": "6",
+          "exp": "<code>2³ − 2 = 8 − 2 = 6</code> ✓"
+        },
+        {
+          "type": "mcq",
+          "formula": "lim  1/x\n x→∞",
+          "stem": "O que acontece com 1/x conforme x cresce sem limite (tende ao infinito)?",
+          "opts": ["1", "∞", "0", "-1"],
+          "correct": 2,
+          "exp": "Quanto maior x, menor é 1/x. Quando x→∞, 1/x→0. Exemplo: 1/1000 = 0.001, 1/1000000 = 0.000001."
+        }
+      ]
+    },
+    {
+      "id": "u1l2",
+      "title": "Limites Laterais",
+      "steps": [
+        {
+          "type": "theory",
+          "title": "Limites pelo Lado Esquerdo e Direito",
+          "blocks": [
+            {
+              "type": "para",
+              "heading": "Definição",
+              "text": "Podemos nos aproximar de um ponto por dois lados. O <strong>limite pela esquerda</strong> (x→a⁻) usa valores menores que a; o <strong>limite pela direita</strong> (x→a⁺) usa valores maiores."
+            },
+            { "type": "formula", "text": "Limite pela esquerda:  lim f(x)  (x→a⁻)\nLimite pela direita:   lim f(x)  (x→a⁺)\n\nO limite existe ⟺ lim(x→a⁻) = lim(x→a⁺)" },
+            {
+              "type": "example",
+              "label": "f(x) = 1/x em x = 0",
+              "body": "Pela DIREITA (x→0⁺): 1/0.1 = 10, 1/0.01 = 100 → +∞\nPela ESQUERDA (x→0⁻): 1/(−0.1) = −10     → −∞\n\nComo +∞ ≠ −∞, o limite NÃO EXISTE."
+            },
+            {
+              "type": "callout",
+              "kind": "warn",
+              "icon": "⚠️",
+              "text": "Se os limites laterais forem diferentes, dizemos que o limite (bilateral) não existe naquele ponto."
+            }
+          ]
+        },
+        {
+          "type": "mcq",
+          "formula": "f(x) = |x| / x",
+          "stem": "Calcule lim(x→0⁺) f(x). Para x > 0, |x| = x, logo f(x) = x/x.",
+          "opts": ["-1", "0", "1", "Indefinido"],
+          "correct": 2,
+          "exp": "Para x > 0: |x|/x = x/x = 1. Portanto lim(x→0⁺) = 1."
+        },
+        {
+          "type": "mcq",
+          "formula": "f(x) = |x| / x",
+          "stem": "Agora calcule lim(x→0⁻) f(x). Para x < 0, |x| = −x, logo f(x) = −x/x.",
+          "opts": ["-1", "0", "1", "Indefinido"],
+          "correct": 0,
+          "exp": "Para x < 0: |x|/x = (−x)/x = −1. Portanto lim(x→0⁻) = −1."
+        },
+        {
+          "type": "mcq",
+          "formula": "lim |x| / x\n x→0",
+          "stem": "Com base nas duas questões anteriores, o limite bilateral de |x|/x quando x→0 existe?",
+          "opts": ["Sim, vale 0", "Sim, vale 1", "Não existe", "Sim, vale −1"],
+          "correct": 2,
+          "exp": "lim(x→0⁺) = 1 mas lim(x→0⁻) = −1. Como são diferentes, o limite bilateral NÃO EXISTE."
+        },
+        {
+          "type": "mcq",
+          "formula": "lim  √x\n x→0⁺",
+          "stem": "√x só está definida para x ≥ 0. Qual é o limite de √x quando x→0 pela direita?",
+          "opts": ["1", "0", "∞", "Não existe"],
+          "correct": 1,
+          "exp": "Substituindo: √0 = 0. Como a função é contínua para x ≥ 0, o limite lateral direito é 0."
+        }
+      ]
+    },
+    {
+      "id": "u1l3",
+      "title": "Continuidade",
+      "steps": [
+        {
+          "type": "theory",
+          "title": "Funções Contínuas",
+          "blocks": [
+            {
+              "type": "para",
+              "heading": "3 condições para continuidade",
+              "text": "Uma função f é <strong>contínua em x = a</strong> se e somente se as três condições abaixo forem satisfeitas simultaneamente:"
+            },
+            { "type": "formula", "text": "1.  f(a)  está definida (existe)\n2.  lim(x→a) f(x)  existe\n3.  lim(x→a) f(x) = f(a)" },
+            {
+              "type": "para",
+              "heading": "Tipos de descontinuidade",
+              "text": "<strong>Removível:</strong> o limite existe, mas f(a) ≠ limite (buraco no gráfico). <strong>De salto:</strong> limites laterais existem mas são diferentes. <strong>Essencial:</strong> pelo menos um limite lateral é ∞."
+            },
+            {
+              "type": "callout",
+              "kind": "tip",
+              "icon": "✅",
+              "text": "Polinômios, sin(x), cos(x), eˣ e ln(x) são contínuos em todo o seu domínio natural."
+            }
+          ]
+        },
+        {
+          "type": "mcq",
+          "formula": "f(x) = (x² − 4) / (x − 2)",
+          "stem": "A função tem uma descontinuidade em x = 2 (divisão por zero). Qual tipo é esta descontinuidade, sabendo que lim(x→2) = 4?",
+          "opts": ["Essencial", "De salto", "Removível", "Não há descontinuidade"],
+          "correct": 2,
+          "exp": "O limite existe (= 4), mas f(2) é indefinida. É uma descontinuidade <strong>removível</strong> — pode ser corrigida definindo f(2) = 4."
+        },
+        {
+          "type": "mcq",
+          "formula": "f(x) = { 1,  se x ≥ 0\n        {-1,  se x < 0",
+          "stem": "Esta função por partes — qual tipo de descontinuidade ela tem em x = 0?",
+          "opts": ["Removível", "De salto", "Essencial", "Contínua"],
+          "correct": 1,
+          "exp": "lim(x→0⁺) = 1 e lim(x→0⁻) = −1. Os limites laterais existem mas são diferentes → descontinuidade <strong>de salto</strong>."
+        },
+        {
+          "type": "input",
+          "formula": "f(x) = x² + 5x − 6  em  x = 1",
+          "stem": "Calcule f(1) para verificar que o polinômio é contínuo. Digite o valor.",
+          "correct": "0",
+          "exp": "<code>f(1) = 1 + 5 − 6 = 0</code>. Como é um polinômio, lim(x→1) = f(1) = 0. Função contínua em x = 1."
+        },
+        {
+          "type": "mcq",
+          "formula": "f(x) = 1 / (x − 3)",
+          "stem": "Em qual ponto esta função tem uma descontinuidade essencial?",
+          "opts": ["x = 0", "x = 1", "x = 3", "x = −3"],
+          "correct": 2,
+          "exp": "Em x = 3, temos 1/0 — indefinido. Além disso, lim(x→3⁺) = +∞ e lim(x→3⁻) = −∞ → descontinuidade <strong>essencial</strong>."
+        }
+      ]
+    },
+    {
+      "id": "u1l4",
+      "title": "Regra de L'Hôpital",
+      "steps": [
+        {
+          "type": "theory",
+          "title": "Regra de L'Hôpital",
+          "blocks": [
+            {
+              "type": "para",
+              "heading": "Formas Indeterminadas",
+              "text": "Às vezes ao calcular um limite encontramos formas como <strong>0/0</strong> ou <strong>∞/∞</strong> — chamadas formas indeterminadas. A substituição direta não funciona. A Regra de L'Hôpital resolve isso."
+            },
+            { "type": "formula", "text": "Se  lim f(x)/g(x)  dá  0/0  ou  ∞/∞,\n\nentão:   lim f(x)/g(x) = lim f'(x)/g'(x)\n\n(derivamos numerador e denominador separadamente)" },
+            {
+              "type": "video",
+              "url": "https://www.youtube.com/embed/eTnDOXBGMko",
+              "caption": "Regra de L'Hôpital explicada com exemplos práticos",
+              "width": 560,
+              "height": 315
+            },
+            {
+              "type": "example",
+              "label": "Aplicando L'Hôpital",
+              "body": "lim(x→0) sin(x)/x\n\nSubstituindo: sin(0)/0 = 0/0  → indeterminado!\n\nDerivando:\n  f(x) = sin(x)  →  f'(x) = cos(x)\n  g(x) = x       →  g'(x) = 1\n\nlim(x→0) cos(x)/1 = cos(0)/1 = 1"
+            },
+            {
+              "type": "callout",
+              "kind": "warn",
+              "icon": "⚠️",
+              "text": "A Regra de L'Hôpital só se aplica em formas 0/0 ou ∞/∞. Não use em outros casos!"
+            }
+          ]
+        },
+        {
+          "type": "mcq",
+          "formula": "lim  (x² − 1) / (x − 1)\n x→1",
+          "stem": "Substituindo x = 1 dá 0/0. Aplique L'Hôpital: derive numerador e denominador separadamente.",
+          "opts": ["1", "2", "3", "4"],
+          "correct": 1,
+          "exp": "f'(x) = 2x → f'(1) = 2. g'(x) = 1. Resultado: 2/1 = 2. Ou: fatore (x²−1) = (x−1)(x+1), cancele e substitua: (1+1) = 2."
+        },
+        {
+          "type": "mcq",
+          "formula": "lim  (e^x − 1) / x\n x→0",
+          "stem": "Outro limite fundamental. Aplique L'Hôpital (dá 0/0). Lembre que a derivada de eˣ é eˣ.",
+          "opts": ["0", "e", "1", "∞"],
+          "correct": 2,
+          "exp": "f'(x) = eˣ → f'(0) = e⁰ = 1. g'(x) = 1. Resultado: 1/1 = 1. Limite fundamental: lim(x→0) (eˣ−1)/x = 1"
+        },
+        {
+          "type": "input",
+          "formula": "lim  (sin(3x)) / x\n x→0",
+          "stem": "Dica: aplique L'Hôpital. Derivada de sin(3x) é 3·cos(3x). Avalie em x = 0. Digite o resultado.",
+          "correct": "3",
+          "exp": "f'(x) = 3cos(3x) → f'(0) = 3cos(0) = 3·1 = 3. g'(x) = 1. Resultado = 3."
+        }
+      ]
+    }
+  ]
+}

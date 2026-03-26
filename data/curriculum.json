@@ -1,0 +1,10 @@
+{
+  "version": "3.0",
+  "title": "∂ Calculus",
+  "subtitle": "Aprenda Cálculo do zero ao avançado",
+  "units": [
+    "u1-limites.json",
+    "u2-derivadas.json",
+    "u3-integrais.json"
+  ]
+}
