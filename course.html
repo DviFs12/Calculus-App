@@ -1,0 +1,640 @@
+<!DOCTYPE html>
+<html lang="pt-BR" data-base="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Curso — ∂ Calculus</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,600;0,9..144,700;1,9..144,300&family=JetBrains+Mono:wght@400;500;700&family=Plus+Jakarta+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/shared.css">
+<style>
+/* Course-specific overrides */
+.page-with-sidebar { min-height: calc(100vh - 54px); }
+
+/* Home panel inside course */
+.course-home { padding: 32px 38px; max-width: 860px; }
+
+/* Lesson view fills height */
+.lesson-view {
+  display: flex;
+  flex-direction: column;
+  height: calc(100vh - 54px);
+}
+
+@media (max-width: 768px) {
+  .course-home { padding: 18px 14px; }
+  .lesson-view { height: calc(100vh - 50px - 58px - env(safe-area-inset-bottom, 0px)); }
+}
+</style>
+</head>
+<body>
+
+<!-- TOPBAR -->
+<div class="topbar">
+  <div class="topbar-left">
+    <a href="index.html" class="brand-link"><span class="sym">&#8706;</span> Calculus</a>
+    <div class="topbar-breadcrumb">
+      <span class="crumb-sep">&#8250;</span>
+      <span id="tb-unit">Curso</span>
+      <span class="crumb-sep" id="tb-sep2" style="display:none">&#8250;</span>
+      <span class="crumb-active" id="tb-lesson"></span>
+    </div>
+  </div>
+  <div class="topbar-right">
+    <div class="pill pill-xp">&#9733; <span id="xp-val">0</span></div>
+    <div class="pill pill-fire">&#128293; <span id="streak-val">0</span>d</div>
+    <div class="pill pill-coin" onclick="location.href='store.html'" title="Loja">&#9670; <span id="coin-val">0</span></div>
+    <button class="icon-btn" onclick="location.href='index.html?tutorial=1'" title="Ajuda">?</button>
+  </div>
+</div>
+
+<!-- BOTTOM NAV -->
+<nav class="bottom-nav" aria-label="Navegacao principal">
+  <div class="bottom-nav-inner">
+    <button class="bnav-item" onclick="location.href='index.html'">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+      Inicio
+    </button>
+    <button class="bnav-item active" onclick="showPanel('home')">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
+      Curso
+    </button>
+    <button class="bnav-item" onclick="location.href='apostila.html'">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+      Apostila
+    </button>
+    <button class="bnav-item" onclick="location.href='store.html'">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
+      Loja
+    </button>
+  </div>
+</nav>
+
+<!-- APP LAYOUT -->
+<div class="page-with-sidebar" id="app">
+
+  <!-- SIDEBAR (desktop) -->
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-stats">
+      <div class="stat-item"><span class="stat-val c-orange" id="sb-xp">0</span><span class="stat-lbl">XP</span></div>
+      <div class="stat-item"><span class="stat-val c-blue"   id="sb-done">0</span><span class="stat-lbl">Licoes</span></div>
+      <div class="stat-item"><span class="stat-val c-purple" id="sb-coins">0</span><span class="stat-lbl">Moedas</span></div>
+    </div>
+
+    <div class="level-bar-wrap">
+      <div class="level-bar-row">
+        <span class="level-name" id="sb-lvl-name">Iniciante</span>
+        <span class="level-num"  id="sb-lvl-num">Nv.1</span>
+      </div>
+      <div class="level-track"><div class="level-fill" id="sb-lvl-bar"></div></div>
+      <div class="level-sub" id="sb-lvl-sub">0 / 100 XP</div>
+    </div>
+
+    <div class="nav-label">Conteudo</div>
+    <div id="nav-units"></div>
+
+    <div class="streak-section">
+      <div class="streak-lbl">Atividade — 28 dias</div>
+      <div class="streak-grid" id="streak-grid"></div>
+    </div>
+
+    <div class="sidebar-bottom">
+      <button class="sidebar-btn" onclick="openResetModal()">&#9881; Redefinir progresso</button>
+    </div>
+  </aside>
+
+  <!-- MAIN -->
+  <main class="main-content" id="main">
+
+    <!-- COURSE HOME PANEL -->
+    <div id="panel-home" class="course-home">
+      <div class="home-greeting" style="font-family:'Fraunces',serif;font-size:1.8rem;font-weight:300;letter-spacing:-0.5px;margin-bottom:3px;">
+        Bem-vindo, <strong>estudante</strong>.
+      </div>
+      <div style="color:var(--ink3);font-size:0.85rem;margin-bottom:24px;" id="home-sub">Escolha uma licao para comecar.</div>
+
+      <div id="continue-wrap" style="margin-bottom:22px;"></div>
+
+      <div class="section-title">Unidades</div>
+      <div class="units-grid" id="units-grid"></div>
+    </div>
+
+    <!-- LESSON PANEL -->
+    <div id="panel-lesson" class="lesson-view" style="display:none;">
+      <div class="lesson-top">
+        <div class="lesson-prog-track">
+          <div class="lesson-prog-fill" id="les-prog"></div>
+        </div>
+        <div class="lives-wrap" id="lives-wrap">&#10084;&#10084;&#10084;</div>
+        <button class="skip-btn" onclick="openSkipModal()">Pular &#8594;</button>
+      </div>
+      <div class="lesson-body" id="lesson-body"></div>
+      <div class="feedback-bar" id="feedback-bar">
+        <div class="fb-body" id="fb-body"></div>
+        <button class="btn-check idle" id="btn-check" onclick="handleCheck()">Verificar</button>
+      </div>
+    </div>
+
+  </main>
+</div>
+
+<!-- TOAST -->
+<div class="toast" id="toast"><span id="toast-icon"></span><span id="toast-text"></span></div>
+
+<!-- RESET MODAL -->
+<div class="modal-overlay" id="reset-modal">
+  <div class="modal">
+    <h3>Redefinir progresso?</h3>
+    <p>Todo o XP, moedas, streak e temas comprados serao apagados. Irreversivel.</p>
+    <div class="modal-btns">
+      <button class="btn-cancel" onclick="closeModal('reset-modal')">Cancelar</button>
+      <button class="btn-danger"  onclick="confirmReset()">Redefinir tudo</button>
+    </div>
+  </div>
+</div>
+
+<!-- SKIP MODAL -->
+<div class="modal-overlay" id="skip-modal">
+  <div class="modal" style="max-width:440px;">
+    <h3>Pular etapa</h3>
+    <p>Ja conhece o conteudo ou quer explorar a frente?</p>
+    <div class="skip-opts" id="skip-opts"></div>
+    <div class="modal-btns">
+      <button class="btn-cancel" onclick="closeModal('skip-modal')">Cancelar</button>
+    </div>
+  </div>
+</div>
+
+<script src="js/shared.js"></script>
+<script>
+// ── STATE ────────────────────────────────
+let STATE = loadState();
+if (STATE.activeTheme) applyTheme(STATE.activeTheme);
+let CURRICULUM = [];
+
+// ── LESSON ENGINE ─────────────────────────
+let LES = { unitId:null, lessonId:null, steps:[], idx:0, lives:3, correct:0, total:0, answered:false, chosen:null };
+
+// ── INIT ─────────────────────────────────
+async function init() {
+  CURRICULUM = await loadCurriculum();
+  buildSidebar();
+  buildHome();
+}
+init();
+
+// ── PANEL SWITCHER ──────────────────────
+function showPanel(name) {
+  document.getElementById('panel-home').style.display   = name === 'home'   ? '' : 'none';
+  document.getElementById('panel-lesson').style.display = name === 'lesson' ? 'flex' : 'none';
+  document.getElementById('feedback-bar').style.display = name === 'lesson' ? 'flex' : 'none';
+  // Update bottom nav active state
+  document.querySelectorAll('.bnav-item').forEach((b,i) => b.classList.toggle('active', i===1));
+}
+
+// ── TOPBAR UPDATE ────────────────────────
+function updateTopbar() {
+  document.getElementById('xp-val').textContent     = STATE.xp;
+  document.getElementById('streak-val').textContent = STATE.streak || 0;
+  document.getElementById('coin-val').textContent   = STATE.coins || 0;
+}
+
+// ── SIDEBAR ──────────────────────────────
+function buildSidebar() {
+  const done = Object.keys(STATE.completedLessons).length;
+  document.getElementById('sb-xp').textContent    = STATE.xp;
+  document.getElementById('sb-done').textContent  = done;
+  document.getElementById('sb-coins').textContent = STATE.coins || 0;
+  updateTopbar();
+
+  const li = getLevelInfo(STATE.xp);
+  document.getElementById('sb-lvl-name').textContent = li.name;
+  document.getElementById('sb-lvl-num').textContent  = 'Nv.' + li.level;
+  document.getElementById('sb-lvl-bar').style.width  = li.pct + '%';
+  document.getElementById('sb-lvl-sub').textContent  = li.hasNext
+    ? li.xpIn + ' / ' + li.xpNeed + ' XP p/ Nv.' + (li.level+1)
+    : 'Nivel maximo!';
+
+  const nav = document.getElementById('nav-units');
+  nav.innerHTML = '';
+  CURRICULUM.forEach((unit, ui) => {
+    const allPrev = ui === 0 || CURRICULUM[ui-1].lessons.every(l => STATE.completedLessons[l.id]);
+    const locked  = !allPrev;
+    const progCount = unit.lessons.filter(l => STATE.completedLessons[l.id]).length;
+    const allDone   = progCount === unit.lessons.length;
+    let dotCls = 'unit-dot';
+    if (allDone) dotCls += ' done'; else if (progCount > 0) dotCls += ' active';
+
+    const wrap = document.createElement('div');
+    wrap.className = 'nav-unit';
+    wrap.innerHTML = `
+      <div class="nav-unit-hdr" ${locked?'style="opacity:.4;pointer-events:none"':''}
+           onclick="toggleNavUnit('nu-${unit.id}')">
+        <div class="${dotCls}"></div>
+        <span>${unit.title}</span>
+      </div>
+      <div class="nav-lessons" id="nu-${unit.id}">
+        ${unit.lessons.map((l, li) => {
+          const isDone   = !!STATE.completedLessons[l.id];
+          const prevDone = li === 0 ? !locked : !!STATE.completedLessons[unit.lessons[li-1].id];
+          const isLocked = !prevDone && !isDone;
+          const icon     = isDone ? '&#10003;' : isLocked ? '&#128274;' : '&#9675;';
+          const cls      = isDone ? 'done' : isLocked ? 'locked' : '';
+          return `<div class="nav-lesson ${cls}" ${isLocked?'':'onclick="startLesson(\''+unit.id+'\',\''+l.id+'\')"'}>
+            <div class="nav-lesson-icon">${icon}</div>${l.title}
+          </div>`;
+        }).join('')}
+      </div>`;
+    nav.appendChild(wrap);
+  });
+
+  // Auto-open first incomplete unit
+  CURRICULUM.forEach(unit => {
+    const allDone = unit.lessons.every(l => STATE.completedLessons[l.id]);
+    const hasProg = unit.lessons.some(l => STATE.completedLessons[l.id]);
+    if (!allDone) {
+      const el = document.getElementById('nu-' + unit.id);
+      if (el) el.classList.add('open');
+    }
+  });
+
+  buildStreakGrid();
+}
+
+function toggleNavUnit(id) {
+  const el = document.getElementById(id);
+  if (el) el.classList.toggle('open');
+}
+
+function buildStreakGrid() {
+  const grid = document.getElementById('streak-grid');
+  grid.innerHTML = '';
+  const today = new Date();
+  for (let i = 27; i >= 0; i--) {
+    const d  = new Date(today);
+    d.setDate(d.getDate() - i);
+    const ds = d.toISOString().slice(0,10);
+    const c  = document.createElement('div');
+    c.className = 'streak-cell';
+    if (ds === today.toISOString().slice(0,10)) c.classList.add('today');
+    else if (STATE.activityLog && STATE.activityLog.includes(ds)) c.classList.add('done');
+    c.title = ds;
+    grid.appendChild(c);
+  }
+}
+
+// ── HOME ─────────────────────────────────
+function buildHome() {
+  const li = getLevelInfo(STATE.xp);
+  document.getElementById('home-sub').textContent = li.name + ' · Nivel ' + li.level + ' — Continue estudando!';
+
+  // Continue card
+  const wrap = document.getElementById('continue-wrap');
+  const next = findNext();
+  if (next) {
+    const unit = CURRICULUM.find(u => u.id === next.uid);
+    const les  = unit.lessons.find(l => l.id === next.lid);
+    wrap.innerHTML = `
+      <div class="continue-card" onclick="startLesson('${unit.id}','${les.id}')">
+        <div class="cc-icon">${unitIcon(unit)}</div>
+        <div class="cc-info">
+          <div class="cc-tag">Continuar &middot; ${unit.title}</div>
+          <div class="cc-title">${les.title}</div>
+          <div class="cc-bar"><div class="cc-bar-fill" style="width:${STATE.completedLessons[les.id]?100:0}%"></div></div>
+        </div>
+        <div class="cc-arrow">&#8594;</div>
+      </div>`;
+  } else {
+    wrap.innerHTML = `<div class="continue-card" style="cursor:default">
+      <div class="cc-icon">&#127891;</div>
+      <div class="cc-info"><div class="cc-tag">Concluido!</div><div class="cc-title">Voce completou todo o conteudo!</div></div>
+    </div>`;
+  }
+
+  // Units grid
+  const grid = document.getElementById('units-grid');
+  grid.innerHTML = '';
+  CURRICULUM.forEach((unit, ui) => {
+    const done   = unit.lessons.filter(l => STATE.completedLessons[l.id]).length;
+    const total  = unit.lessons.length;
+    const locked = ui > 0 && !CURRICULUM[ui-1].lessons.every(l => STATE.completedLessons[l.id]);
+    const allDone = done === total;
+    const pct = (done / total) * 100;
+    let bCls = 'locked', bTxt = 'Bloqueado';
+    if (allDone) { bCls = 'done'; bTxt = 'Concluido'; }
+    else if (done > 0) { bCls = 'progress'; bTxt = done + '/' + total + ' licoes'; }
+    else if (!locked)  { bCls = 'progress'; bTxt = 'Disponivel'; }
+
+    const card = document.createElement('div');
+    card.className = 'unit-card' + (locked ? ' locked' : '');
+    card.innerHTML = `
+      <div class="uc-head">
+        <div class="uc-icon">${unitIcon(unit)}</div>
+        <div class="uc-badge ${bCls}">${bTxt}</div>
+      </div>
+      <div class="uc-title">${unit.title}</div>
+      <div class="uc-sub">${unit.desc} &middot; ${total} licoes</div>
+      <div class="uc-bar"><div class="uc-fill${allDone?' done':''}" style="width:${pct}%"></div></div>`;
+
+    if (!locked) {
+      const target = unit.lessons.find(l => !STATE.completedLessons[l.id]) || unit.lessons[0];
+      card.onclick = () => startLesson(unit.id, target.id);
+    }
+    grid.appendChild(card);
+  });
+}
+
+function unitIcon(unit) {
+  const icons = { u1:'&#8736;', u2:'&#8593;', u3:'&#8747;' };
+  return `<span class="unit-icon-text">${icons[unit.id] || unit.title[0]}</span>`;
+}
+
+function findNext() {
+  for (const unit of CURRICULUM) {
+    const ui = CURRICULUM.indexOf(unit);
+    if (ui > 0 && !CURRICULUM[ui-1].lessons.every(l => STATE.completedLessons[l.id])) continue;
+    for (const l of unit.lessons) {
+      if (!STATE.completedLessons[l.id]) return { uid: unit.id, lid: l.id };
+    }
+  }
+  return null;
+}
+
+// ── LESSON ENGINE ─────────────────────────
+function startLesson(uid, lid) {
+  const unit = CURRICULUM.find(u => u.id === uid);
+  const les  = unit.lessons.find(l => l.id === lid);
+  LES = { unitId: uid, lessonId: lid, steps: les.steps, idx: 0, lives: 3, correct: 0, total: 0, answered: false, chosen: null };
+
+  document.getElementById('tb-unit').textContent  = unit.title;
+  document.getElementById('tb-lesson').textContent = les.title;
+  document.getElementById('tb-sep2').style.display = 'inline';
+  showPanel('lesson');
+  renderStep();
+}
+
+function renderStep() {
+  LES.answered = false; LES.chosen = null;
+  const step = LES.steps[LES.idx];
+  const pct  = (LES.idx / LES.steps.length) * 100;
+  document.getElementById('les-prog').style.width = pct + '%';
+
+  const lw = document.getElementById('lives-wrap');
+  lw.innerHTML = '&#10084;'.repeat(Math.max(0, LES.lives)) + '&#128148;'.repeat(Math.max(0, 3 - LES.lives));
+
+  const fb  = document.getElementById('feedback-bar');
+  fb.className = 'feedback-bar';
+  document.getElementById('fb-body').innerHTML = '';
+  const btn = document.getElementById('btn-check');
+  btn.className = 'btn-check idle'; btn.textContent = 'Verificar';
+
+  if (step.type === 'theory') renderTheory(step);
+  else if (step.type === 'mcq')   renderMCQ(step);
+  else if (step.type === 'input') renderInput(step);
+}
+
+function renderTheory(step) {
+  let html = `<div class="theory-card">
+    <div class="theory-tag">Teoria</div>
+    <div class="theory-title">${step.title}</div>`;
+
+  step.blocks.forEach(b => {
+    if (b.type === 'para') {
+      html += `<div class="theory-block">${b.heading ? `<h3>${b.heading}</h3>` : ''}<p>${b.text}</p></div>`;
+    } else if (b.type === 'formula') {
+      html += `<div class="formula-box">${escH(b.text)}</div>`;
+    } else if (b.type === 'callout') {
+      const cls = b.kind === 'warn' ? 'warn' : b.kind === 'tip' ? 'tip' : '';
+      const icon = b.kind === 'warn' ? '&#9888;' : b.kind === 'tip' ? '&#10003;' : '&#9432;';
+      html += `<div class="callout ${cls}"><div class="callout-icon">${icon}</div><div class="callout-text">${b.text}</div></div>`;
+    } else if (b.type === 'example') {
+      html += `<div class="example-box"><div class="example-hdr">${b.label}</div><div class="example-body">${escH(b.body)}</div></div>`;
+    } else if (b.type === 'image') {
+      html += `<div class="img-block"><img src="${b.src}" alt="${b.alt||''}" loading="lazy"><div class="img-caption">${b.caption||''}</div></div>`;
+    } else if (b.type === 'video') {
+      html += `<div class="vid-block"><iframe src="${b.url}" allowfullscreen loading="lazy"></iframe></div>${b.caption?`<div class="vid-caption">${b.caption}</div>`:''}`;
+    }
+  });
+  html += '</div>';
+  document.getElementById('lesson-body').innerHTML = html;
+
+  const btn = document.getElementById('btn-check');
+  btn.className = 'btn-check ready'; btn.textContent = 'Entendido &#8594;'; btn.onclick = advanceStep;
+}
+
+function renderMCQ(step) {
+  const letters = ['A','B','C','D'];
+  document.getElementById('lesson-body').innerHTML = `
+    <div class="question-card">
+      <div class="q-num">Questao ${LES.idx} de ${LES.steps.length - 1}</div>
+      ${step.formula ? `<div class="q-formula">${escH(step.formula)}</div>` : ''}
+      <div class="q-stem">${step.stem}</div>
+      <div class="options" id="opts">
+        ${step.opts.map((o,i) => `
+          <div class="opt" data-i="${i}" onclick="selectOpt(${i})">
+            <div class="opt-letter">${letters[i]}</div>
+            <span>${o}</span>
+          </div>`).join('')}
+      </div>
+    </div>`;
+}
+
+function renderInput(step) {
+  document.getElementById('lesson-body').innerHTML = `
+    <div class="question-card">
+      <div class="q-num">Questao ${LES.idx} de ${LES.steps.length - 1}</div>
+      ${step.formula ? `<div class="q-formula">${escH(step.formula)}</div>` : ''}
+      <div class="q-stem">${step.stem}</div>
+      <div class="input-lbl">Sua resposta</div>
+      <input class="q-input" id="q-input" type="text" autocomplete="off" placeholder="Digite aqui..."
+        oninput="onInputChange()" onkeydown="if(event.key==='Enter')handleCheck()">
+    </div>`;
+  setTimeout(() => document.getElementById('q-input')?.focus(), 80);
+}
+
+function selectOpt(i) {
+  if (LES.answered) return;
+  LES.chosen = i;
+  document.querySelectorAll('.opt').forEach((el, j) => el.classList.toggle('selected', j === i));
+  const btn = document.getElementById('btn-check');
+  btn.className = 'btn-check ready'; btn.textContent = 'Verificar'; btn.onclick = handleCheck;
+}
+
+function onInputChange() {
+  const v = document.getElementById('q-input')?.value?.trim();
+  const btn = document.getElementById('btn-check');
+  btn.className = v ? 'btn-check ready' : 'btn-check idle';
+  btn.textContent = 'Verificar'; btn.onclick = handleCheck;
+}
+
+function handleCheck() {
+  const step = LES.steps[LES.idx];
+  if (step.type === 'theory') { advanceStep(); return; }
+  if (LES.answered) { advanceStep(); return; }
+
+  if (step.type === 'mcq') {
+    if (LES.chosen === null) return;
+    LES.answered = true; LES.total++;
+    const ok = LES.chosen === step.correct;
+    if (ok) LES.correct++;
+    document.querySelectorAll('.opt').forEach((el, i) => {
+      el.classList.add('disabled');
+      if (i === step.correct) el.classList.add('correct');
+      else if (i === LES.chosen && !ok) el.classList.add('wrong');
+    });
+    showFeedback(ok, step.exp);
+    if (!ok) handleWrong();
+  } else if (step.type === 'input') {
+    const inp = document.getElementById('q-input');
+    if (!inp?.value?.trim()) return;
+    LES.answered = true; LES.total++;
+    const ok = inp.value.trim().toLowerCase().replace(/\s/g,'') === step.correct.toLowerCase().replace(/\s/g,'');
+    if (ok) LES.correct++;
+    inp.disabled = true;
+    inp.classList.add(ok ? 'correct' : 'wrong');
+    showFeedback(ok, step.exp);
+    if (!ok) handleWrong();
+  }
+}
+
+function handleWrong() {
+  LES.lives--;
+  updateLives();
+  if (LES.lives <= 0) setTimeout(showGameOver, 1300);
+}
+
+function updateLives() {
+  document.getElementById('lives-wrap').innerHTML =
+    '&#10084;'.repeat(Math.max(0, LES.lives)) + '&#128148;'.repeat(Math.max(0, 3 - LES.lives));
+}
+
+function showFeedback(ok, exp) {
+  const fb = document.getElementById('feedback-bar');
+  fb.className = 'feedback-bar ' + (ok ? 'correct' : 'wrong');
+  if (ok) {
+    STATE.xp     += 15;
+    STATE.coins   = (STATE.coins || 0) + 5;
+    saveState(STATE);
+    updateTopbar();
+    buildSidebar();
+    showToast('&#9733;', '+15 XP  &#9670; +5 moedas');
+  }
+  document.getElementById('fb-body').innerHTML = `
+    <div class="fb-title ${ok?'correct':'wrong'}">${ok ? '&#10003; Correto!' : '&#10007; Incorreto'}</div>
+    <div class="fb-exp">${exp}</div>`;
+  const btn = document.getElementById('btn-check');
+  btn.className = ok ? 'btn-check next' : 'btn-check next-wrong';
+  btn.textContent = 'Continuar \u2192'; btn.onclick = advanceStep;
+}
+
+function advanceStep() {
+  LES.idx++;
+  if (LES.idx >= LES.steps.length) completeLesson();
+  else renderStep();
+}
+
+function completeLesson() {
+  const acc = LES.total > 0 ? Math.round((LES.correct / LES.total) * 100) : 100;
+  const xpEarned    = 80 + LES.correct * 10 + (acc === 100 ? 20 : 0);
+  const coinsEarned = 40 + (acc === 100 ? 20 : 0);
+  STATE.xp     += xpEarned;
+  STATE.coins   = (STATE.coins || 0) + coinsEarned;
+  STATE.completedLessons[LES.lessonId] = { xp: xpEarned, accuracy: acc, date: new Date().toISOString() };
+
+  const today = new Date().toISOString().slice(0,10);
+  if (STATE.lastStudyDate !== today) {
+    const yest = new Date(Date.now()-86400000).toISOString().slice(0,10);
+    STATE.streak = STATE.lastStudyDate === yest ? (STATE.streak||0)+1 : 1;
+    STATE.lastStudyDate = today;
+  }
+  if (!STATE.activityLog) STATE.activityLog = [];
+  if (!STATE.activityLog.includes(today)) STATE.activityLog.push(today);
+  saveState(STATE);
+  updateTopbar();
+  buildSidebar();
+
+  const li = getLevelInfo(STATE.xp);
+  document.getElementById('les-prog').style.width = '100%';
+  document.getElementById('feedback-bar').style.display = 'none';
+  document.getElementById('lesson-body').innerHTML = `
+    <div class="end-view" style="padding:0">
+      <div class="end-card">
+        <span class="end-trophy">&#127942;</span>
+        <div class="end-title">Licao concluida!</div>
+        <div class="end-sub"><strong>${findLessonTitle(LES.lessonId)}</strong></div>
+        <div class="end-stats">
+          <div class="end-stat"><span class="end-stat-val c-gold">+${xpEarned}</span><div class="end-stat-lbl">XP</div></div>
+          <div class="end-stat"><span class="end-stat-val c-purple">+${coinsEarned}</span><div class="end-stat-lbl">Moedas</div></div>
+          <div class="end-stat"><span class="end-stat-val c-green">${acc}%</span><div class="end-stat-lbl">Precisao</div></div>
+          <div class="end-stat"><span class="end-stat-val c-blue">${li.level}</span><div class="end-stat-lbl">Nivel</div></div>
+        </div>
+        <button class="btn-primary" onclick="goHome()">Continuar &#8594;</button>
+        <button class="btn-secondary" onclick="replayLesson()">Repetir</button>
+      </div>
+    </div>`;
+}
+
+function showGameOver() {
+  document.getElementById('feedback-bar').style.display = 'none';
+  document.getElementById('lesson-body').innerHTML = `
+    <div class="end-view" style="padding:0">
+      <div class="end-card">
+        <span class="end-trophy" style="font-size:2.8rem">&#128148;</span>
+        <div class="end-title" style="color:var(--red)">Sem vidas!</div>
+        <div class="end-sub" style="margin-bottom:22px">Erre, aprenda e tente de novo.</div>
+        <button class="btn-primary" onclick="replayLesson()">Tentar de novo</button>
+        <button class="btn-secondary" onclick="goHome()">Voltar ao inicio</button>
+      </div>
+    </div>`;
+}
+
+function replayLesson() {
+  document.getElementById('feedback-bar').style.display = 'flex';
+  startLesson(LES.unitId, LES.lessonId);
+}
+
+function goHome() {
+  document.getElementById('feedback-bar').style.display = 'flex';
+  document.getElementById('tb-sep2').style.display = 'none';
+  document.getElementById('tb-lesson').textContent = '';
+  document.getElementById('tb-unit').textContent = 'Curso';
+  showPanel('home');
+  buildHome();
+}
+
+function findLessonTitle(lid) {
+  for (const u of CURRICULUM) { const l = u.lessons.find(l => l.id === lid); if (l) return l.title; }
+  return '';
+}
+
+// ── SKIP MODAL ───────────────────────────
+function openSkipModal() {
+  const opts = document.getElementById('skip-opts');
+  opts.innerHTML = '';
+  const addOpt = (icon, title, sub, fn) => {
+    const d = document.createElement('div');
+    d.className = 'skip-opt';
+    d.innerHTML = `<div class="skip-opt-icon">${icon}</div><div><div class="skip-opt-title">${title}</div><div class="skip-opt-sub">${sub}</div></div>`;
+    d.onclick = () => { closeModal('skip-modal'); fn(); };
+    opts.appendChild(d);
+  };
+  if (LES.idx < LES.steps.length - 1) addOpt('&#9197;', 'Proxima etapa', 'Pular apenas esta etapa', () => { LES.idx++; if(LES.idx>=LES.steps.length) completeLesson(); else renderStep(); });
+  addOpt('&#127937;', 'Completar licao', 'Marcar como concluida', completeLesson);
+  addOpt('&#127968;', 'Voltar ao inicio', 'Explorar todas as licoes', goHome);
+  document.getElementById('skip-modal').classList.add('open');
+}
+
+// ── RESET ────────────────────────────────
+function openResetModal()  { document.getElementById('reset-modal').classList.add('open'); }
+function closeModal(id)    { document.getElementById(id).classList.remove('open'); }
+function confirmReset() {
+  localStorage.removeItem('calculus_v4');
+  STATE = loadState();
+  applyTheme('light');
+  closeModal('reset-modal');
+  buildSidebar(); buildHome();
+  showToast('&#10003;', 'Progresso redefinido');
+}
+</script>
+</body>
+</html>

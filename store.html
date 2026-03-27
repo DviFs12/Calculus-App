@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="pt-BR" data-base="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Loja — ∂ Calculus</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,600;0,9..144,700;1,9..144,300&family=JetBrains+Mono:wght@400;500;700&family=Plus+Jakarta+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/shared.css">
+<style>
+.store-wrap { padding: 36px 44px; max-width: 900px; }
+.coins-balance {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: color-mix(in srgb, #7c3aed 10%, var(--paper));
+  border: 1px solid color-mix(in srgb, #7c3aed 25%, transparent);
+  border-radius: 100px; padding: 7px 18px;
+  font-size: 0.9rem; font-weight: 700; color: #7c3aed;
+  font-family: 'JetBrains Mono', monospace; margin-bottom: 28px;
+}
+.themes-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(195px,1fr)); gap: 14px; }
+.theme-card {
+  background: var(--card-bg); border: 2px solid var(--line);
+  border-radius: 14px; padding: 16px; position: relative;
+  transition: all 0.18s;
+}
+.theme-card:hover { transform: translateY(-2px); border-color: var(--ink3); }
+.theme-card.is-active { border-color: var(--accent); }
+.theme-card.is-owned  { border-color: var(--green); }
+
+.theme-preview {
+  width: 100%; height: 60px; border-radius: 8px; margin-bottom: 11px;
+  display: flex; overflow: hidden; gap: 3px;
+}
+.tp-side  { width: 30%; }
+.tp-main  { flex: 1; display: flex; flex-direction: column; gap: 4px; padding: 8px; }
+.tp-bar   { border-radius: 3px; }
+
+.theme-name { font-weight: 700; font-size: 0.88rem; margin-bottom: 3px; }
+.theme-desc { font-size: 0.73rem; color: var(--ink3); margin-bottom: 9px; }
+.theme-price {
+  font-size: 0.78rem; font-weight: 700; color: #7c3aed;
+  font-family: 'JetBrains Mono', monospace; margin-bottom: 9px;
+}
+.theme-price.free { color: var(--green); }
+
+.badge {
+  position: absolute; top: 10px; right: 10px;
+  border-radius: 100px; padding: 2px 8px;
+  font-size: 0.62rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px;
+  color: #fff;
+}
+.badge-active { background: var(--accent); }
+.badge-owned  { background: var(--green); }
+
+.btn-buy {
+  width: 100%; background: #7c3aed; color: #fff; border: none;
+  border-radius: 8px; padding: 8px 12px; font-size: 0.79rem; font-weight: 600;
+  cursor: pointer; font-family: 'Plus Jakarta Sans', sans-serif; transition: opacity 0.15s;
+}
+.btn-buy:hover    { opacity: 0.82; }
+.btn-buy:disabled { opacity: 0.35; cursor: not-allowed; }
+.btn-apply {
+  width: 100%; background: var(--accent); color: #fff; border: none;
+  border-radius: 8px; padding: 8px 12px; font-size: 0.79rem; font-weight: 600;
+  cursor: pointer; font-family: 'Plus Jakarta Sans', sans-serif; transition: opacity 0.15s;
+}
+.btn-apply:hover    { opacity: 0.82; }
+.btn-apply:disabled { opacity: 0.5; cursor: default; }
+
+@media (max-width: 768px) {
+  .store-wrap { padding: 18px 14px; }
+  .themes-grid { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 380px) {
+  .themes-grid { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+
+<!-- TOPBAR -->
+<div class="topbar">
+  <div class="topbar-left">
+    <a href="index.html" class="brand-link"><span class="sym">&#8706;</span> Calculus</a>
+    <div class="topbar-breadcrumb">
+      <span class="crumb-sep">&#8250;</span>
+      <span class="crumb-active">Loja</span>
+    </div>
+  </div>
+  <div class="topbar-right">
+    <div class="pill pill-xp">&#9733; <span id="xp-val">0</span></div>
+    <div class="pill pill-coin">&#9670; <span id="coin-val">0</span></div>
+    <button class="icon-btn" onclick="location.href='index.html'" title="Inicio">&#8962;</button>
+  </div>
+</div>
+
+<!-- BOTTOM NAV -->
+<nav class="bottom-nav" aria-label="Navegacao principal">
+  <div class="bottom-nav-inner">
+    <button class="bnav-item" onclick="location.href='index.html'">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+      Inicio
+    </button>
+    <button class="bnav-item" onclick="location.href='course.html'">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
+      Curso
+    </button>
+    <button class="bnav-item" onclick="location.href='apostila.html'">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+      Apostila
+    </button>
+    <button class="bnav-item active" onclick="location.href='store.html'">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
+      Loja
+    </button>
+  </div>
+</nav>
+
+<!-- STORE CONTENT -->
+<main style="min-height:calc(100vh - 54px);">
+  <div class="store-wrap">
+    <h1 class="page-title">Loja de Temas</h1>
+    <p class="page-sub">Use suas moedas para desbloquear temas exclusivos. Ganhe moedas completando licoes!</p>
+    <div class="coins-balance">&#9670; <span id="balance">0</span> moedas disponíveis</div>
+    <div class="themes-grid" id="themes-grid"></div>
+  </div>
+</main>
+
+<!-- TOAST -->
+<div class="toast" id="toast"><span id="toast-icon"></span><span id="toast-text"></span></div>
+
+<script src="js/shared.js"></script>
+<script>
+let STATE = loadState();
+if (STATE.activeTheme) applyTheme(STATE.activeTheme);
+
+function refresh() {
+  document.getElementById('xp-val').textContent   = STATE.xp;
+  document.getElementById('coin-val').textContent = STATE.coins || 0;
+  document.getElementById('balance').textContent  = STATE.coins || 0;
+  buildGrid();
+}
+
+function buildGrid() {
+  const grid   = document.getElementById('themes-grid');
+  grid.innerHTML = '';
+  const owned  = STATE.ownedThemes || ['light','dark'];
+  const active = STATE.activeTheme || 'light';
+
+  THEMES_DATA.forEach(theme => {
+    const isOwned  = owned.includes(theme.id);
+    const isActive = active === theme.id;
+    const canAfford = (STATE.coins||0) >= theme.price;
+
+    const bgMain = theme.base === 'dark' ? '#1e1c16' : '#faf8f4';
+    const bgSide = theme.base === 'dark' ? '#28251e' : '#f2ede5';
+    const bgLine = theme.base === 'dark' ? '#3a3730' : '#ddd5c8';
+
+    let actionHTML = '';
+    if (isActive) {
+      actionHTML = `<button class="btn-apply" disabled>&#10003; Ativo</button>`;
+    } else if (isOwned) {
+      actionHTML = `<button class="btn-apply" onclick="applyThemeAndSave('${theme.id}')">Aplicar</button>`;
+    } else {
+      actionHTML = `<button class="btn-buy" ${canAfford?'':'disabled'} onclick="buyTheme('${theme.id}',${theme.price})">&#9670; ${theme.price} comprar</button>`;
+    }
+
+    const card = document.createElement('div');
+    card.className = 'theme-card' + (isActive?' is-active':'') + (isOwned&&!isActive?' is-owned':'');
+    card.innerHTML = `
+      ${isActive ? '<div class="badge badge-active">Ativo</div>' : isOwned ? '<div class="badge badge-owned">Seu</div>' : ''}
+      <div class="theme-preview">
+        <div class="tp-side" style="background:${bgSide}"></div>
+        <div class="tp-main" style="background:${bgMain}">
+          <div class="tp-bar" style="height:8px;background:${theme.accent};width:60%"></div>
+          <div class="tp-bar" style="height:5px;background:${bgLine};width:80%"></div>
+          <div class="tp-bar" style="height:5px;background:${bgLine};width:50%"></div>
+        </div>
+      </div>
+      <div class="theme-name">${theme.name}</div>
+      <div class="theme-desc">${theme.desc}</div>
+      <div class="theme-price ${theme.price===0?'free':''}">${theme.price===0?'Gratis':'&#9670; '+theme.price}</div>
+      ${actionHTML}`;
+    grid.appendChild(card);
+  });
+}
+
+function buyTheme(id, price) {
+  if ((STATE.coins||0) < price) { showToast('&#10007;', 'Moedas insuficientes!'); return; }
+  STATE.coins -= price;
+  if (!STATE.ownedThemes) STATE.ownedThemes = ['light','dark'];
+  STATE.ownedThemes.push(id);
+  saveState(STATE);
+  refresh();
+  showToast('&#9733;', 'Tema desbloqueado!');
+}
+
+function applyThemeAndSave(id) {
+  STATE.activeTheme = id;
+  saveState(STATE);
+  applyTheme(id);
+  refresh();
+  showToast('&#10003;', 'Tema aplicado!');
+}
+
+refresh();
+</script>
+</body>
+</html>
