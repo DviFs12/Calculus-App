@@ -345,10 +345,30 @@ body {
   font-weight: 600;
   font-family: 'JetBrains Mono', monospace;
   white-space: nowrap;
+  cursor: default;
 }
 .xp-pill { background: var(--gold-bg); border: 1px solid color-mix(in srgb, var(--gold) 30%, transparent); color: var(--gold); }
 .streak-pill { background: var(--accent-bg); border: 1px solid color-mix(in srgb, var(--accent) 30%, transparent); color: var(--accent); }
-.coins-pill { background: color-mix(in srgb, #7c3aed 10%, var(--paper)); border: 1px solid color-mix(in srgb, #7c3aed 25%, transparent); color: #7c3aed; }
+.coins-pill { background: color-mix(in srgb, #7c3aed 10%, var(--paper)); border: 1px solid color-mix(in srgb, #7c3aed 25%, transparent); color: #7c3aed; cursor: pointer; transition: opacity 0.15s; }
+.coins-pill:hover { opacity: 0.8; }
+
+.topbar-store-btn {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  background: var(--paper3);
+  border: 1px solid var(--line);
+  border-radius: 100px;
+  padding: 5px 12px;
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--ink2);
+  cursor: pointer;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  transition: all 0.15s;
+  white-space: nowrap;
+}
+.topbar-store-btn:hover { background: var(--line); color: var(--ink); }
 
 /* ─── VIEWS ─── */
 .view { display: none; }
@@ -831,6 +851,8 @@ body {
   .themes-grid { grid-template-columns: repeat(2, 1fr); }
   .completion-stats { grid-template-columns: repeat(2, 1fr); }
   .topbar-right .xp-pill, .topbar-right .streak-pill, .topbar-right .coins-pill { padding: 3px 8px; font-size: 0.72rem; }
+  .topbar-store-btn span.store-label { display: none; }
+  .topbar-store-btn { padding: 5px 9px; }
   .tutorial-tooltip { max-width: calc(100vw - 32px); }
 }
 
@@ -900,7 +922,6 @@ body {
 
     <div class="sidebar-bottom">
       <button class="sidebar-btn" id="btn-apostila-nav" onclick="showApostila()">📚 Apostila do curso</button>
-      <button class="sidebar-btn" id="btn-store-nav" onclick="showStore()">🛍️ Loja de temas</button>
       <button class="sidebar-btn" onclick="openResetModal()">⚙ Redefinir progresso</button>
     </div>
   </aside>
@@ -920,9 +941,10 @@ body {
         </div>
       </div>
       <div class="topbar-right">
-        <div class="xp-pill">⭐ <span id="xp-display">0</span></div>
+        <div class="xp-pill">★ <span id="xp-display">0</span> XP</div>
         <div class="streak-pill">🔥 <span id="streak-display">0</span>d</div>
-        <div class="coins-pill">🪙 <span id="coins-display">0</span></div>
+        <div class="coins-pill" onclick="showStore()" title="Loja de Temas">&#9670; <span id="coins-display">0</span></div>
+        <button class="topbar-store-btn" onclick="showStore()">&#9672; <span class="store-label">Loja</span></button>
       </div>
     </div>
 
@@ -970,7 +992,7 @@ body {
       <div class="store-view">
         <h1>🛍️ Loja de Temas</h1>
         <p class="store-sub">Use suas moedas para desbloquear temas exclusivos. Ganhe moedas completando lições!</p>
-        <div class="coins-balance">🪙 <span id="store-coins">0</span> moedas disponíveis</div>
+        <div class="coins-balance">&#9670; <span id="store-coins">0</span> moedas disponíveis</div>
         <div class="themes-grid" id="themes-grid"></div>
       </div>
     </div>
@@ -1274,12 +1296,18 @@ let LESSON = { unitId:null, lessonId:null, steps:[], stepIdx:0, lives:3, correct
 function openSidebar() {
   document.getElementById('sidebar').classList.add('open');
   document.getElementById('sidebar-overlay').classList.add('open');
-  document.body.style.overflow = 'hidden';
+  // Don't override overflow if tutorial is active (it already owns it)
+  if (document.getElementById('tutorial-overlay').style.display !== 'block') {
+    document.body.style.overflow = 'hidden';
+  }
 }
 function closeSidebar() {
   document.getElementById('sidebar').classList.remove('open');
   document.getElementById('sidebar-overlay').classList.remove('open');
-  document.body.style.overflow = '';
+  // Only restore overflow if tutorial isn't running
+  if (document.getElementById('tutorial-overlay').style.display !== 'block') {
+    document.body.style.overflow = '';
+  }
 }
 
 // ══════════════════════════════════════════
@@ -1775,7 +1803,7 @@ function buildStore() {
       actionBtn = `<button class="btn-apply-theme" onclick="activateTheme('${theme.id}')">Aplicar</button>`;
     } else {
       const canAfford = (STATE.coins||0) >= theme.price;
-      actionBtn = `<button class="btn-buy-theme" ${canAfford?'':'disabled'} onclick="buyTheme('${theme.id}',${theme.price})">🪙 ${theme.price} comprar</button>`;
+      actionBtn = `<button class="btn-buy-theme" ${canAfford?'':'disabled'} onclick="buyTheme('${theme.id}',${theme.price})">&#9670; ${theme.price} comprar</button>`;
     }
 
     if (isActive) card.innerHTML += `<div class="theme-active-badge">Ativo</div>`;
@@ -1784,7 +1812,7 @@ function buildStore() {
     card.innerHTML += `${previewHTML}
       <div class="theme-card-name">${theme.emoji} ${theme.name}</div>
       <div class="theme-card-desc">${theme.desc}</div>
-      <div class="theme-card-price ${theme.price===0?'free':''}">${theme.price===0?'🆓 Grátis':'🪙 '+theme.price+' moedas'}</div>
+      <div class="theme-card-price ${theme.price===0?'free':''}">${theme.price===0?'Grátis':'&#9670; '+theme.price+' moedas'}</div>
       <div style="margin-top:10px">${actionBtn}</div>`;
     grid.appendChild(card);
   });
@@ -1825,45 +1853,52 @@ const TUTORIAL_STEPS = [
   },
   {
     title: 'Barra lateral 📋',
-    text: 'Aqui ficam suas estatísticas, nível, e o menu de lições. No mobile, toque no ☰ para abrir.',
+    text: 'Aqui ficam suas estatísticas, nível e o menu de lições. No mobile, toque no ☰ para abrir.',
     target: '#sidebar',
-    anchor: 'right'
+    anchor: 'right',
+    scrollTo: '#sidebar'
   },
   {
     title: 'Seu progresso ⭐',
     text: 'Ganhe XP e Moedas completando lições. O XP sobe seu nível e as Moedas compram temas na loja!',
     target: '.sidebar-stats',
-    anchor: 'right'
+    anchor: 'right',
+    scrollTo: '.sidebar-stats'
   },
   {
-    title: 'Seu nível 🏅',
-    text: 'Conforme você acumula XP, sobe de Iniciante até Lenda. Cada nível desbloqueia reconhecimento!',
+    title: 'Seu nível',
+    text: 'Conforme você acumula XP, sobe de Iniciante até Lenda. Acompanhe o progresso na barra!',
     target: '.level-badge-wrap',
-    anchor: 'right'
+    anchor: 'right',
+    scrollTo: '.level-badge-wrap'
   },
   {
     title: 'As lições 📐',
     text: 'Clique em uma unidade para expandir as lições. Complete-as em ordem para desbloquear o próximo tópico!',
     target: '#nav-units',
-    anchor: 'right'
+    anchor: 'right',
+    scrollTo: '#nav-units'
   },
   {
-    title: 'Apostila 📚',
-    text: 'Acesse toda a teoria do curso em um só lugar, organizada por tópico. Pode até imprimir!',
+    title: 'Apostila do curso 📚',
+    text: 'Acesse toda a teoria reunida em um só lugar, organizada por tópico. Pode até imprimir!',
     target: '#btn-apostila-nav',
-    anchor: 'right'
+    anchor: 'right',
+    scrollTo: '#btn-apostila-nav'
   },
   {
-    title: 'Loja de Temas 🛍️',
-    text: 'Use suas Moedas para comprar temas exclusivos com cores e estilos diferentes!',
-    target: '#btn-store-nav',
-    anchor: 'right'
+    title: 'Loja de Temas',
+    text: 'Clique nas moedas ou no botão "Loja" para comprar temas exclusivos com suas moedas!',
+    target: '.topbar-store-btn',
+    anchor: 'bottom',
+    scrollTo: null
   },
   {
     title: 'Pronto para começar! 🚀',
-    text: 'Clique em uma lição para iniciar. Cada lição tem teoria, exemplos e exercícios interativos. Bons estudos!',
+    text: 'Clique em uma lição para iniciar. Cada lição tem teoria, exemplos e exercícios. Bons estudos!',
     target: '#continue-wrap',
-    anchor: 'bottom'
+    anchor: 'bottom',
+    scrollTo: null
   }
 ];
 
@@ -1871,6 +1906,8 @@ let tutStep = 0;
 
 function startTutorial() {
   tutStep = 0;
+  const sidebar = document.getElementById('sidebar');
+  sidebar.scrollTop = 0;
   document.getElementById('tutorial-overlay').style.display = 'block';
   document.body.style.overflow = 'hidden';
   renderTutorialStep();
@@ -1880,53 +1917,112 @@ function renderTutorialStep() {
   const step = TUTORIAL_STEPS[tutStep];
   document.getElementById('tut-title').textContent = step.title;
   document.getElementById('tut-text').textContent = step.text;
-  document.getElementById('btn-tut-next').textContent = tutStep < TUTORIAL_STEPS.length-1 ? 'Próximo →' : 'Começar! 🚀';
+  document.getElementById('btn-tut-next').textContent = tutStep < TUTORIAL_STEPS.length-1 ? 'Próximo →' : 'Começar!';
 
   // Dots
   const dots = document.getElementById('tut-dots');
   dots.innerHTML = TUTORIAL_STEPS.map((_, i) =>
     `<div class="tutorial-dot ${i===tutStep?'active':''}"></div>`).join('');
 
-  // Highlight
   const hl = document.getElementById('tutorial-highlight');
   const tip = document.getElementById('tutorial-tooltip');
-  if (step.target) {
-    const el = document.querySelector(step.target);
-    if (el) {
-      const rect = el.getBoundingClientRect();
-      hl.style.cssText = `left:${rect.left-6}px;top:${rect.top-6}px;width:${rect.width+12}px;height:${rect.height+12}px;`;
-      hl.style.display = 'block';
-      // Position tooltip
-      const tW = Math.min(300, window.innerWidth - 32);
-      let tx, ty;
-      if (step.anchor === 'right') {
-        tx = Math.min(rect.right + 14, window.innerWidth - tW - 16);
-        ty = Math.max(16, rect.top);
-      } else {
-        tx = Math.max(16, rect.left);
-        ty = rect.bottom + 14;
-      }
-      if (ty + 200 > window.innerHeight) ty = rect.top - 200;
-      tip.style.cssText = `left:${tx}px;top:${ty}px;width:${tW}px;`;
-    } else {
-      hl.style.display = 'none';
-      tip.style.cssText = 'left:50%;top:50%;transform:translate(-50%,-50%);width:300px;';
-    }
-  } else {
+
+  if (!step.target) {
     hl.style.display = 'none';
-    tip.style.cssText = 'left:50%;top:50%;transform:translate(-50%,-50%);width:min(320px,calc(100vw-32px));';
+    tip.style.cssText = 'left:50%;top:50%;transform:translate(-50%,-50%);width:min(320px,calc(100vw-32px));position:absolute;';
+    return;
   }
+
+  // Scroll the target into view within its scroll container before measuring
+  const el = document.querySelector(step.target);
+  if (!el) {
+    hl.style.display = 'none';
+    tip.style.cssText = 'left:50%;top:50%;transform:translate(-50%,-50%);width:min(320px,calc(100vw-32px));position:absolute;';
+    return;
+  }
+
+  // Scroll target into view smoothly inside sidebar (or page)
+  if (step.scrollTo) {
+    const scrollEl = document.querySelector(step.scrollTo);
+    if (scrollEl) {
+      scrollEl.scrollIntoView({ block: 'nearest', behavior: 'instant' });
+    }
+  }
+
+  // After scrolling, measure position
+  const rect = el.getBoundingClientRect();
+  const vw = window.innerWidth;
+  const vh = window.innerHeight;
+
+  // Check if element is actually visible on screen
+  const isVisible = rect.top < vh && rect.bottom > 0 && rect.left < vw && rect.right > 0;
+
+  if (!isVisible) {
+    // Element still off-screen (e.g. inside closed sidebar on mobile) — show centered tooltip
+    hl.style.display = 'none';
+    tip.style.cssText = 'left:50%;top:50%;transform:translate(-50%,-50%);width:min(320px,calc(100vw-32px));position:absolute;';
+    return;
+  }
+
+  // Highlight
+  hl.style.cssText = `
+    position:absolute;
+    left:${rect.left - 6}px;
+    top:${rect.top - 6}px;
+    width:${rect.width + 12}px;
+    height:${rect.height + 12}px;
+    display:block;
+    border-radius:12px;
+    box-shadow:0 0 0 9999px rgba(0,0,0,0.65);
+    pointer-events:none;
+    transition:all 0.35s cubic-bezier(.4,0,.2,1);
+    z-index:1;
+  `;
+
+  // Position tooltip — try right of element, then below, then above, then centered
+  const tW = Math.min(300, vw - 32);
+  const tH = 170; // approx tooltip height
+  let tx, ty;
+
+  if (step.anchor === 'right' && rect.right + 14 + tW < vw) {
+    tx = rect.right + 14;
+    ty = Math.max(16, Math.min(rect.top, vh - tH - 16));
+  } else if (step.anchor === 'bottom' && rect.bottom + 14 + tH < vh) {
+    tx = Math.max(16, Math.min(rect.left, vw - tW - 16));
+    ty = rect.bottom + 14;
+  } else if (rect.top - tH - 14 > 0) {
+    // above
+    tx = Math.max(16, Math.min(rect.left, vw - tW - 16));
+    ty = rect.top - tH - 14;
+  } else {
+    // fallback: beside or centered
+    tx = Math.max(16, Math.min(rect.right + 10, vw - tW - 16));
+    ty = Math.max(16, Math.min(rect.top, vh - tH - 16));
+  }
+
+  tip.style.cssText = `position:absolute;left:${tx}px;top:${ty}px;width:${tW}px;`;
 }
 
 function nextTutorialStep() {
   tutStep++;
-  if (tutStep >= TUTORIAL_STEPS.length) endTutorial();
-  else renderTutorialStep();
+  if (tutStep >= TUTORIAL_STEPS.length) { endTutorial(); return; }
+  const step = TUTORIAL_STEPS[tutStep];
+  const isMobile = window.innerWidth <= 768;
+  const sidebarTargets = ['#sidebar','.sidebar-stats','.level-badge-wrap','#nav-units','#btn-apostila-nav'];
+  const isSidebarTarget = step.target && sidebarTargets.some(t => step.target === t || step.target.startsWith(t));
+  if (isMobile && isSidebarTarget) {
+    openSidebar();
+    setTimeout(renderTutorialStep, 360);
+  } else {
+    renderTutorialStep();
+  }
 }
 
 function endTutorial() {
   document.getElementById('tutorial-overlay').style.display = 'none';
   document.body.style.overflow = '';
+  // Close sidebar if it was opened during tutorial on mobile
+  if (window.innerWidth <= 768) closeSidebar();
   STATE.tutorialDone = true;
   saveState();
 }
@@ -1951,7 +2047,7 @@ function escH(str) {
 let toastTimer;
 function showXpToast(xp, coins) {
   const t = document.getElementById('toast');
-  document.getElementById('toast-icon').textContent = '⭐';
+  document.getElementById('toast-icon').textContent = '★';
   document.getElementById('toast-text').textContent = `+${xp} XP · +${coins} moedas`;
   t.classList.add('show'); clearTimeout(toastTimer);
   toastTimer = setTimeout(() => t.classList.remove('show'), 2400);
