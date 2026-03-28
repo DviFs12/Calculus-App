@@ -111,7 +111,7 @@
       <div class="home-greeting" style="font-family:'Fraunces',serif;font-size:1.8rem;font-weight:300;letter-spacing:-0.5px;margin-bottom:3px;">
         Bem-vindo, <strong>estudante</strong>.
       </div>
-      <div style="color:var(--ink3);font-size:0.85rem;margin-bottom:24px;" id="home-sub">Escolha uma licao para comecar.</div>
+      <div style="color:var(--ink3);font-size:0.85rem;margin-bottom:24px;" id="home-sub">Escolha uma lição para começar.</div>
 
       <div id="continue-wrap" style="margin-bottom:22px;"></div>
 
@@ -145,7 +145,7 @@
 <div class="modal-overlay" id="reset-modal">
   <div class="modal">
     <h3>Redefinir progresso?</h3>
-    <p>Todo o XP, moedas, streak e temas comprados serao apagados. Irreversivel.</p>
+    <p>Todo o XP, moedas, streak e temas comprados serão apagados. Irreversível.</p>
     <div class="modal-btns">
       <button class="btn-cancel" onclick="closeModal('reset-modal')">Cancelar</button>
       <button class="btn-danger"  onclick="confirmReset()">Redefinir tudo</button>
@@ -157,7 +157,7 @@
 <div class="modal-overlay" id="skip-modal">
   <div class="modal" style="max-width:440px;">
     <h3>Pular etapa</h3>
-    <p>Ja conhece o conteudo ou quer explorar a frente?</p>
+    <p>Já conhece o conteúdo ou quer explorar à frente?</p>
     <div class="skip-opts" id="skip-opts"></div>
     <div class="modal-btns">
       <button class="btn-cancel" onclick="closeModal('skip-modal')">Cancelar</button>
@@ -213,7 +213,7 @@ function buildSidebar() {
   document.getElementById('sb-lvl-bar').style.width  = li.pct + '%';
   document.getElementById('sb-lvl-sub').textContent  = li.hasNext
     ? li.xpIn + ' / ' + li.xpNeed + ' XP p/ Nv.' + (li.level+1)
-    : 'Nivel maximo!';
+    : 'Nível máximo!';
 
   const nav = document.getElementById('nav-units');
   nav.innerHTML = '';
@@ -298,7 +298,7 @@ function buildHome() {
       <div class="continue-card" onclick="startLesson('${unit.id}','${les.id}')">
         <div class="cc-icon">${unitIcon(unit)}</div>
         <div class="cc-info">
-          <div class="cc-tag">Continuar &middot; ${unit.title}</div>
+          <div class="cc-tag">Continuar · ${unit.title}</div>
           <div class="cc-title">${les.title}</div>
           <div class="cc-bar"><div class="cc-bar-fill" style="width:${STATE.completedLessons[les.id]?100:0}%"></div></div>
         </div>
@@ -419,14 +419,14 @@ function renderTheory(step) {
   document.getElementById('lesson-body').innerHTML = html;
 
   const btn = document.getElementById('btn-check');
-  btn.className = 'btn-check ready'; btn.innerHTML = 'Entendido &rarr;'; btn.onclick = advanceStep;
+  btn.className = 'btn-check ready'; btn.innerHTML = 'Entendido →'; btn.onclick = advanceStep;
 }
 
 function renderMCQ(step) {
   const letters = ['A','B','C','D'];
   document.getElementById('lesson-body').innerHTML = `
     <div class="question-card">
-      <div class="q-num">Questao ${LES.idx} de ${LES.steps.length - 1}</div>
+      <div class="q-num">Questão ${LES.idx} de ${LES.steps.length - 1}</div>
       ${step.formula ? `<div class="q-formula">${escH(step.formula)}</div>` : ''}
       <div class="q-stem">${step.stem}</div>
       <div class="options" id="opts">
@@ -442,11 +442,11 @@ function renderMCQ(step) {
 function renderInput(step) {
   document.getElementById('lesson-body').innerHTML = `
     <div class="question-card">
-      <div class="q-num">Questao ${LES.idx} de ${LES.steps.length - 1}</div>
+      <div class="q-num">Questão ${LES.idx} de ${LES.steps.length - 1}</div>
       ${step.formula ? `<div class="q-formula">${escH(step.formula)}</div>` : ''}
       <div class="q-stem">${step.stem}</div>
       <div class="input-lbl">Sua resposta</div>
-      <input class="q-input" id="q-input" type="text" autocomplete="off" placeholder="Digite aqui..."
+      <input class="q-input" id="q-input" type="text" autocomplete="off" placeholder="Digite aqui…"
         oninput="onInputChange()" onkeydown="if(event.key==='Enter')handleCheck()">
     </div>`;
   setTimeout(() => document.getElementById('q-input')?.focus(), 80);
@@ -520,11 +520,11 @@ function showFeedback(ok, exp) {
     showToast('★', '+15 XP ◆ +5 moedas');
   }
   document.getElementById('fb-body').innerHTML = `
-    <div class="fb-title ${ok?'correct':'wrong'}">${ok ? '&#10003; Correto!' : '&#10007; Incorreto'}</div>
+    <div class="fb-title ${ok?'correct':'wrong'}">${ok ? '✓ Correto!' : '✗ Incorreto'}</div>
     <div class="fb-exp">${exp}</div>`;
   const btn = document.getElementById('btn-check');
   btn.className = ok ? 'btn-check next' : 'btn-check next-wrong';
-  btn.innerHTML = 'Continuar &rarr;'; btn.onclick = advanceStep;
+  btn.innerHTML = 'Continuar →'; btn.onclick = advanceStep;
 }
 
 function advanceStep() {
@@ -560,12 +560,12 @@ function completeLesson() {
     <div class="end-view" style="padding:0">
       <div class="end-card">
         <span class="end-trophy">&#127942;</span>
-        <div class="end-title">Licao concluida!</div>
+        <div class="end-title">Lição concluída!</div>
         <div class="end-sub"><strong>${findLessonTitle(LES.lessonId)}</strong></div>
         <div class="end-stats">
           <div class="end-stat"><span class="end-stat-val c-gold">+${xpEarned}</span><div class="end-stat-lbl">XP</div></div>
           <div class="end-stat"><span class="end-stat-val c-purple">+${coinsEarned}</span><div class="end-stat-lbl">Moedas</div></div>
-          <div class="end-stat"><span class="end-stat-val c-green">${acc}%</span><div class="end-stat-lbl">Precisao</div></div>
+          <div class="end-stat"><span class="end-stat-val c-green">${acc}%</span><div class="end-stat-lbl">Precisão</div></div>
           <div class="end-stat"><span class="end-stat-val c-blue">${li.level}</span><div class="end-stat-lbl">Nivel</div></div>
         </div>
         <button class="btn-primary" onclick="goHome()">Continuar &#8594;</button>
@@ -583,7 +583,7 @@ function showGameOver() {
         <div class="end-title" style="color:var(--red)">Sem vidas!</div>
         <div class="end-sub" style="margin-bottom:22px">Erre, aprenda e tente de novo.</div>
         <button class="btn-primary" onclick="replayLesson()">Tentar de novo</button>
-        <button class="btn-secondary" onclick="goHome()">Voltar ao inicio</button>
+        <button class="btn-secondary" onclick="goHome()">Voltar ao início</button>
       </div>
     </div>`;
 }
@@ -618,9 +618,9 @@ function openSkipModal() {
     d.onclick = () => { closeModal('skip-modal'); fn(); };
     opts.appendChild(d);
   };
-  if (LES.idx < LES.steps.length - 1) addOpt('&#9197;', 'Proxima etapa', 'Pular apenas esta etapa', () => { LES.idx++; if(LES.idx>=LES.steps.length) completeLesson(); else renderStep(); });
-  addOpt('&#127937;', 'Completar licao', 'Marcar como concluida', completeLesson);
-  addOpt('&#127968;', 'Voltar ao inicio', 'Explorar todas as licoes', goHome);
+  if (LES.idx < LES.steps.length - 1) addOpt('&#9197;', 'Próxima etapa', 'Pular apenas esta etapa', () => { LES.idx++; if(LES.idx>=LES.steps.length) completeLesson(); else renderStep(); });
+  addOpt('&#127937;', 'Completar lição', 'Marcar como concluída', completeLesson);
+  addOpt('&#127968;', 'Voltar ao início', 'Explorar todas as lições', goHome);
   document.getElementById('skip-modal').classList.add('open');
 }
 

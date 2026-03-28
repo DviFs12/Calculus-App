@@ -2,11 +2,11 @@
   "id": "u4",
   "emoji": "integrais",
   "title": "Integrais",
-  "desc": "Acumulacao, areas e o Teorema Fundamental",
+  "desc": "Acumulacao, áreas é o Teorema Fundamental",
   "lessons": [
     {
       "id": "u4l1",
-      "title": "Intuicao e Soma de Riemann",
+      "title": "Intuição e Soma de Riemann",
       "steps": [
         {
           "type": "theory",
@@ -14,30 +14,30 @@
           "blocks": [
             {
               "type": "para",
-              "heading": "O problema da area",
-              "text": "Como calcular a area de uma regiao com bordas curvas? A ideia de Riemann: divida a regiao em retangulos finos, calcule a area de cada um, some tudo. Quanto mais finos os retangulos, mais precisa a aproximacao. No limite (infinitos retangulos infinitamente finos), obtem-se a area exata — isso e a <strong>integral definida</strong>."
+              "heading": "O problema da área",
+              "text": "Como calcular a área de uma região com bordas curvas? A ideia de Riemann: divida a região em retângulos finos, calcule a área de cada um, some tudo. Quanto mais finos os retângulos, mais precisa a aproximação. No limite (infinitos retângulos infinitamente finos), obtem-sé a área exata — isso é a <strong>integral definida</strong>."
             },
             {
-              "type": "formula",
+              "type": "fórmula",
               "text": "Soma de Riemann:\n\nA ~ sum[i=1 a n] f(x_i) * Dx\n\nonde Dx = (b-a)/n  e  x_i = a + i*Dx\n\nIntegral definida (limite quando n -> inf):\n\n  Int[a,b] f(x) dx = lim (n->inf) sum f(x_i)*Dx"
             },
             {
               "type": "example",
-              "label": "Aproximando a area sob f(x) = x^2 em [0,1]",
-              "body": "Com 4 retangulos (n=4), Dx = 0.25:\n\nRetangulo 1: f(0.25)*0.25 = 0.0625*0.25 = 0.016\nRetangulo 2: f(0.50)*0.25 = 0.25*0.25 = 0.063\nRetangulo 3: f(0.75)*0.25 = 0.5625*0.25 = 0.141\nRetangulo 4: f(1.00)*0.25 = 1.00*0.25 = 0.250\n\nSoma ~ 0.469  (valor exato = 1/3 = 0.333...)\n\nCom mais retangulos a aproximacao melhora!"
+              "label": "Apróximando a área sob f(x) = x^2 em [0,1]",
+              "body": "Com 4 retângulos (n=4), Dx = 0.25:\n\nRetângulo 1: f(0.25)*0.25 = 0.0625*0.25 = 0.016\nRetângulo 2: f(0.50)*0.25 = 0.25*0.25 = 0.063\nRetângulo 3: f(0.75)*0.25 = 0.5625*0.25 = 0.141\nRetângulo 4: f(1.00)*0.25 = 1.00*0.25 = 0.250\n\nSoma ~ 0.469  (valor exato = 1/3 = 0.333...)\n\nCom mais retângulos a aproximação melhora!"
             },
             {
               "type": "callout",
               "kind": "info",
               "icon": "i",
-              "text": "Aplicacao direta: em engenharia numerica e simulacoes computacionais, integrais sao frequentemente calculadas por metodos de soma (quadratura numerica), que sao versoes sofisticadas da soma de Riemann."
+              "text": "Aplicação direta: em engenharia numérica e simulacoes computacionais, integrais são frequentemente calculadas por metodos de soma (quadratura numérica), que são versoes sofisticadas da soma de Riemann."
             }
           ]
         },
         {
           "type": "mcq",
-          "formula": "f(x) = 2  em  [0, 3]\nArea exata = ?",
-          "stem": "Uma funcao constante f(x) = 2 sobre [0,3] forma um retangulo. Area = base x altura.",
+          "fórmula": "f(x) = 2  em  [0, 3]\nÁrea exata = ?",
+          "stem": "Uma função constante f(x) = 2 sobre [0,3] forma um retângulo. Área = base x altura.",
           "opts": [
             "2",
             "3",
@@ -45,25 +45,25 @@
             "6"
           ],
           "correct": 3,
-          "exp": "Area = base x altura = 3 x 2 = 6. Para funcoes simples, a integral e geometricamente obvio."
+          "exp": "Área = base x altura = 3 x 2 = 6. Para funções simples, a integral e geométricamente obvio."
         },
         {
           "type": "mcq",
-          "formula": "Soma de Riemann para f(x) = x em [0,2]\nn=2, Dx = 1",
+          "fórmula": "Soma de Riemann para f(x) = x em [0,2]\nn=2, Dx = 1",
           "stem": "x_1 = 0, x_2 = 1. Soma = f(0)*1 + f(1)*1 = 0 + 1 = 1. O valor exato e 2. O que aumentar n faz?",
           "opts": [
-            "Diminui a precisao",
+            "Diminui a precisão",
             "Aumenta o erro",
-            "Melhora a aproximacao",
+            "Melhora a aproximação",
             "Nao muda nada"
           ],
           "correct": 2,
-          "exp": "Mais retangulos (maior n) => melhor aproximacao da area real. Com n->inf, chegamos ao valor exato."
+          "exp": "Mais retângulos (maior n) => melhor aproximação da área real. Com n->inf, chegamos ao valor exato."
         },
         {
           "type": "mcq",
-          "formula": "Se a integral representa area,\no que Int[0,5] 3 dx significa?",
-          "stem": "f(x) = 3 constante sobre [0,5]. Qual e a area sob essa funcao?",
+          "fórmula": "Sé a integral representa área,\no que Int[0,5] 3 dx significa?",
+          "stem": "f(x) = 3 constante sobre [0,5]. Qual é a área sob essa função?",
           "opts": [
             "0",
             "3",
@@ -71,14 +71,14 @@
             "15"
           ],
           "correct": 3,
-          "exp": "Area do retangulo: largura 5 x altura 3 = 15."
+          "exp": "Área do retângulo: largura 5 x altura 3 = 15."
         },
         {
           "type": "input",
-          "formula": "Aproxime: area sob f(x) = x em [0,4]\nUsando 2 retangulos (n=2)",
-          "stem": "Dx = 2. Retangulos: f(0)*2 + f(2)*2 = 0*2 + 2*2 = 0 + 4 = ?",
+          "fórmula": "Aproxime: área sob f(x) = x em [0,4]\nUsando 2 retângulos (n=2)",
+          "stem": "Dx = 2. Retângulos: f(0)*2 + f(2)*2 = 0*2 + 2*2 = 0 + 4 = ?",
           "correct": "4",
-          "exp": "Soma de Riemann = 0 + 4 = 4. (Valor exato = 8, usando retangulo pela esquerda.)"
+          "exp": "Soma de Riemann = 0 + 4 = 4. (Valor exato = 8, usando retângulo pela esquerda.)"
         }
       ]
     },
@@ -93,29 +93,29 @@
             {
               "type": "para",
               "heading": "Desfazendo a derivada",
-              "text": "A integral indefinida e o processo <strong>inverso</strong> da derivada. Se f'(x) = 2x, entao qual funcao, ao ser derivada, da 2x? Resposta: x^2. Mas tambem x^2 + 1, x^2 + 5, x^2 - 7... Por isso adicionamos a <strong>constante de integracao C</strong>: F(x) = x^2 + C."
+              "text": "A integral indefinida é o processo <strong>inverso</strong> da derivada. Se f'(x) = 2x, então qual função, ao ser derivada, da 2x? Resposta: x^2. Mas também x^2 + 1, x^2 + 5, x^2 - 7... Por isso adicionamos a <strong>constante de integração C</strong>: F(x) = x^2 + C."
             },
             {
-              "type": "formula",
+              "type": "fórmula",
               "text": "Int f(x) dx = F(x) + C\n\nonde F'(x) = f(x)  e  C e constante.\n\nRegras fundamentais:\n  Int x^n dx = x^(n+1)/(n+1) + C  (n != -1)\n  Int e^x dx = e^x + C\n  Int 1/x dx = ln|x| + C\n  Int cos(x) dx = sin(x) + C\n  Int sin(x) dx = -cos(x) + C"
             },
             {
               "type": "callout",
               "kind": "warn",
               "icon": "!",
-              "text": "NUNCA esqueca o '+C' na integral indefinida! Cada valor diferente de C gera uma antiderivada diferente. Omitir o C e um erro classico em provas."
+              "text": "NUNCA esqueca o '+C' na integral indefinida! Cada valor diferente de C gera uma antiderivada diferente. Omitir o C é um erro classico em provas."
             },
             {
               "type": "example",
               "label": "Calculando integrais indefinidas",
-              "body": "Int 4x^3 dx\n= 4 * x^(3+1)/(3+1) + C\n= 4 * x^4/4 + C\n= x^4 + C\n\nVerificacao: d/dx(x^4 + C) = 4x^3 ✓\n\nInt (3x^2 + 2x - 5) dx\n= x^3 + x^2 - 5x + C\n\nVerificacao: d/dx(...) = 3x^2 + 2x - 5 ✓"
+              "body": "Int 4x^3 dx\n= 4 * x^(3+1)/(3+1) + C\n= 4 * x^4/4 + C\n= x^4 + C\n\nVerificação: d/dx(x^4 + C) = 4x^3 ✓\n\nInt (3x^2 + 2x - 5) dx\n= x^3 + x^2 - 5x + C\n\nVerificação: d/dx(...) = 3x^2 + 2x - 5 ✓"
             }
           ]
         },
         {
           "type": "mcq",
-          "formula": "Int x^4 dx",
-          "stem": "Use a regra da potencia: Int x^n dx = x^(n+1)/(n+1) + C, com n=4.",
+          "fórmula": "Int x^4 dx",
+          "stem": "Use a regra da potência: Int x^n dx = x^(n+1)/(n+1) + C, com n=4.",
           "opts": [
             "x^5 + C",
             "x^5/4 + C",
@@ -123,11 +123,11 @@
             "4x^3 + C"
           ],
           "correct": 2,
-          "exp": "Int x^4 dx = x^5/5 + C. Verificacao: d/dx(x^5/5) = 5x^4/5 = x^4 ✓"
+          "exp": "Int x^4 dx = x^5/5 + C. Verificação: d/dx(x^5/5) = 5x^4/5 = x^4 ✓"
         },
         {
           "type": "mcq",
-          "formula": "Int (6x^2 + 4x - 3) dx",
+          "fórmula": "Int (6x^2 + 4x - 3) dx",
           "stem": "Integre cada termo separadamente usando linearidade.",
           "opts": [
             "2x^3 + 2x^2 - 3x + C",
@@ -140,8 +140,8 @@
         },
         {
           "type": "mcq",
-          "formula": "Int e^x dx",
-          "stem": "Qual funcao, derivada, da e^x? Lembre que d/dx(e^x) = e^x.",
+          "fórmula": "Int e^x dx",
+          "stem": "Qual função, derivada, da e^x? Lembre que d/dx(e^x) = e^x.",
           "opts": [
             "x*e^x + C",
             "e^x + C",
@@ -149,12 +149,12 @@
             "e^x/x + C"
           ],
           "correct": 1,
-          "exp": "Int e^x dx = e^x + C. A exponencial e^x e a unica funcao que e sua propria antiderivada (a menos de C)."
+          "exp": "Int e^x dx = e^x + C. A exponencial e^x é a única função que e sua própria antiderivada (a menos de C)."
         },
         {
           "type": "input",
-          "formula": "Int cos(x) dx = ? * sin(x) + C",
-          "stem": "d/dx(sin(x)) = cos(x). Portanto a antiderivada de cos(x) e sin(x). Qual e o coeficiente?",
+          "fórmula": "Int cos(x) dx = ? * sin(x) + C",
+          "stem": "d/dx(sin(x)) = cos(x). Portanto a antiderivada de cos(x) e sin(x). Qual é o coeficiente?",
           "correct": "1",
           "exp": "Int cos(x) dx = sin(x) + C. Coeficiente = 1."
         }
@@ -166,33 +166,33 @@
       "steps": [
         {
           "type": "theory",
-          "title": "O Teorema Fundamental do Calculo",
+          "title": "O Teorema Fundamental do Cálculo",
           "blocks": [
             {
               "type": "para",
-              "heading": "A conexao mais bonita da matematica",
-              "text": "O Teorema Fundamental do Calculo conecta derivada e integral — duas ideias aparentemente nao relacionadas. Ele diz: para calcular a area exata sob f(x) de a ate b, basta encontrar uma antiderivada F(x) e calcular F(b) - F(a). Eliminando a necessidade das somas de Riemann!"
+              "heading": "A conexao mais bonita da matemática",
+              "text": "O Teorema Fundamental do Cálculo conecta derivada e integral — duas ideias aparentemente não relacionadas. Ele diz: para calcular a área exata sob f(x) de a até b, basta encontrar uma antiderivada F(x) e calcular F(b) - F(a). Eliminando a necessidade das somas de Riemann!"
             },
             {
-              "type": "formula",
-              "text": "Teorema Fundamental do Calculo:\n\nInt[a,b] f(x) dx = F(b) - F(a)\n\nonde F'(x) = f(x)\n\nNotacao: [F(x)] de a ate b = F(b) - F(a)\n\nObs: a constante C cancela: F(b)+C - (F(a)+C) = F(b)-F(a)"
+              "type": "fórmula",
+              "text": "Teorema Fundamental do Cálculo:\n\nInt[a,b] f(x) dx = F(b) - F(a)\n\nonde F'(x) = f(x)\n\nNotação: [F(x)] de a até b = F(b) - F(a)\n\nObs: a constante C cancela: F(b)+C - (F(a)+C) = F(b)-F(a)"
             },
             {
               "type": "example",
               "label": "Calculando Int[0,2] x^2 dx",
-              "body": "Passo 1: Antiderivada de x^2 e F(x) = x^3/3\n\nPasso 2: Avaliar nos limites:\n  F(2) = 2^3/3 = 8/3\n  F(0) = 0^3/3 = 0\n\nPasso 3: F(2) - F(0) = 8/3 - 0 = 8/3\n\nArea sob x^2 de 0 a 2 = 8/3 ≈ 2.67 unidades^2"
+              "body": "Passo 1: Antiderivada de x^2 e F(x) = x^3/3\n\nPasso 2: Avaliar nos limites:\n  F(2) = 2^3/3 = 8/3\n  F(0) = 0^3/3 = 0\n\nPasso 3: F(2) - F(0) = 8/3 - 0 = 8/3\n\nÁrea sob x^2 de 0 a 2 = 8/3 ≈ 2.67 unidades^2"
             },
             {
               "type": "callout",
               "kind": "info",
               "icon": "i",
-              "text": "Integrais negativas: se f(x) < 0 no intervalo, a integral fica negativa (area 'abaixo' do eixo). Para area geometrica total, use valor absoluto. Em fisica, isso representa trabalho negativo ou deslocamento de retorno."
+              "text": "Integrais negativas: se f(x) < 0 no intervalo, a integral fica negativa (área 'abaixo' do eixo). Para área geométrica total, use valor absoluto. Em física, isso representa trabalho negativo ou deslocamento de retorno."
             }
           ]
         },
         {
           "type": "mcq",
-          "formula": "Int[1,3] 2x dx",
+          "fórmula": "Int[1,3] 2x dx",
           "stem": "F(x) = x^2. Calcule F(3) - F(1).",
           "opts": [
             "4",
@@ -205,14 +205,14 @@
         },
         {
           "type": "input",
-          "formula": "Int[0,pi] sin(x) dx",
+          "fórmula": "Int[0,pi] sin(x) dx",
           "stem": "F(x) = -cos(x). F(pi) - F(0) = -cos(pi) - (-cos(0)). cos(pi) = -1, cos(0) = 1.",
           "correct": "2",
-          "exp": "-(-1) - (-1) = 1 + 1 = 2. Area sob um arco do seno = 2."
+          "exp": "-(-1) - (-1) = 1 + 1 = 2. Área sob um arco do seno = 2."
         },
         {
           "type": "mcq",
-          "formula": "Int[0,1] e^x dx",
+          "fórmula": "Int[0,1] e^x dx",
           "stem": "F(x) = e^x. Calcule F(1) - F(0). Use e ≈ 2.718, e^0 = 1.",
           "opts": [
             "e-1",
@@ -225,8 +225,8 @@
         },
         {
           "type": "mcq",
-          "formula": "Int[-1,1] x^3 dx",
-          "stem": "x^3 e funcao impar: f(-x) = -f(x). O que acontece com a integral num intervalo simetrico?",
+          "fórmula": "Int[-1,1] x^3 dx",
+          "stem": "x^3 e função impar: f(-x) = -f(x). O que acontece com a integral num intervalo simetrico?",
           "opts": [
             "2",
             "1",
@@ -234,7 +234,7 @@
             "-1"
           ],
           "correct": 2,
-          "exp": "Para funcoes impares em intervalos simetricos [-a,a], a integral e sempre 0. As areas se cancelam. Verifique: F(x) = x^4/4; F(1)-F(-1) = 1/4 - 1/4 = 0."
+          "exp": "Para funções impares em intervalos simetricos [-a,a], a integral é sempre 0. As áreas se cancelam. Verifique: F(x) = x^4/4; F(1)-F(-1) = 1/4 - 1/4 = 0."
         }
       ]
     }

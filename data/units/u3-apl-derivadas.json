@@ -15,28 +15,28 @@
             {
               "type": "para",
               "heading": "Concavidade",
-              "text": "A segunda derivada revela a <strong>concavidade</strong>: se f''(x) > 0, a funcao 'curva para cima' (concava para cima, como uma tigela); se f''(x) < 0, 'curva para baixo' (concava para baixo, como um morro). Isso ajuda a visualizar o grafico e a confirmar maximos e minimos."
+              "text": "A segunda derivada revela a <strong>concavidade</strong>: se f''(x) > 0, a função 'curva para cima' (concava para cima, como uma tigela); se f''(x) < 0, 'curva para baixo' (concava para baixo, como um morro). Isso ajuda a visualizar o gráfico é a confirmar máximos e mínimos."
             },
             {
-              "type": "formula",
-              "text": "f''(x) > 0  =>  concava para cima (soriso)\nf''(x) < 0  =>  concava para baixo (tristeza)\nf''(x) = 0  =>  posivel ponto de inflexao\n\nPonto de inflexao: onde a concavidade muda de\nsinal. Nao e necessariamente maximo ou minimo."
+              "type": "fórmula",
+              "text": "f''(x) > 0  =>  concava para cima (soriso)\nf''(x) < 0  =>  concava para baixo (tristeza)\nf''(x) = 0  =>  posivel ponto de inflexão\n\nPonto de inflexão: onde a concavidade muda de\nsinal. Nao e necessáriamente máximo ou mínimo."
             },
             {
               "type": "example",
               "label": "f(x) = x^3 - 3x: analisando concavidade",
-              "body": "f'(x) = 3x^2 - 3\nf''(x) = 6x\n\nf''(x) > 0 quando x > 0  (concava para cima)\nf''(x) < 0 quando x < 0  (concava para baixo)\nf''(0) = 0  =>  ponto de inflexao em x = 0\n\nNo ponto de inflexao, a curva 'vira' de\nconcavidade — como o centro de um 'S'."
+              "body": "f'(x) = 3x^2 - 3\nf''(x) = 6x\n\nf''(x) > 0 quando x > 0  (concava para cima)\nf''(x) < 0 quando x < 0  (concava para baixo)\nf''(0) = 0  =>  ponto de inflexão em x = 0\n\nNo ponto de inflexão, a curva 'vira' de\nconcavidade — como o centro de um 'S'."
             },
             {
               "type": "callout",
               "kind": "info",
               "icon": "i",
-              "text": "Aplicacao: em economia, o 'ponto de inflexao' de uma curva de custo indica onde o crescimento de custos comeca a acelerar ou desacelerar — informacao crucial para decisoes empresariais."
+              "text": "Aplicação: em economia, o 'ponto de inflexão' de uma curva de custo indica onde o crescimento de custos começa a acelerar ou desacelerar — informacao crucial para decisoes empresariais."
             }
           ]
         },
         {
           "type": "mcq",
-          "formula": "f(x) = x^4 - 4x^2\nf''(x) = 12x^2 - 8",
+          "fórmula": "f(x) = x^4 - 4x^2\nf''(x) = 12x^2 - 8",
           "stem": "Onde f''(x) = 0? Resolva 12x^2 - 8 = 0.",
           "opts": [
             "x = 0",
@@ -45,12 +45,12 @@
             "x = +-2"
           ],
           "correct": 2,
-          "exp": "12x^2 = 8, x^2 = 2/3, x = +/- sqrt(2/3) ~ +/- 0.816. Sao os candidatos a ponto de inflexao."
+          "exp": "12x^2 = 8, x^2 = 2/3, x = +/- sqrt(2/3) ~ +/- 0.816. Sao os candidatos a ponto de inflexão."
         },
         {
           "type": "mcq",
-          "formula": "g(x) = e^x\ng''(x) = e^x",
-          "stem": "g''(x) = e^x > 0 para todo x. Qual e a concavidade de g?",
+          "fórmula": "g(x) = e^x\ng''(x) = e^x",
+          "stem": "g''(x) = e^x > 0 para todo x. Qual é a concavidade de g?",
           "opts": [
             "Sempre concava para baixo",
             "Muda de concavidade em x=0",
@@ -58,27 +58,27 @@
             "Nao tem concavidade definida"
           ],
           "correct": 2,
-          "exp": "Como e^x > 0 sempre, a funcao e^x e sempre concava para cima. Por isso a exponencial cresce cada vez mais rapido."
+          "exp": "Como e^x > 0 sempre, a função e^x é sempre concava para cima. Por isso a exponencial cresce cada vez mais rápido."
         },
         {
           "type": "mcq",
-          "formula": "h(x) = -x^2 + 4x\nh''(x) = -2",
+          "fórmula": "h(x) = -x^2 + 4x\nh''(x) = -2",
           "stem": "Como h''(x) = -2 < 0 em todos os pontos, a parabola e...",
           "opts": [
             "Concava para cima",
-            "Concava para baixo, com maximo",
-            "Concava para cima, com minimo",
+            "Concava para baixo, com máximo",
+            "Concava para cima, com mínimo",
             "Sem concavidade definida"
           ],
           "correct": 1,
-          "exp": "h''(x) = -2 < 0 sempre => CONCAVA PARA BAIXO. O ponto critico (x=2) e um MAXIMO, confirmado pela 2a derivada."
+          "exp": "h''(x) = -2 < 0 sempre => CONCAVA PARA BAIXO. O ponto crítico (x=2) é um MAXIMO, confirmado pela 2a derivada."
         },
         {
           "type": "input",
-          "formula": "f(x) = x^3\nPonto de inflexao: x = ?",
+          "fórmula": "f(x) = x^3\nPonto de inflexão: x = ?",
           "stem": "f'(x) = 3x^2, f''(x) = 6x. Para que x f''(x) = 0?",
           "correct": "0",
-          "exp": "f''(x) = 6x = 0 => x = 0. Em x=0 a concavidade muda de negativa para positiva: ponto de inflexao."
+          "exp": "f''(x) = 6x = 0 => x = 0. Em x=0 a concavidade muda de negativa para positiva: ponto de inflexão."
         }
       ]
     },
@@ -88,47 +88,47 @@
       "steps": [
         {
           "type": "theory",
-          "title": "Desenhando graficos com Calculo",
+          "title": "Desenhando gráficos com Cálculo",
           "blocks": [
             {
               "type": "para",
               "heading": "O roteiro completo",
-              "text": "Com derivadas e limites, podemos esbocar com precisao qualquer grafico sem calculadora. O roteiro: (1) dominio, (2) interceptos, (3) simetria, (4) assintolas via limites, (5) monotonia via f', (6) extremos, (7) concavidade via f''."
+              "text": "Com derivadas e limites, podemos esbocar com precisão qualquer gráfico sem calculadora. O roteiro: (1) dominio, (2) interceptos, (3) simetria, (4) assintolas via limites, (5) monotonia via f', (6) extremos, (7) concavidade via f''."
             },
             {
-              "type": "formula",
-              "text": "Monotonia (f' positiva/negativa):\n  f'(x) > 0 em (a,b)  =>  f crescente em (a,b)\n  f'(x) < 0 em (a,b)  =>  f decrescente em (a,b)\n\nResumo do estudo de sinal:\n  f'(x) > 0 => crescente\n  f'(x) = 0 => possivel extremo\n  f'(x) < 0 => decrescente"
+              "type": "fórmula",
+              "text": "Monotonia (f' positiva/negativa):\n  f'(x) > 0 em (a,b)  =>  f crescente em (a,b)\n  f'(x) < 0 em (a,b)  =>  f decrescente em (a,b)\n\nResumo do estudo de sinal:\n  f'(x) > 0 => crescente\n  f'(x) = 0 => possível extremo\n  f'(x) < 0 => decrescente"
             },
             {
               "type": "example",
               "label": "Estudo completo: f(x) = x^3 - 3x",
-              "body": "Dominio: todos os reais\n\nIntercepto y: f(0) = 0\nIntercepto x: x^3 - 3x = x(x^2-3) = 0\n  => x = 0, x = sqrt(3), x = -sqrt(3)\n\nf'(x) = 3x^2 - 3 = 3(x-1)(x+1)\n  > 0 para x < -1 ou x > 1 (crescente)\n  < 0 para -1 < x < 1 (decrescente)\n\nf''(x) = 6x\n  > 0 para x > 0 (concava p/ cima)\n  < 0 para x < 0 (concava p/ baixo)\n\nMaximo local em x=-1: f(-1) = 2\nMinimo local em x=1:  f(1) = -2\nInflexao em x=0:      f(0) = 0"
+              "body": "Dominio: todos os reais\n\nIntercepto y: f(0) = 0\nIntercepto x: x^3 - 3x = x(x^2-3) = 0\n  => x = 0, x = sqrt(3), x = -sqrt(3)\n\nf'(x) = 3x^2 - 3 = 3(x-1)(x+1)\n  > 0 para x < -1 ou x > 1 (crescente)\n  < 0 para -1 < x < 1 (decrescente)\n\nf''(x) = 6x\n  > 0 para x > 0 (concava p/ cima)\n  < 0 para x < 0 (concava p/ baixo)\n\nMáximo local em x=-1: f(-1) = 2\nMínimo local em x=1:  f(1) = -2\nInflexao em x=0:      f(0) = 0"
             },
             {
               "type": "callout",
               "kind": "tip",
               "icon": "v",
-              "text": "Este metodo e usado em animacao computacional e design de curvas (splines) para garantir que as curvas tenham o comportamento visual desejado — subindo, descendo, curvando na direcao certa."
+              "text": "Este metodo é usado em animacao computacional e design de curvas (splines) para garantir que as curvas tenham o comportamento visual desejado — subindo, descendo, curvando na direção certa."
             }
           ]
         },
         {
           "type": "mcq",
-          "formula": "f'(x) > 0 em (1, 5)",
+          "fórmula": "f'(x) > 0 em (1, 5)",
           "stem": "O que isso nos diz sobre f neste intervalo?",
           "opts": [
             "f e decrescente",
             "f e concava para cima",
             "f e crescente",
-            "f tem maximo em x=3"
+            "f tem máximo em x=3"
           ],
           "correct": 2,
           "exp": "f'(x) > 0 => f CRESCENTE no intervalo (1,5)."
         },
         {
           "type": "mcq",
-          "formula": "f(x) = x^2 - 4\nAnalisando f'(x) = 2x",
-          "stem": "Para que valores de x a funcao e crescente? Decrescente?",
+          "fórmula": "f(x) = x^2 - 4\nAnalisando f'(x) = 2x",
+          "stem": "Para que valores de x a função e crescente? Decrescente?",
           "opts": [
             "Crescente para x>0, decrescente para x<0",
             "Crescente para x<0, decrescente para x>0",
@@ -136,11 +136,11 @@
             "Sempre decrescente"
           ],
           "correct": 0,
-          "exp": "f'(x) = 2x > 0 quando x > 0 (crescente); f'(x) < 0 quando x < 0 (decrescente). Minimo em x=0."
+          "exp": "f'(x) = 2x > 0 quando x > 0 (crescente); f'(x) < 0 quando x < 0 (decrescente). Mínimo em x=0."
         },
         {
           "type": "mcq",
-          "formula": "g(x) = -2x^3 + 3x^2\ng'(x) = -6x^2 + 6x = -6x(x-1)",
+          "fórmula": "g(x) = -2x^3 + 3x^2\ng'(x) = -6x^2 + 6x = -6x(x-1)",
           "stem": "Onde g'(x) = 0? Para quais intervalos g e crescente?",
           "opts": [
             "x=0 e x=1; crescente em (0,1)",
@@ -153,10 +153,10 @@
         },
         {
           "type": "input",
-          "formula": "f(x) = x^3 - 3x^2\nValor de f no minimo local (em x=2)?",
+          "fórmula": "f(x) = x^3 - 3x^2\nValor de f no mínimo local (em x=2)?",
           "stem": "f(2) = 2^3 - 3(2^2) = 8 - 12 = ?",
           "correct": "-4",
-          "exp": "f(2) = 8 - 12 = -4. Este e o valor minimo local da funcao."
+          "exp": "f(2) = 8 - 12 = -4. Este é o valor mínimo local da função."
         }
       ]
     },
@@ -166,30 +166,30 @@
       "steps": [
         {
           "type": "theory",
-          "title": "Calculo aplicado a problemas reais",
+          "title": "Cálculo aplicado a problemas reais",
           "blocks": [
             {
               "type": "para",
-              "heading": "Da matematica ao problema real",
-              "text": "Problemas de otimizacao aparecem em toda a engenharia e economia: minimize o material para fazer uma lata, maximize o sinal de uma antena, encontre o ponto de producao com maior lucro. O processo e sempre o mesmo: traduza o problema para uma funcao, depois otimize."
+              "heading": "Da matemática ao problema real",
+              "text": "Problemas de otimização aparecem em toda a engenharia e economia: minimize o material para fazer uma lata, maximize o sinal de uma antena, encontre o ponto de produção com maior lucro. O processo e sempre o mesmo: traduza o problema para uma função, depois otimize."
             },
             {
               "type": "example",
-              "label": "Problema classico: cerca de area maxima",
-              "body": "Problema: voce tem 100 m de cerca e quer criar\num retangulo de area maxima.\n\nVariaveis: largura x, comprimento y\nRestricao: 2x + 2y = 100  =>  y = 50 - x\n\nArea: A(x) = x*y = x*(50-x) = 50x - x^2\nDominio: 0 < x < 50\n\nA'(x) = 50 - 2x = 0  =>  x = 25\nA''(25) = -2 < 0  =>  MAXIMO!\n\nDimensoes otimas: 25m x 25m (quadrado)\nArea maxima: 625 m^2\n\nLicao: para perimetro fixo, o quadrado\nmaximiza a area!"
+              "label": "Problema classico: cerca de área maxima",
+              "body": "Problema: você tem 100 m de cerca e quer criar\num retângulo de área maxima.\n\nVariaveis: largura x, comprimento y\nRestricao: 2x + 2y = 100  =>  y = 50 - x\n\nÁrea: A(x) = x*y = x*(50-x) = 50x - x^2\nDominio: 0 < x < 50\n\nA'(x) = 50 - 2x = 0  =>  x = 25\nA''(25) = -2 < 0  =>  MAXIMO!\n\nDimensoes otimas: 25m x 25m (quadrado)\nÁrea maxima: 625 m^2\n\nLicao: para perimetro fixo, o quadrado\nmaximiza a área!"
             },
             {
               "type": "callout",
               "kind": "info",
               "icon": "i",
-              "text": "Problemas de otimizacao sao o coracao da engenharia: projeto de pontes (minimizar material), transmissao de sinal (maximizar alcance), logistica (minimizar tempo/custo), design de algoritmos (minimizar operacoes)."
+              "text": "Problemas de otimização são o coracao da engenharia: projeto de pontes (minimizar material), transmissão de sinal (maximizar alcance), logistica (minimizar tempo/custo), design de algoritmos (minimizar operacoes)."
             }
           ]
         },
         {
           "type": "mcq",
-          "formula": "Lucro L(x) = -x^2 + 8x - 7\n(x = unidades produzidas)",
-          "stem": "L'(x) = -2x + 8 = 0. Qual e a quantidade que maximiza o lucro?",
+          "fórmula": "Lucro L(x) = -x^2 + 8x - 7\n(x = unidades produzidas)",
+          "stem": "L'(x) = -2x + 8 = 0. Qual é a quantidade que maximiza o lucro?",
           "opts": [
             "x = 2",
             "x = 4",
@@ -197,11 +197,11 @@
             "x = 8"
           ],
           "correct": 1,
-          "exp": "L'(x) = -2x+8 = 0 => x = 4. L''(4) = -2 < 0 confirma maximo. Lucro maximo: L(4) = -16+32-7 = 9."
+          "exp": "L'(x) = -2x+8 = 0 => x = 4. L''(4) = -2 < 0 confirma máximo. Lucro máximo: L(4) = -16+32-7 = 9."
         },
         {
           "type": "mcq",
-          "formula": "Custo: C(x) = x^2 - 6x + 15\n(x = quantidade)",
+          "fórmula": "Custo: C(x) = x^2 - 6x + 15\n(x = quantidade)",
           "stem": "C'(x) = 2x - 6 = 0. Qual quantidade minimiza o custo?",
           "opts": [
             "x = 2",
@@ -210,18 +210,18 @@
             "x = 15"
           ],
           "correct": 1,
-          "exp": "C'(x) = 2x-6 = 0 => x = 3. C''(3) = 2 > 0 confirma minimo. Custo minimo: C(3) = 9-18+15 = 6."
+          "exp": "C'(x) = 2x-6 = 0 => x = 3. C''(3) = 2 > 0 confirma mínimo. Custo mínimo: C(3) = 9-18+15 = 6."
         },
         {
           "type": "input",
-          "formula": "Retangulo com perimetro 60 m.\nLargura otima para area maxima?",
+          "fórmula": "Retângulo com perimetro 60 m.\nLargura otima para área maxima?",
           "stem": "2x + 2y = 60 => y = 30-x. A(x) = x(30-x). A'(x) = 30-2x = 0. Qual e x?",
           "correct": "15",
-          "exp": "A'(x) = 30-2x = 0 => x = 15 m. A area maxima e 15x15 = 225 m^2."
+          "exp": "A'(x) = 30-2x = 0 => x = 15 m. A área maxima e 15x15 = 225 m^2."
         },
         {
           "type": "mcq",
-          "formula": "Velocidade v(t) = -3t^2 + 12t\n(em m/s)",
+          "fórmula": "Velocidade v(t) = -3t^2 + 12t\n(em m/s)",
           "stem": "v'(t) = -6t + 12 = 0. Em qual instante a velocidade e maxima?",
           "opts": [
             "t = 1",

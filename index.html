@@ -215,7 +215,7 @@
       <div class="resume-row">
         <div class="resume-stat"><span class="rv c-orange" id="res-xp">0</span><span class="rl">XP Total</span></div>
         <div class="resume-stat"><span class="rv c-purple" id="res-coins">0</span><span class="rl">Moedas</span></div>
-        <div class="resume-stat"><span class="rv c-blue" id="res-lessons">0</span><span class="rl">Licoes</span></div>
+        <div class="resume-stat"><span class="rv c-blue" id="res-lessons">0</span><span class="rl">Lições</span></div>
       </div>
       <div class="resume-level-row">
         <span class="resume-level-name" id="res-level">Iniciante</span>
@@ -225,29 +225,29 @@
 
     <div class="hero-symbol">&#8706;</div>
     <h1 class="hero-title">Aprenda Calculo<br>do zero ao avancado</h1>
-    <p class="hero-sub">Licoes interativas com teoria, exercicios e feedback instantaneo. Ganhe XP, suba de nivel e desbloqueie temas.</p>
+    <p class="hero-sub">Lições interativas com teoria, exercícios e feedback instantâneo. Ganhe XP, suba de nível e desbloqueie temas.</p>
 
     <div class="hero-actions">
-      <a href="course.html" class="btn-hero btn-hero-primary" id="cta-btn">Comecar agora</a>
+      <a href="course.html" class="btn-hero btn-hero-primary" id="cta-btn">Começar agora</a>
       <a href="apostila.html" class="btn-hero btn-hero-secondary">Ver apostila</a>
     </div>
 
     <div class="stats-strip">
-      <div class="stat-chip"><span class="val">3</span><span class="lbl">Unidades</span></div>
-      <div class="stat-chip"><span class="val">10</span><span class="lbl">Licoes</span></div>
-      <div class="stat-chip"><span class="val">40+</span><span class="lbl">Exercicios</span></div>
+      <div class="stat-chip"><span class="val">7</span><span class="lbl">Módulos</span></div>
+      <div class="stat-chip"><span class="val">22</span><span class="lbl">Lições</span></div>
+      <div class="stat-chip"><span class="val">88</span><span class="lbl">Exercícios</span></div>
       <div class="stat-chip"><span class="val">8</span><span class="lbl">Temas</span></div>
     </div>
 
     <div class="features">
       <div class="feature-card">
         <div class="feature-icon">&#9632;</div>
-        <div class="feature-title">Licoes estruturadas</div>
-        <div class="feature-desc">Teoria com exemplos, depois exercicios multipla escolha e dissertativos.</div>
+        <div class="feature-title">Lições estruturadas</div>
+        <div class="feature-desc">Teoria com exemplos, depois exercícios de múltipla escolha e dissertativos.</div>
       </div>
       <div class="feature-card">
         <div class="feature-icon">&#9650;</div>
-        <div class="feature-title">Niveis e XP</div>
+        <div class="feature-title">Níveis e XP</div>
         <div class="feature-desc">Acumule XP, suba de Iniciante a Lenda e acompanhe seu progresso.</div>
       </div>
       <div class="feature-card">
@@ -258,7 +258,7 @@
       <div class="feature-card">
         <div class="feature-icon">&#8706;</div>
         <div class="feature-title">Apostila completa</div>
-        <div class="feature-desc">Todo o conteudo teorico reunido e imprimivel em um unico lugar.</div>
+        <div class="feature-desc">Todo o conteúdo teórico reunido e imprimível em um único lugar.</div>
       </div>
     </div>
 
@@ -316,23 +316,23 @@ refreshResume();
 // ── TUTORIAL ────────────────────────────
 const TUT_STEPS = [
   {
-    title: 'Bem-vindo ao Calculus!',
-    text: 'Este e seu app de aprendizado de Calculo. Vou mostrar como tudo funciona em poucos passos!',
+    title: 'Bem-vindo ao ∂ Calculus!',
+    text: 'Este é seu app de aprendizado de Cálculo. Vou mostrar como tudo funciona em poucos passos!',
     target: null
   },
   {
-    title: 'Barra de navegacao',
-    text: 'No topo ficam seu XP e suas moedas. No mobile, use o menu abaixo para navegar entre as paginas.',
+    title: 'Barra de navegação',
+    text: 'No topo ficam seu XP e suas moedas. No mobile, use o menu abaixo para navegar entre as páginas.',
     target: '.topbar-right'
   },
   {
-    title: 'Navegacao mobile',
-    text: 'Esta barra fica sempre visivel no celular. Use-a para ir ao Curso, Apostila e Loja rapidamente.',
+    title: 'Navegação mobile',
+    text: 'Esta barra fica sempre visível no celular. Use-a para ir ao Curso, Apostila e Loja rapidamente.',
     target: '.bottom-nav'
   },
   {
     title: 'Comece pelo Curso',
-    text: 'Acesse "Curso" para ver as licoes de Calculo. Complete-as em ordem para desbloquear novos topicos.',
+    text: 'Acesse "Curso" para ver as lições de Cálculo. Complete-as em ordem para desbloquear novos tópicos.',
     target: '#cta-btn'
   },
   {
@@ -347,7 +347,7 @@ const TUT_STEPS = [
   },
   {
     title: 'Tudo pronto!',
-    text: 'Agora e so estudar. Cada licao tem teoria, exemplos e exercicios. Bons estudos!',
+    text: 'Agora é só estudar. Cada lição tem teoria, exemplos e exercícios. Bons estudos!',
     target: null
   }
 ];
@@ -365,7 +365,7 @@ function renderTutStep() {
   const s = TUT_STEPS[tutIdx];
   document.getElementById('tut-title').textContent = s.title;
   document.getElementById('tut-text').textContent  = s.text;
-  document.getElementById('tut-next').textContent  = tutIdx < TUT_STEPS.length - 1 ? 'Proximo' : 'Comecar!';
+  document.getElementById('tut-next').textContent  = tutIdx < TUT_STEPS.length - 1 ? 'Próximo' : 'Começar!';
 
   // dots
   document.getElementById('tut-dots').innerHTML = TUT_STEPS.map((_, i) =>
