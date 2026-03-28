@@ -1,177 +1,328 @@
 {
   "id": "u2",
-  "emoji": "📈",
+  "emoji": "derivadas",
   "title": "Derivadas",
-  "desc": "Taxas de variação instantânea",
+  "desc": "Taxas de variacao instantanea e retas tangentes",
   "lessons": [
     {
       "id": "u2l1",
-      "title": "Definição de Derivada",
+      "title": "Definicao de Derivada",
       "steps": [
         {
           "type": "theory",
-          "title": "O que é uma Derivada?",
+          "title": "O que e uma Derivada?",
           "blocks": [
             {
               "type": "para",
-              "heading": "Taxa de variação instantânea",
-              "text": "A derivada de f em x = a representa a <strong>taxa de variação instantânea</strong> de f naquele ponto — geometricamente, é a inclinação da reta tangente ao gráfico."
+              "heading": "Intuicao: velocidade instantanea",
+              "text": "Imagine um carro cujo velocimetro marca 80 km/h. Isso e uma <strong>taxa de variacao instantanea</strong> — quanto a posicao muda <em>naquele exato momento</em>. A derivada formaliza exatamente essa ideia para qualquer funcao."
             },
-            { "type": "formula", "text": "f'(a) = lim  [f(a+h) − f(a)] / h\n        h→0\n\n(Definição por limite — \"taxa média quando h→0\")" },
-            {
-              "type": "para",
-              "heading": "Notações",
-              "text": "Existem várias notações para derivada, todas equivalentes:"
-            },
-            { "type": "formula", "text": "f'(x)   (Lagrange)\ndf/dx   (Leibniz)\nDf(x)   (Euler)\ny'      (quando y = f(x))" },
             {
               "type": "callout",
               "kind": "info",
-              "icon": "📌",
-              "text": "Se f(x) representa posição no tempo, f'(x) é a velocidade. Se f(x) é velocidade, f'(x) é a aceleração."
+              "icon": "i",
+              "text": "A derivada responde: 'qual e a taxa de variacao desta funcao neste instante especifico?' Isso serve para velocidade, crescimento de populacoes, corrente eletrica, taxa de reacao quimica — qualquer grandeza que mude com o tempo."
+            },
+            {
+              "type": "formula",
+              "text": "Definicao por limite (taxa media -> taxa instantanea):\n\nf'(a) = lim [f(a+h) - f(a)] / h\n        h->0\n\nNotacoes equivalentes:\n  f'(x)   Lagrange\n  df/dx   Leibniz\n  y'      quando y = f(x)\n  Df(x)   Euler"
+            },
+            {
+              "type": "example",
+              "label": "Calculando f'(x) para f(x) = x^2 pela definicao",
+              "body": "f'(x) = lim [(x+h)^2 - x^2] / h\n        h->0\n\n= lim [x^2 + 2xh + h^2 - x^2] / h\n  h->0\n\n= lim [2xh + h^2] / h\n  h->0\n\n= lim [2x + h] = 2x\n  h->0\n\nPortanto: se f(x) = x^2, entao f'(x) = 2x"
+            },
+            {
+              "type": "callout",
+              "kind": "tip",
+              "icon": "v",
+              "text": "Interpretacao geometrica: f'(a) e a inclinacao da reta tangente ao grafico de f no ponto (a, f(a)). Se f'(a) > 0, a funcao cresce; se f'(a) < 0, decresce; se f'(a) = 0, ha um ponto critico."
             }
           ]
         },
         {
           "type": "mcq",
-          "formula": "f(x) = x²\nCalcule f'(x) pela definição",
-          "stem": "Usando a definição: [f(x+h) − f(x)] / h = [(x+h)² − x²] / h. Expanda e simplifique para h→0.",
-          "opts": ["x", "2x", "2x + h", "x²"],
+          "formula": "f(x) = x^2\nf'(x) = ?",
+          "stem": "Pela definicao calculada no exemplo, f'(x) = 2x. Qual e o valor de f'(5)?",
+          "opts": [
+            "5",
+            "10",
+            "15",
+            "25"
+          ],
           "correct": 1,
-          "exp": "[(x²+2xh+h²) − x²]/h = (2xh+h²)/h = 2x+h → quando h→0: f'(x) = 2x ✓"
+          "exp": "f'(5) = 2(5) = 10. A inclinacao da tangente de x^2 no ponto x=5 e 10."
         },
         {
           "type": "mcq",
-          "formula": "f(x) = c  (constante)",
-          "stem": "Qual é a derivada de uma função constante? Use a definição: [c − c]/h = 0/h.",
-          "opts": ["c", "1", "0", "x"],
+          "formula": "f(x) = 7 (constante)",
+          "stem": "Qual e a derivada de uma funcao constante? Pense: o grafico e uma reta horizontal — qual sua inclinacao?",
+          "opts": [
+            "7",
+            "1",
+            "0",
+            "indefinido"
+          ],
           "correct": 2,
-          "exp": "Uma constante não varia — sua taxa de variação é sempre zero. f'(x) = 0."
+          "exp": "f'(x) = 0. Uma constante nao varia — sua taxa de variacao e sempre zero."
         },
         {
           "type": "input",
-          "formula": "f(x) = x³\nf'(x) = ?  (use a regra: d/dx xⁿ = n·xⁿ⁻¹)",
-          "stem": "A regra da potência diz: d/dx xⁿ = n·xⁿ⁻¹. Aplique para n = 3. Digite apenas o coeficiente numérico (ex: se for 5x², digite 5).",
+          "formula": "f(x) = x^3\nCoeficiente de f'(x)?",
+          "stem": "Pela regra d/dx(x^n) = n*x^(n-1), com n=3. Digite apenas o coeficiente numerico.",
           "correct": "3",
-          "exp": "d/dx x³ = 3x². O coeficiente é 3."
+          "exp": "d/dx(x^3) = 3x^2. Coeficiente = 3."
         },
         {
           "type": "mcq",
-          "formula": "f(x) = 5x⁴ − 3x² + 7x − 2",
-          "stem": "Derive cada termo separadamente usando a regra da potência e a linearidade da derivada.",
-          "opts": ["20x³ − 6x + 7", "20x³ − 6x", "5x³ − 3x + 7", "20x⁴ − 6x² + 7"],
+          "formula": "f(x) = 4x^3 - 2x + 1",
+          "stem": "Derive cada termo separadamente. d/dx(4x^3) = 12x^2, d/dx(-2x) = -2, d/dx(1) = 0.",
+          "opts": [
+            "12x^2 - 2",
+            "4x^2 - 2",
+            "12x^3 - 2x",
+            "12x^2 - 2x"
+          ],
           "correct": 0,
-          "exp": "d/dx(5x⁴) = 20x³, d/dx(−3x²) = −6x, d/dx(7x) = 7, d/dx(−2) = 0. Total: 20x³ − 6x + 7."
+          "exp": "f'(x) = 12x^2 - 2. A derivada de uma soma e a soma das derivadas (linearidade)."
         }
       ]
     },
     {
       "id": "u2l2",
-      "title": "Regras de Derivação",
+      "title": "Regras de Derivacao",
       "steps": [
         {
           "type": "theory",
-          "title": "Regras Principais de Derivação",
+          "title": "As quatro regras fundamentais",
           "blocks": [
-            { "type": "formula", "text": "Regra da Potência:   d/dx xⁿ = n·xⁿ⁻¹\n\nRegra do Produto:   d/dx [f·g] = f'·g + f·g'\n\nRegra do Quociente: d/dx [f/g] = (f'·g − f·g') / g²\n\nRegra da Cadeia:    d/dx [f(g(x))] = f'(g(x))·g'(x)" },
             {
-              "type": "para",
-              "heading": "Derivadas de funções especiais",
-              "text": "Algumas derivadas fundamentais devem ser memorizadas:"
+              "type": "formula",
+              "text": "Regra da Potencia:   d/dx x^n = n*x^(n-1)\n\nRegra do Produto:    d/dx [f*g] = f'*g + f*g'\n\nRegra do Quociente:  d/dx [f/g] = (f'*g - f*g') / g^2\n\nRegra da Cadeia:     d/dx [f(g(x))] = f'(g(x)) * g'(x)"
             },
-            { "type": "formula", "text": "d/dx sin(x)  =  cos(x)\nd/dx cos(x)  = −sin(x)\nd/dx eˣ      =  eˣ\nd/dx ln(x)   =  1/x\nd/dx tg(x)   =  sec²(x)" },
+            {
+              "type": "formula",
+              "text": "Derivadas fundamentais:\n  d/dx sin(x)  =  cos(x)\n  d/dx cos(x)  = -sin(x)\n  d/dx e^x     =  e^x\n  d/dx ln(x)   =  1/x\n  d/dx tan(x)  =  sec^2(x)"
+            },
             {
               "type": "callout",
               "kind": "tip",
-              "icon": "🎯",
-              "text": "A Regra da Cadeia é a mais usada no Cálculo avançado. Pense: \"derivada de fora × derivada de dentro\"."
+              "icon": "v",
+              "text": "Regra da Cadeia em palavras: 'derivada da funcao de fora avaliada dentro, vezes derivada da funcao de dentro'. Ex: d/dx sin(x^2) = cos(x^2) * 2x"
+            },
+            {
+              "type": "example",
+              "label": "Regra do produto: d/dx [x^2 * sin(x)]",
+              "body": "f = x^2   =>  f' = 2x\ng = sin(x) =>  g' = cos(x)\n\nd/dx [f*g] = f'*g + f*g'\n           = 2x*sin(x) + x^2*cos(x)"
+            },
+            {
+              "type": "example",
+              "label": "Regra da cadeia: d/dx sin(3x^2)",
+              "body": "Funcao de fora: sin(u), derivada = cos(u)\nFuncao de dentro: u = 3x^2, derivada = 6x\n\nd/dx sin(3x^2) = cos(3x^2) * 6x = 6x*cos(3x^2)"
             }
           ]
         },
         {
           "type": "mcq",
-          "formula": "d/dx [x² · sin(x)]",
-          "stem": "Use a Regra do Produto: d/dx[f·g] = f'g + fg'. Aqui f = x² e g = sin(x).",
-          "opts": ["2x · cos(x)", "x² · cos(x)", "2x·sin(x) + x²·cos(x)", "2x·cos(x) − x²·sin(x)"],
-          "correct": 2,
-          "exp": "f'=2x, g'=cos(x). Produto: (2x)·sin(x) + x²·cos(x) = 2x·sin(x) + x²·cos(x)"
+          "formula": "d/dx [x^3 * cos(x)]",
+          "stem": "Use a regra do produto: f=x^3, g=cos(x). Entao f'=3x^2 e g'=-sin(x).",
+          "opts": [
+            "3x^2 * (-sin(x))",
+            "3x^2*cos(x) - x^3*sin(x)",
+            "3x^2*cos(x) + x^3*sin(x)",
+            "x^3*(-sin(x))"
+          ],
+          "correct": 1,
+          "exp": "f'g + fg' = 3x^2*cos(x) + x^3*(-sin(x)) = 3x^2*cos(x) - x^3*sin(x)"
         },
         {
           "type": "mcq",
-          "formula": "d/dx [eˣ / x]",
-          "stem": "Use a Regra do Quociente: (f'g − fg') / g². Aqui f = eˣ, g = x.",
-          "opts": ["eˣ/x − eˣ/x²", "eˣ · (1 − 1/x) / x", "(eˣ·x − eˣ) / x²", "eˣ/x²"],
-          "correct": 2,
-          "exp": "f'=eˣ, g'=1. Quociente: (eˣ·x − eˣ·1)/x² = eˣ(x−1)/x²"
+          "formula": "d/dx [e^x / x]",
+          "stem": "Regra do quociente: f=e^x, g=x. f'=e^x, g'=1.",
+          "opts": [
+            "e^x/x",
+            "e^x*(x-1)/x^2",
+            "e^x/x^2",
+            "(e^x*x + e^x)/x^2"
+          ],
+          "correct": 1,
+          "exp": "(f'g - fg')/g^2 = (e^x*x - e^x*1)/x^2 = e^x*(x-1)/x^2"
         },
         {
           "type": "mcq",
-          "formula": "d/dx sin(x²)",
-          "stem": "Use a Regra da Cadeia. \"Fora\" = sin(u), \"dentro\" = u = x².",
-          "opts": ["cos(x²)", "2x·cos(x)", "2x·cos(x²)", "sin(2x)"],
-          "correct": 2,
-          "exp": "d/du sin(u) = cos(u). d/dx x² = 2x. Cadeia: cos(x²)·2x = 2x·cos(x²)"
+          "formula": "d/dx cos(x^2 + 1)",
+          "stem": "Regra da cadeia. Fora: cos(u), dentro: u = x^2+1. Derive cada parte.",
+          "opts": [
+            "sin(x^2+1)",
+            "2x*cos(x^2+1)",
+            "-sin(x^2+1)",
+            "-(2x)*sin(x^2+1)"
+          ],
+          "correct": 3,
+          "exp": "d/du cos(u) = -sin(u). d/dx (x^2+1) = 2x. Resultado: -sin(x^2+1)*2x = -2x*sin(x^2+1)"
         },
         {
           "type": "input",
-          "formula": "d/dx [3x⁵ − 2x³ + x]\nem  x = 1",
-          "stem": "Calcule a derivada e substitua x = 1. Derivada: 15x⁴ − 6x² + 1. Quanto vale em x = 1?",
-          "correct": "10",
-          "exp": "15(1) − 6(1) + 1 = 15 − 6 + 1 = 10"
+          "formula": "d/dx [2x^5 - 3x^2 + x]  em  x = 1",
+          "stem": "Derivada: 10x^4 - 6x + 1. Substitua x = 1.",
+          "correct": "5",
+          "exp": "10(1) - 6(1) + 1 = 10 - 6 + 1 = 5."
         }
       ]
     },
     {
       "id": "u2l3",
-      "title": "Máximos e Mínimos",
+      "title": "Aplicacoes: Velocidade e Crescimento",
       "steps": [
         {
           "type": "theory",
-          "title": "Encontrando Máximos e Mínimos",
+          "title": "Derivada como taxa de variacao real",
           "blocks": [
             {
               "type": "para",
-              "heading": "Pontos críticos",
-              "text": "Um <strong>ponto crítico</strong> ocorre onde f'(x) = 0 ou f'(x) não existe. Nesses pontos pode haver máximo local, mínimo local ou ponto de inflexão."
+              "heading": "Posicao, velocidade e aceleracao",
+              "text": "Se s(t) e a posicao de um objeto em funcao do tempo, entao a <strong>velocidade instantanea</strong> e v(t) = s'(t) e a <strong>aceleracao</strong> e a(t) = v'(t) = s''(t). Esta e a conexao entre Calculo e Fisica."
             },
-            { "type": "formula", "text": "Teste da Segunda Derivada:\n\nSe f'(a) = 0, calcule f''(a):\n• f''(a) > 0  →  mínimo local em x = a\n• f''(a) < 0  →  máximo local em x = a\n• f''(a) = 0  →  inconclusivo (use outro teste)" },
+            {
+              "type": "formula",
+              "text": "s(t) = posicao (metros, km...)\nv(t) = s'(t) = velocidade (m/s, km/h...)\na(t) = v'(t) = s''(t) = aceleracao (m/s^2...)\n\nEx: s(t) = 5t^2 + 2t\n  v(t) = 10t + 2\n  a(t) = 10  (constante!)"
+            },
             {
               "type": "example",
-              "label": "Exemplo: f(x) = x³ − 3x",
-              "body": "1. f'(x) = 3x² − 3 = 0  →  x² = 1  →  x = ±1\n\n2. f''(x) = 6x\n   f''(1)  =  6 > 0  →  mínimo em x = 1\n   f''(−1) = −6 < 0  →  máximo em x = −1\n\n3. Valores: f(1) = −2 (mínimo), f(−1) = 2 (máximo)"
+              "label": "Um carro com s(t) = t^3 - 6t^2 + 9t metros",
+              "body": "Velocidade: v(t) = s'(t) = 3t^2 - 12t + 9\nAceleracao: a(t) = v'(t) = 6t - 12\n\nVelocidade em t=1:\n  v(1) = 3 - 12 + 9 = 0\n  (carro momentaneamente parado!)\n\nVelocidade em t=3:\n  v(3) = 27 - 36 + 9 = 0\n  (outro instante de repouso)\n\nAceleracao em t=1:\n  a(1) = 6 - 12 = -6 m/s^2 (desacelerando)"
+            },
+            {
+              "type": "callout",
+              "kind": "info",
+              "icon": "i",
+              "text": "Aplicacao em engenharia: em robotica e controle, voce precisa calcular velocidade e aceleracao a partir de sensores de posicao. A derivada e o algoritmo central nesses sistemas."
             }
           ]
         },
         {
           "type": "mcq",
-          "formula": "f(x) = x² − 6x + 8",
-          "stem": "Para encontrar os pontos críticos, resolva f'(x) = 0. Qual é o ponto crítico desta parábola?",
-          "opts": ["x = 2", "x = 3", "x = 4", "x = 6"],
+          "formula": "s(t) = 3t^2 - 2t + 1\nv(t) = s'(t) = ?",
+          "stem": "Derive s(t) para obter a velocidade instantanea.",
+          "opts": [
+            "3t - 2",
+            "6t - 2",
+            "6t^2 - 2",
+            "3t^2 - 2"
+          ],
           "correct": 1,
-          "exp": "f'(x) = 2x − 6 = 0 → 2x = 6 → x = 3. Este é o vértice da parábola."
-        },
-        {
-          "type": "mcq",
-          "formula": "f(x) = x² − 6x + 8\nf''(x) = 2",
-          "stem": "Sabendo que x = 3 é ponto crítico e f''(3) = 2 > 0, o que isso indica?",
-          "opts": ["Máximo local", "Mínimo local", "Ponto de inflexão", "Inconclusivo"],
-          "correct": 1,
-          "exp": "f''(3) = 2 > 0 → a concavidade é para cima → mínimo local em x = 3. f(3) = 9 − 18 + 8 = −1."
+          "exp": "s'(t) = 6t - 2."
         },
         {
           "type": "input",
-          "formula": "f(x) = −x² + 4x − 1",
-          "stem": "Encontre o ponto crítico (onde f'(x) = 0) e calcule o valor máximo de f. Digite o valor máximo.",
-          "correct": "3",
-          "exp": "f'(x) = −2x + 4 = 0 → x = 2. f(2) = −4 + 8 − 1 = 3. Como f''(x) = −2 < 0, é máximo local."
+          "formula": "s(t) = 4t^2 + 3t\nVelocidade em t = 2?",
+          "stem": "Primeiro derive s(t) para obter v(t) = 8t + 3. Depois calcule v(2).",
+          "correct": "19",
+          "exp": "v(t) = 8t + 3. v(2) = 16 + 3 = 19 m/s."
         },
         {
           "type": "mcq",
-          "formula": "f(x) = x³",
-          "stem": "f'(x) = 3x² = 0 em x = 0. f''(0) = 0 (inconclusivo). O que é x = 0 para esta função?",
-          "opts": ["Máximo local", "Mínimo local", "Ponto de inflexão", "Descontinuidade"],
+          "formula": "s(t) = t^3 - 3t\nEm qual instante v(t) = 0?",
+          "stem": "v(t) = s'(t) = 3t^2 - 3. Iguale a zero: 3t^2 - 3 = 0.",
+          "opts": [
+            "t = 0",
+            "t = 1",
+            "t = 3",
+            "t = 1 e t = -1"
+          ],
+          "correct": 3,
+          "exp": "3t^2 = 3, t^2 = 1, t = +/-1. Nos dois instantes a velocidade e zero (objeto em repouso)."
+        },
+        {
+          "type": "mcq",
+          "formula": "P(t) = 1000 * 2^t bacterias\nQual e a taxa de crescimento P'(t)?",
+          "stem": "Derivada de a^t = a^t * ln(a). Aqui a = 2.",
+          "opts": [
+            "1000 * t * 2^(t-1)",
+            "1000 * 2^t * ln(2)",
+            "2000^t",
+            "1000 * ln(2)"
+          ],
+          "correct": 1,
+          "exp": "P'(t) = 1000 * 2^t * ln(2). A taxa de crescimento e proporcional a populacao atual — caracteristica do crescimento exponencial."
+        }
+      ]
+    },
+    {
+      "id": "u2l4",
+      "title": "Maximos, Minimos e Otimizacao",
+      "steps": [
+        {
+          "type": "theory",
+          "title": "Encontrando os melhores valores",
+          "blocks": [
+            {
+              "type": "para",
+              "heading": "Por que otimizar?",
+              "text": "A maioria dos problemas de engenharia e economia envolve encontrar o <strong>melhor valor</strong>: maximar lucro, minimizar custo, encontrar o angulo otimo de um lancamento, a dimensao ideal de uma embalagem. A derivada e a ferramenta central para resolver todos esses problemas."
+            },
+            {
+              "type": "formula",
+              "text": "Algoritmo de otimizacao:\n\n1. Encontre pontos criticos:\n   f'(x) = 0  ou  f'(x) indefinida\n\n2. Teste da 2a derivada:\n   f''(a) > 0  =>  minimo local em x=a\n   f''(a) < 0  =>  maximo local em x=a\n   f''(a) = 0  =>  inconclusivo\n\n3. Verifique as extremidades do dominio\n   para maximo/minimo global."
+            },
+            {
+              "type": "example",
+              "label": "Otimizacao: caixa de volume maximo",
+              "body": "Problema: uma folha de papelao 10x10 cm.\nCorte quadrados de lado x nos cantos.\nDobrar forma uma caixa sem tampa.\n\nVolume: V(x) = x*(10-2x)^2\n\nDerivar: V'(x) = (10-2x)^2 + x*2*(10-2x)*(-2)\n       = (10-2x)[(10-2x) - 4x]\n       = (10-2x)(10-6x)\n\nV'(x) = 0  =>  x = 5 ou x = 5/3\n(x = 5 invalido pois a caixa nao teria base)\n\nV''(5/3) < 0  =>  MAXIMO em x = 5/3 cm\n\nVolume maximo: V(5/3) = 5/3 * (20/3)^2 = 2000/27 ~= 74 cm^3"
+            },
+            {
+              "type": "callout",
+              "kind": "tip",
+              "icon": "v",
+              "text": "Em problemas de otimizacao: (1) defina a variavel, (2) expresse a funcao objetivo, (3) encontre o dominio valido, (4) derive e iguale a zero, (5) confirme com a 2a derivada."
+            }
+          ]
+        },
+        {
+          "type": "mcq",
+          "formula": "f(x) = x^2 - 6x + 8",
+          "stem": "f'(x) = 2x - 6 = 0 => x = 3. f''(x) = 2 > 0. O que isso indica?",
+          "opts": [
+            "Maximo em x=3",
+            "Minimo em x=3",
+            "Ponto de inflexao em x=3",
+            "Nada conclusivo"
+          ],
+          "correct": 1,
+          "exp": "f''(3) = 2 > 0 => concavidade para cima => MINIMO local em x = 3. f(3) = 9-18+8 = -1."
+        },
+        {
+          "type": "mcq",
+          "formula": "g(x) = -x^2 + 4x - 1",
+          "stem": "g'(x) = -2x + 4 = 0 => x = 2. g''(x) = -2. Qual e o valor maximo?",
+          "opts": [
+            "1",
+            "2",
+            "3",
+            "4"
+          ],
           "correct": 2,
-          "exp": "x = 0 é um ponto de inflexão de f(x) = x³. A função não tem máximo nem mínimo local — ela cresce para sempre."
+          "exp": "g''(2) = -2 < 0 => MAXIMO. g(2) = -4+8-1 = 3."
+        },
+        {
+          "type": "input",
+          "formula": "h(x) = x^3 - 3x^2\nPonto critico para x > 0?",
+          "stem": "h'(x) = 3x^2 - 6x = 3x(x-2) = 0. Os pontos criticos sao x=0 e x=2. Digite o positivo.",
+          "correct": "2",
+          "exp": "h'(x) = 3x(x-2) = 0 => x=0 ou x=2. O ponto critico positivo e x=2."
+        },
+        {
+          "type": "mcq",
+          "formula": "h(x) = x^3 - 3x^2 (continuacao)\nh''(x) = 6x - 6. Em x = 2:",
+          "stem": "Calcule h''(2) e determine se x=2 e maximo ou minimo.",
+          "opts": [
+            "Maximo, h''(2) = -6",
+            "Minimo, h''(2) = 6",
+            "Inconclusivo, h''(2) = 0",
+            "Maximo, h''(2) = 6"
+          ],
+          "correct": 1,
+          "exp": "h''(2) = 6(2)-6 = 6 > 0 => MINIMO local em x=2. h(2) = 8-12 = -4."
         }
       ]
     }

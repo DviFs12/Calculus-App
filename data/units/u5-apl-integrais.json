@@ -1,0 +1,158 @@
+{
+  "id": "u5",
+  "emoji": "apl-integrais",
+  "title": "Aplic. de Integrais",
+  "desc": "Areas, volumes e aplicacoes fisicas",
+  "lessons": [
+    {
+      "id": "u5l1",
+      "title": "Area entre Curvas",
+      "steps": [
+        {
+          "type": "theory",
+          "title": "Area entre duas funcoes",
+          "blocks": [
+            {
+              "type": "para",
+              "heading": "Alem da area sob uma curva",
+              "text": "Muitas vezes precisamos calcular a area entre <strong>duas</strong> curvas. A ideia e simples: subtraia a funcao de baixo da de cima e integre. A area entre f(x) e g(x) onde f >= g no intervalo [a,b] e Int[a,b] [f(x) - g(x)] dx."
+            },
+            {
+              "type": "formula",
+              "text": "Area entre f (cima) e g (baixo):\n\nA = Int[a,b] [f(x) - g(x)] dx\n\nPasso a passo:\n1. Encontre onde as curvas se cruzam\n   (resolva f(x) = g(x) para achar a e b)\n2. Determine qual funcao esta acima\n3. Integre a diferenca"
+            },
+            {
+              "type": "example",
+              "label": "Area entre f(x) = x e g(x) = x^2",
+              "body": "Passo 1: Encontrar intersecoes:\n  x = x^2  =>  x^2 - x = 0  =>  x(x-1) = 0\n  x = 0  e  x = 1\n\nPasso 2: Em [0,1], x >= x^2 (f esta acima)\n\nPasso 3: Integrar:\n  A = Int[0,1] (x - x^2) dx\n    = [x^2/2 - x^3/3] de 0 a 1\n    = (1/2 - 1/3) - 0\n    = 1/6 unidades^2"
+            }
+          ]
+        },
+        {
+          "type": "mcq",
+          "formula": "Area entre f(x) = 4 e g(x) = x^2 em [-2,2]",
+          "stem": "f(x) = 4 esta acima de g(x) = x^2 no intervalo. Calcule Int[-2,2] (4 - x^2) dx. F(x) = 4x - x^3/3.",
+          "opts": [
+            "16/3",
+            "32/3",
+            "8",
+            "4"
+          ],
+          "correct": 1,
+          "exp": "[4x - x^3/3] de -2 a 2 = (8-8/3) - (-8+8/3) = 16 - 16/3 = 32/3 ≈ 10.67"
+        },
+        {
+          "type": "mcq",
+          "formula": "As curvas f(x)=x+2 e g(x)=x^2\nse cruzam em x=? ",
+          "stem": "Resolva x^2 = x + 2, ou seja x^2 - x - 2 = 0.",
+          "opts": [
+            "x=-1 e x=2",
+            "x=0 e x=1",
+            "x=1 e x=2",
+            "x=-2 e x=1"
+          ],
+          "correct": 0,
+          "exp": "x^2-x-2 = (x-2)(x+1) = 0 => x = 2 e x = -1."
+        },
+        {
+          "type": "input",
+          "formula": "Area entre y=3 e y=x^2 em [-1,1]",
+          "stem": "A = Int[-1,1](3-x^2)dx. F(x)=3x-x^3/3. F(1)-F(-1) = (3-1/3) - (-3+1/3) = ?",
+          "correct": "16/3",
+          "exp": "(3-1/3)-(-3+1/3) = 8/3 + 8/3 = 16/3."
+        },
+        {
+          "type": "mcq",
+          "formula": "Qual representa a area ENTRE duas curvas?",
+          "stem": "Escolha a expressao correta para area entre f(acima) e g(abaixo) em [a,b].",
+          "opts": [
+            "Int[a,b] f(x) dx",
+            "Int[a,b] g(x) dx",
+            "Int[a,b] [f(x) - g(x)] dx",
+            "Int[a,b] [f(x) + g(x)] dx"
+          ],
+          "correct": 2,
+          "exp": "Area entre curvas = integral da diferenca (funcao de cima menos funcao de baixo)."
+        }
+      ]
+    },
+    {
+      "id": "u5l2",
+      "title": "Aplicacoes Fisicas",
+      "steps": [
+        {
+          "type": "theory",
+          "title": "Integrais em fisica e engenharia",
+          "blocks": [
+            {
+              "type": "para",
+              "heading": "Trabalho e deslocamento",
+              "text": "Em fisica, o <strong>trabalho</strong> realizado por uma forca F(x) variavel ao deslocar um objeto de a ate b e W = Int[a,b] F(x) dx. O <strong>deslocamento</strong> a partir da velocidade e d = Int[a,b] v(t) dt. A integral e a ferramenta que transforma taxas de variacao em quantidades acumuladas."
+            },
+            {
+              "type": "formula",
+              "text": "Deslocamento (posicao final - inicial):\n  s = Int[a,b] v(t) dt\n\nDistancia total (caminho percorrido):\n  d = Int[a,b] |v(t)| dt\n\nTrabalho de forca variavel F(x):\n  W = Int[a,b] F(x) dx\n\nValor medio de f em [a,b]:\n  f_med = (1/(b-a)) * Int[a,b] f(x) dx"
+            },
+            {
+              "type": "example",
+              "label": "Deslocamento com v(t) = 3t^2 - 6t (em m/s)",
+              "body": "Deslocamento de t=0 a t=3:\n\ns = Int[0,3] (3t^2 - 6t) dt\n  = [t^3 - 3t^2] de 0 a 3\n  = (27 - 27) - 0\n  = 0 metros\n\nO objeto voltou ao ponto de partida!\n\nMas a distancia TOTAL nao e zero —\ne preciso considerar o valor absoluto\nda velocidade, separando os intervalos."
+            },
+            {
+              "type": "callout",
+              "kind": "info",
+              "icon": "i",
+              "text": "Em engenharia eletrica, a carga acumulada num capacitor e Q = Int I(t) dt, onde I(t) e a corrente. Em termica, a energia acumulada e E = Int P(t) dt. A integral e a operacao universal de acumulacao."
+            }
+          ]
+        },
+        {
+          "type": "mcq",
+          "formula": "v(t) = 2t + 1  (m/s)\nDeslocamento em [0, 3]?",
+          "stem": "Integre: Int[0,3] (2t+1) dt. F(t) = t^2 + t. F(3) - F(0) = ?",
+          "opts": [
+            "9",
+            "10",
+            "12",
+            "15"
+          ],
+          "correct": 2,
+          "exp": "F(3) = 9+3 = 12. F(0) = 0. Deslocamento = 12 metros."
+        },
+        {
+          "type": "mcq",
+          "formula": "v(t) = 6t^2 m/s\nDeslocamento em [1,3]?",
+          "stem": "F(t) = 2t^3. F(3) - F(1) = ?",
+          "opts": [
+            "18",
+            "50",
+            "52",
+            "54"
+          ],
+          "correct": 2,
+          "exp": "F(3) = 2(27) = 54. F(1) = 2(1) = 2. 54 - 2 = 52 metros."
+        },
+        {
+          "type": "input",
+          "formula": "Valor medio de f(x) = 2x em [0,4]",
+          "stem": "f_med = (1/4) * Int[0,4] 2x dx. Antiderivada: x^2. Calcule (1/4)*(16-0).",
+          "correct": "4",
+          "exp": "(1/4)*[x^2] de 0 a 4 = (1/4)*16 = 4."
+        },
+        {
+          "type": "mcq",
+          "formula": "F(x) = 3 N (forca constante)\nTrabalho em [0, 5]?",
+          "stem": "W = Int[0,5] 3 dx. Para forca constante, trabalho = forca x distancia.",
+          "opts": [
+            "3",
+            "5",
+            "8",
+            "15"
+          ],
+          "correct": 3,
+          "exp": "W = [3x] de 0 a 5 = 15 - 0 = 15 J."
+        }
+      ]
+    }
+  ]
+}

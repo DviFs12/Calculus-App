@@ -186,13 +186,13 @@ function buildGrid() {
 }
 
 function buyTheme(id, price) {
-  if ((STATE.coins||0) < price) { showToast('&#10007;', 'Moedas insuficientes!'); return; }
+  if ((STATE.coins||0) < price) { showToast('✗', 'Moedas insuficientes!'); return; }
   STATE.coins -= price;
   if (!STATE.ownedThemes) STATE.ownedThemes = ['light','dark'];
   STATE.ownedThemes.push(id);
   saveState(STATE);
   refresh();
-  showToast('&#9733;', 'Tema desbloqueado!');
+  showToast('★', 'Tema desbloqueado!');
 }
 
 function applyThemeAndSave(id) {
@@ -200,7 +200,7 @@ function applyThemeAndSave(id) {
   saveState(STATE);
   applyTheme(id);
   refresh();
-  showToast('&#10003;', 'Tema aplicado!');
+  showToast('✓', 'Tema aplicado!');
 }
 
 refresh();

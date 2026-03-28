@@ -95,8 +95,8 @@ let _toastTimer;
 function showToast(icon, text) {
   const t = document.getElementById('toast');
   if (!t) return;
-  document.getElementById('toast-icon').textContent = icon;
-  document.getElementById('toast-text').textContent = text;
+  document.getElementById('toast-icon').innerHTML = icon;
+  document.getElementById('toast-text').innerHTML = text;
   t.classList.add('show');
   clearTimeout(_toastTimer);
   _toastTimer = setTimeout(() => t.classList.remove('show'), 2600);

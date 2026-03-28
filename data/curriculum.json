@@ -1,10 +1,14 @@
 {
-  "version": "3.0",
+  "version": "4.0",
   "title": "∂ Calculus",
-  "subtitle": "Aprenda Cálculo do zero ao avançado",
+  "subtitle": "Aprenda Calculo do zero ao avancado",
   "units": [
+    "u0-fundamentos.json",
     "u1-limites.json",
     "u2-derivadas.json",
-    "u3-integrais.json"
+    "u3-apl-derivadas.json",
+    "u4-integrais.json",
+    "u5-apl-integrais.json",
+    "u6-tecnicas.json"
   ]
 }

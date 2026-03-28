@@ -1,0 +1,232 @@
+{
+  "id": "u0",
+  "emoji": "fundamentos",
+  "title": "Fundamentos",
+  "desc": "Pre-Calculo: funcoes, graficos e algebra",
+  "lessons": [
+    {
+      "id": "u0l1",
+      "title": "O que e uma Funcao?",
+      "steps": [
+        {
+          "type": "theory",
+          "title": "Funcoes: a linguagem do Calculo",
+          "blocks": [
+            {
+              "type": "para",
+              "heading": "Intuicao",
+              "text": "Imagine uma maquina: voce coloca um numero, ela processa e devolve outro numero. Isso e uma <strong>funcao</strong>. Cada entrada produz exatamente uma saida — sem ambiguidade."
+            },
+            {
+              "type": "callout",
+              "kind": "info",
+              "icon": "i",
+              "text": "Analogia do dia a dia: o termometro e uma funcao. Para cada temperatura real (entrada), ele mostra exatamente um valor em graus (saida)."
+            },
+            {
+              "type": "para",
+              "heading": "Definicao formal",
+              "text": "Uma funcao <strong>f</strong> e uma regra que associa cada elemento x de um conjunto (o <strong>dominio</strong>) a exatamente um elemento f(x) de outro conjunto (o <strong>contradominio</strong>). Escrevemos: <strong>f: A → B</strong>, lido 'f de A em B'."
+            },
+            {
+              "type": "formula",
+              "text": "f(x) = expressao envolvendo x\n\nExemplos:\n  f(x) = 2x + 3      (funcao linear)\n  g(x) = x^2         (funcao quadratica)\n  h(x) = sqrt(x)     (funcao raiz quadrada)\n\nNotacao: f(x) le-se 'f de x'"
+            },
+            {
+              "type": "para",
+              "heading": "Dominio e Imagem",
+              "text": "O <strong>dominio</strong> e o conjunto de todas as entradas validas (onde a funcao faz sentido). A <strong>imagem</strong> e o conjunto de todos os valores que a funcao realmente assume. Por exemplo, para f(x) = sqrt(x), o dominio e x >= 0, pois nao existe raiz de numero negativo nos reais."
+            },
+            {
+              "type": "example",
+              "label": "Calculando f(x) = 3x - 1",
+              "body": "f(2)  = 3(2) - 1 = 6 - 1 = 5\nf(0)  = 3(0) - 1 = 0 - 1 = -1\nf(-3) = 3(-3) - 1 = -9 - 1 = -10\n\nInterpretacao: quando x = 2, a saida e 5."
+            },
+            {
+              "type": "callout",
+              "kind": "tip",
+              "icon": "v",
+              "text": "Aplicacao em engenharia: a velocidade de um carro em funcao do tempo, v(t), e uma funcao. Para cada instante t, existe exatamente uma velocidade v."
+            }
+          ]
+        },
+        {
+          "type": "mcq",
+          "formula": "f(x) = 4x + 2\nCalcule f(3)",
+          "stem": "Substitua x = 3 na expressao f(x) = 4x + 2. Qual e o resultado?",
+          "opts": ["10", "12", "14", "16"],
+          "correct": 2,
+          "exp": "f(3) = 4(3) + 2 = 12 + 2 = 14. Substituicao direta: troque x pelo valor dado."
+        },
+        {
+          "type": "mcq",
+          "formula": "g(x) = x^2 - 3\nQual e g(-2)?",
+          "stem": "Lembre que (-2)^2 = 4. Calcule g(-2) = (-2)^2 - 3.",
+          "opts": ["1", "-7", "7", "-1"],
+          "correct": 0,
+          "exp": "g(-2) = (-2)^2 - 3 = 4 - 3 = 1. Atencao: o quadrado de numero negativo e positivo!"
+        },
+        {
+          "type": "input",
+          "formula": "h(x) = 2x^2 + x - 1\nh(2) = ?",
+          "stem": "Substitua x = 2: 2(2)^2 + 2 - 1. Calcule passo a passo e digite o resultado.",
+          "correct": "9",
+          "exp": "h(2) = 2(4) + 2 - 1 = 8 + 2 - 1 = 9."
+        },
+        {
+          "type": "mcq",
+          "formula": "f(x) = sqrt(x - 1)\nQual e o dominio de f?",
+          "stem": "A raiz quadrada so existe (nos reais) quando o conteudo e maior ou igual a zero. Quando x - 1 >= 0?",
+          "opts": ["x > 0", "x >= 0", "x >= 1", "x > 1"],
+          "correct": 2,
+          "exp": "Precisamos que x - 1 >= 0, ou seja, x >= 1. Para x = 1: sqrt(0) = 0 (valido). Para x = 0: sqrt(-1) (invalido)."
+        }
+      ]
+    },
+    {
+      "id": "u0l2",
+      "title": "Tipos de Funcoes",
+      "steps": [
+        {
+          "type": "theory",
+          "title": "As principais familias de funcoes",
+          "blocks": [
+            {
+              "type": "para",
+              "heading": "Funcoes Lineares",
+              "text": "A forma mais simples: <strong>f(x) = ax + b</strong>. O grafico e uma reta. O coeficiente <em>a</em> e a inclinacao (quanto f cresce por unidade de x) e <em>b</em> e onde a reta cruza o eixo y. Usada para modelar crescimento constante: salario fixo, consumo proporcional."
+            },
+            {
+              "type": "formula",
+              "text": "f(x) = ax + b\n\na = inclinacao (taxa de variacao)\nb = intercepto no eixo y\n\nEx: f(x) = 2x + 1\n  -> passa por (0, 1)\n  -> cresce 2 unidades a cada 1 em x"
+            },
+            {
+              "type": "para",
+              "heading": "Funcoes Quadraticas",
+              "text": "Da forma <strong>f(x) = ax^2 + bx + c</strong>, seu grafico e uma parabola. Se a > 0, abre para cima (minimo); se a < 0, abre para baixo (maximo). Aparecem em fisica (trajetoria de projeteis), economia (lucro maximo) e engenharia."
+            },
+            {
+              "type": "para",
+              "heading": "Funcoes Modulares e Raiz",
+              "text": "A funcao <strong>|x|</strong> (valor absoluto) retorna sempre um valor positivo ou zero: |3| = 3, |-3| = 3. Ja <strong>sqrt(x)</strong> (raiz quadrada) so aceita x >= 0 e sempre retorna valores >= 0. Ambas sao usadas para modelar distancias e magnitudes."
+            },
+            {
+              "type": "callout",
+              "kind": "info",
+              "icon": "i",
+              "text": "Funcoes compostas: podemos combinar funcoes! Por exemplo, f(g(x)) aplica primeiro g, depois f sobre o resultado. Se g(x) = x^2 e f(x) = 2x, entao f(g(3)) = f(9) = 18."
+            },
+            {
+              "type": "example",
+              "label": "Reconhecendo tipos de funcao",
+              "body": "f(x) = 5x - 2       -> linear    (grau 1)\ng(x) = x^2 + 3x     -> quadratica (grau 2)\nh(x) = sqrt(2x + 1) -> radical\nk(x) = |x - 4|     -> modular\n\nCada tipo tem comportamento e grafico distintos."
+            }
+          ]
+        },
+        {
+          "type": "mcq",
+          "formula": "f(x) = -3x + 6",
+          "stem": "Esta funcao e linear. Qual e a sua inclinacao (coeficiente angular)?",
+          "opts": ["6", "3", "-3", "-6"],
+          "correct": 2,
+          "exp": "Na forma f(x) = ax + b, o coeficiente de x e a inclinacao. Aqui a = -3. O sinal negativo indica que a funcao decresce."
+        },
+        {
+          "type": "mcq",
+          "formula": "g(x) = x^2 - 4x + 4\ng(x) = (x - 2)^2",
+          "stem": "O vertice desta parabola esta em x = 2. Como a = 1 > 0, a parabola abre para cima. Qual e o valor minimo de g(x)?",
+          "opts": ["4", "2", "0", "-4"],
+          "correct": 2,
+          "exp": "g(2) = (2-2)^2 = 0. Este e o valor minimo, pois a parabola abre para cima e o vertice e seu ponto mais baixo."
+        },
+        {
+          "type": "mcq",
+          "formula": "f(g(x)) com f(x) = x + 3 e g(x) = 2x\nCalcule f(g(4))",
+          "stem": "Primeiro calcule g(4), depois aplique f ao resultado.",
+          "opts": ["8", "10", "11", "14"],
+          "correct": 2,
+          "exp": "g(4) = 2(4) = 8. Depois, f(8) = 8 + 3 = 11. Composicao: aplique sempre de dentro para fora."
+        },
+        {
+          "type": "input",
+          "formula": "f(x) = |2x - 6|\nf(1) = ?",
+          "stem": "Calcule 2(1) - 6 = -4, depois aplique o valor absoluto. Qual e f(1)?",
+          "correct": "4",
+          "exp": "f(1) = |2(1) - 6| = |2 - 6| = |-4| = 4. Valor absoluto elimina o sinal negativo."
+        }
+      ]
+    },
+    {
+      "id": "u0l3",
+      "title": "Funcoes Exponenciais e Logaritmicas",
+      "steps": [
+        {
+          "type": "theory",
+          "title": "Crescimento exponencial e sua inversa",
+          "blocks": [
+            {
+              "type": "para",
+              "heading": "Funcao Exponencial",
+              "text": "Uma funcao exponencial tem a forma <strong>f(x) = a^x</strong>, onde a > 0 e a ≠ 1. O que a torna especial: a variavel esta no <em>expoente</em>. Isso gera um crescimento (ou decrescimento) extremamente rapido — muito mais veloz que qualquer polinomio."
+            },
+            {
+              "type": "callout",
+              "kind": "info",
+              "icon": "i",
+              "text": "Aplicacao real: o crescimento de bacterias, juros compostos, decaimento radioativo e a propagacao de virus seguem modelos exponenciais. Em tecnologia, o numero de transistores em chips dobra aproximadamente a cada dois anos (Lei de Moore)."
+            },
+            {
+              "type": "formula",
+              "text": "f(x) = a^x   (exponencial geral)\nf(x) = e^x   (exponencial natural, base e = 2.71828...)\n\nPropriedades:\n  a^0 = 1     (qualquer base elevada a 0 e 1)\n  a^1 = a\n  a^m * a^n = a^(m+n)\n  (a^m)^n = a^(m*n)"
+            },
+            {
+              "type": "para",
+              "heading": "Funcao Logaritmica",
+              "text": "O logaritmo e o <strong>inverso</strong> da exponencial. Se 2^3 = 8, entao log_2(8) = 3. Pergunta: 'a que potencia devo elevar a base para obter este numero?' O logaritmo natural (ln) usa base e e e o mais importante no Calculo."
+            },
+            {
+              "type": "formula",
+              "text": "log_a(x) = y  <==>  a^y = x\n\nlog_10(1000) = 3  pois  10^3 = 1000\nln(e^5) = 5       pois  e^5 = e^5\n\nPropriedades fundamentais:\n  ln(x*y) = ln(x) + ln(y)\n  ln(x/y) = ln(x) - ln(y)\n  ln(x^n) = n*ln(x)\n  ln(e^x) = x   (inversos!)"
+            },
+            {
+              "type": "example",
+              "label": "Resolvendo equacoes exponenciais",
+              "body": "Resolver: 2^x = 32\n\nPasso 1: Escreva 32 como potencia de 2:\n  32 = 2^5\n\nPasso 2: Igualar os expoentes:\n  2^x = 2^5  =>  x = 5\n\nAlternativamente, aplique log_2 em ambos os lados:\n  log_2(2^x) = log_2(32)\n  x = 5"
+            }
+          ]
+        },
+        {
+          "type": "mcq",
+          "formula": "f(x) = 2^x\nf(4) = ?",
+          "stem": "Calcule 2 elevado a 4.",
+          "opts": ["8", "12", "16", "32"],
+          "correct": 2,
+          "exp": "2^4 = 2 x 2 x 2 x 2 = 16."
+        },
+        {
+          "type": "mcq",
+          "formula": "log_3(81) = ?",
+          "stem": "Pergunta: a que potencia devo elevar 3 para obter 81? Calcule: 3^1=3, 3^2=9, 3^3=27, 3^4=81.",
+          "opts": ["3", "4", "9", "27"],
+          "correct": 1,
+          "exp": "3^4 = 81, portanto log_3(81) = 4."
+        },
+        {
+          "type": "mcq",
+          "formula": "ln(e^7) = ?",
+          "stem": "Lembre que ln e log_e, e que ln(e^x) = x por serem funcoes inversas.",
+          "opts": ["e", "7", "7e", "1"],
+          "correct": 1,
+          "exp": "ln e log_e sao funcoes inversas da exponencial e^x. Portanto ln(e^7) = 7."
+        },
+        {
+          "type": "input",
+          "formula": "3^x = 27\nx = ?",
+          "stem": "Escreva 27 como potencia de 3. Lembre: 3^1=3, 3^2=9, 3^3=27.",
+          "correct": "3",
+          "exp": "27 = 3^3, entao 3^x = 3^3 implica x = 3."
+        }
+      ]
+    }
+  ]
+}

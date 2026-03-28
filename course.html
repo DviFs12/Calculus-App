@@ -419,7 +419,7 @@ function renderTheory(step) {
   document.getElementById('lesson-body').innerHTML = html;
 
   const btn = document.getElementById('btn-check');
-  btn.className = 'btn-check ready'; btn.textContent = 'Entendido &#8594;'; btn.onclick = advanceStep;
+  btn.className = 'btn-check ready'; btn.innerHTML = 'Entendido &rarr;'; btn.onclick = advanceStep;
 }
 
 function renderMCQ(step) {
@@ -517,14 +517,14 @@ function showFeedback(ok, exp) {
     saveState(STATE);
     updateTopbar();
     buildSidebar();
-    showToast('&#9733;', '+15 XP  &#9670; +5 moedas');
+    showToast('★', '+15 XP ◆ +5 moedas');
   }
   document.getElementById('fb-body').innerHTML = `
     <div class="fb-title ${ok?'correct':'wrong'}">${ok ? '&#10003; Correto!' : '&#10007; Incorreto'}</div>
     <div class="fb-exp">${exp}</div>`;
   const btn = document.getElementById('btn-check');
   btn.className = ok ? 'btn-check next' : 'btn-check next-wrong';
-  btn.textContent = 'Continuar \u2192'; btn.onclick = advanceStep;
+  btn.innerHTML = 'Continuar &rarr;'; btn.onclick = advanceStep;
 }
 
 function advanceStep() {
@@ -633,7 +633,7 @@ function confirmReset() {
   applyTheme('light');
   closeModal('reset-modal');
   buildSidebar(); buildHome();
-  showToast('&#10003;', 'Progresso redefinido');
+  showToast('✓', 'Progresso redefinido');
 }
 </script>
 </body>
