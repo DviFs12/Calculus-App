@@ -1,16 +1,16 @@
 {
   "id": "u6",
   "emoji": "técnicas",
-  "title": "Tecnicas de Integracao",
-  "desc": "Substituicao, partes e frações parciais",
+  "title": "Técnicas de Integração",
+  "desc": "Substituição, partes e frações parciais",
   "lessons": [
     {
       "id": "u6l1",
-      "title": "Substituicao (Regra da Cadeia Inversa)",
+      "title": "Substituição (Regra da Cadeia Inversa)",
       "steps": [
         {
           "type": "theory",
-          "title": "Substituicao: desfazendo a regra da cadeia",
+          "title": "Substituição: desfazendo a regra da cadeia",
           "blocks": [
             {
               "type": "para",
@@ -78,7 +78,7 @@
     },
     {
       "id": "u6l2",
-      "title": "Integracao por Partes",
+      "title": "Integração por Partes",
       "steps": [
         {
           "type": "theory",

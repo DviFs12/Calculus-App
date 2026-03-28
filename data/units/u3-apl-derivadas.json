@@ -2,11 +2,11 @@
   "id": "u3",
   "emoji": "apl-derivadas",
   "title": "Aplic. de Derivadas",
-  "desc": "Graficos, concavidade e problemas reais",
+  "desc": "Gráficos, concavidade e problemas reais",
   "lessons": [
     {
       "id": "u3l1",
-      "title": "Concavidade e Ponto de Inflexao",
+      "title": "Concavidade e Ponto de Inflexão",
       "steps": [
         {
           "type": "theory",
@@ -84,7 +84,7 @@
     },
     {
       "id": "u3l2",
-      "title": "Estudo Completo de Graficos",
+      "title": "Estudo Completo de Gráficos",
       "steps": [
         {
           "type": "theory",
@@ -102,7 +102,7 @@
             {
               "type": "example",
               "label": "Estudo completo: f(x) = x^3 - 3x",
-              "body": "Dominio: todos os reais\n\nIntercepto y: f(0) = 0\nIntercepto x: x^3 - 3x = x(x^2-3) = 0\n  => x = 0, x = sqrt(3), x = -sqrt(3)\n\nf'(x) = 3x^2 - 3 = 3(x-1)(x+1)\n  > 0 para x < -1 ou x > 1 (crescente)\n  < 0 para -1 < x < 1 (decrescente)\n\nf''(x) = 6x\n  > 0 para x > 0 (concava p/ cima)\n  < 0 para x < 0 (concava p/ baixo)\n\nMáximo local em x=-1: f(-1) = 2\nMínimo local em x=1:  f(1) = -2\nInflexao em x=0:      f(0) = 0"
+              "body": "Domínio: todos os reais\n\nIntercepto y: f(0) = 0\nIntercepto x: x^3 - 3x = x(x^2-3) = 0\n  => x = 0, x = sqrt(3), x = -sqrt(3)\n\nf'(x) = 3x^2 - 3 = 3(x-1)(x+1)\n  > 0 para x < -1 ou x > 1 (crescente)\n  < 0 para -1 < x < 1 (decrescente)\n\nf''(x) = 6x\n  > 0 para x > 0 (concava p/ cima)\n  < 0 para x < 0 (concava p/ baixo)\n\nMáximo local em x=-1: f(-1) = 2\nMínimo local em x=1:  f(1) = -2\nInflexao em x=0:      f(0) = 0"
             },
             {
               "type": "callout",
@@ -162,7 +162,7 @@
     },
     {
       "id": "u3l3",
-      "title": "Problemas de Otimizacao Real",
+      "title": "Problemas de Otimização Real",
       "steps": [
         {
           "type": "theory",
@@ -176,7 +176,7 @@
             {
               "type": "example",
               "label": "Problema classico: cerca de área maxima",
-              "body": "Problema: você tem 100 m de cerca e quer criar\num retângulo de área maxima.\n\nVariaveis: largura x, comprimento y\nRestricao: 2x + 2y = 100  =>  y = 50 - x\n\nÁrea: A(x) = x*y = x*(50-x) = 50x - x^2\nDominio: 0 < x < 50\n\nA'(x) = 50 - 2x = 0  =>  x = 25\nA''(25) = -2 < 0  =>  MAXIMO!\n\nDimensoes otimas: 25m x 25m (quadrado)\nÁrea maxima: 625 m^2\n\nLicao: para perimetro fixo, o quadrado\nmaximiza a área!"
+              "body": "Problema: você tem 100 m de cerca e quer criar\num retângulo de área maxima.\n\nVariaveis: largura x, comprimento y\nRestrição: 2x + 2y = 100  =>  y = 50 - x\n\nÁrea: A(x) = x*y = x*(50-x) = 50x - x^2\nDomínio: 0 < x < 50\n\nA'(x) = 50 - 2x = 0  =>  x = 25\nA''(25) = -2 < 0  =>  MAXIMO!\n\nDimensoes otimas: 25m x 25m (quadrado)\nÁrea maxima: 625 m^2\n\nLicao: para perimetro fixo, o quadrado\nmaximiza a área!"
             },
             {
               "type": "callout",

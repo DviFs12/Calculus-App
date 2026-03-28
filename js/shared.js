@@ -237,3 +237,124 @@ const CURRICULUM_INLINE = [
     ]
   }
 ];
+
+
+// ══════════════════════════════════════════
+//  DEBUG CONSOLE COMMANDS
+//  Disponíveis globalmente em window.calc.*
+// ══════════════════════════════════════════
+const calc = {
+  /** Adiciona moedas. Ex: calc.addCoins(500) */
+  addCoins(amount = 100) {
+    const state = loadState();
+    state.coins = (state.coins || 0) + amount;
+    saveState(state);
+    if (typeof updateTopbar === 'function') updateTopbar();
+    if (typeof buildSidebar === 'function') buildSidebar();
+    console.log(`%c✓ +${amount} moedas adicionadas. Total: ${state.coins}`, 'color:#7c3aed;font-weight:bold');
+  },
+
+  /** Adiciona XP. Ex: calc.addXP(1000) */
+  addXP(amount = 500) {
+    const state = loadState();
+    state.xp = (state.xp || 0) + amount;
+    saveState(state);
+    if (typeof updateTopbar === 'function') updateTopbar();
+    if (typeof buildSidebar === 'function') buildSidebar();
+    console.log(`%c✓ +${amount} XP adicionados. Total: ${state.xp}`, 'color:#b45309;font-weight:bold');
+  },
+
+  /** Define o nível diretamente pelo XP mínimo. Ex: calc.setLevel(5) */
+  setLevel(level = 1) {
+    const LEVELS_MIN = [0, 100, 250, 500, 900, 1400, 2000, 3000];
+    const xp = LEVELS_MIN[Math.min(level - 1, LEVELS_MIN.length - 1)] || 0;
+    const state = loadState();
+    state.xp = xp;
+    saveState(state);
+    if (typeof updateTopbar === 'function') updateTopbar();
+    if (typeof buildSidebar === 'function') buildSidebar();
+    const li = getLevelInfo(xp);
+    console.log(`%c✓ Nível definido: ${li.level} (${li.name}), XP = ${xp}`, 'color:#15803d;font-weight:bold');
+  },
+
+  /** Desbloqueia todos os temas. Ex: calc.unlockAllThemes() */
+  unlockAllThemes() {
+    const state = loadState();
+    state.ownedThemes = THEMES_DATA.map(t => t.id);
+    saveState(state);
+    console.log(`%c✓ Todos os ${THEMES_DATA.length} temas desbloqueados`, 'color:#7c3aed;font-weight:bold');
+    console.log('Temas:', state.ownedThemes.join(', '));
+  },
+
+  /** Completa todas as lições. Ex: calc.completeAll() */
+  completeAll() {
+    const state = loadState();
+    if (typeof CURRICULUM !== 'undefined') {
+      let count = 0;
+      CURRICULUM.forEach(unit => {
+        unit.lessons.forEach(les => {
+          if (!state.completedLessons[les.id]) {
+            state.completedLessons[les.id] = { xp: 100, accuracy: 100, date: new Date().toISOString() };
+            count++;
+          }
+        });
+      });
+      saveState(state);
+      if (typeof buildSidebar === 'function') buildSidebar();
+      if (typeof buildHome === 'function') buildHome();
+      console.log(`%c✓ ${count} lições marcadas como concluídas`, 'color:#15803d;font-weight:bold');
+    } else {
+      console.warn('CURRICULUM não disponível nesta página. Use em course.html');
+    }
+  },
+
+  /** Reseta todo o progresso. Ex: calc.reset() */
+  reset() {
+    localStorage.removeItem('calculus_v4');
+    console.log('%c✓ Progresso resetado. Recarregue a página.', 'color:#dc2626;font-weight:bold');
+    setTimeout(() => location.reload(), 800);
+  },
+
+  /** Mostra o estado atual. Ex: calc.status() */
+  status() {
+    const state = loadState();
+    const li = getLevelInfo(state.xp);
+    console.group('%c∂ Calculus — Estado atual', 'color:#c2410c;font-size:14px;font-weight:bold');
+    console.log(`XP: ${state.xp} | Nível: ${li.level} (${li.name})`);
+    console.log(`Moedas: ${state.coins || 0}`);
+    console.log(`Streak: ${state.streak || 0} dias`);
+    console.log(`Lições concluídas: ${Object.keys(state.completedLessons).length}`);
+    console.log(`Temas desbloqueados: ${(state.ownedThemes || []).join(', ')}`);
+    console.log(`Tema ativo: ${state.activeTheme || 'light'}`);
+    console.log(`Tutorial feito: ${state.tutorialDone ? 'sim' : 'não'}`);
+    console.groupEnd();
+    return state;
+  },
+
+  /** Mostra ajuda dos comandos. Ex: calc.help() */
+  help() {
+    console.group('%c∂ Calculus — Comandos de Debug', 'color:#c2410c;font-size:14px;font-weight:bold');
+    console.log('%ccalc.addCoins(n)      ', 'font-weight:bold', '— Adiciona n moedas (padrão: 100)');
+    console.log('%ccalc.addXP(n)         ', 'font-weight:bold', '— Adiciona n XP (padrão: 500)');
+    console.log('%ccalc.setLevel(n)      ', 'font-weight:bold', '— Define nível 1-8 (padrão: 1)');
+    console.log('%ccalc.unlockAllThemes()', 'font-weight:bold', '— Desbloqueia todos os temas');
+    console.log('%ccalc.completeAll()    ', 'font-weight:bold', '— Marca todas as lições como concluídas');
+    console.log('%ccalc.reset()          ', 'font-weight:bold', '— Reseta todo o progresso');
+    console.log('%ccalc.status()         ', 'font-weight:bold', '— Mostra o estado atual');
+    console.log('%ccalc.help()           ', 'font-weight:bold', '— Esta ajuda');
+    console.groupEnd();
+  }
+};
+
+// Expor globalmente
+if (typeof window !== 'undefined') {
+  window.calc = calc;
+  // Dica no console ao carregar
+  console.log(
+    '%c∂ Calculus%c — Debug disponível. Digite %ccalc.help()%c para ver os comandos.',
+    'color:#c2410c;font-weight:bold;font-size:13px',
+    'color:inherit',
+    'color:#7c3aed;font-weight:bold',
+    'color:inherit'
+  );
+}

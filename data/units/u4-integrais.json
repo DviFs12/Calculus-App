@@ -2,7 +2,7 @@
   "id": "u4",
   "emoji": "integrais",
   "title": "Integrais",
-  "desc": "Acumulacao, áreas é o Teorema Fundamental",
+  "desc": "Acumulação, áreas e o Teorema Fundamental",
   "lessons": [
     {
       "id": "u4l1",
@@ -170,7 +170,7 @@
           "blocks": [
             {
               "type": "para",
-              "heading": "A conexao mais bonita da matemática",
+              "heading": "A conexão mais bonita da matemática",
               "text": "O Teorema Fundamental do Cálculo conecta derivada e integral — duas ideias aparentemente não relacionadas. Ele diz: para calcular a área exata sob f(x) de a até b, basta encontrar uma antiderivada F(x) e calcular F(b) - F(a). Eliminando a necessidade das somas de Riemann!"
             },
             {

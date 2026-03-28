@@ -90,7 +90,7 @@
     },
     {
       "id": "u2l2",
-      "title": "Regras de Derivacao",
+      "title": "Regras de Derivação",
       "steps": [
         {
           "type": "theory",
@@ -172,7 +172,7 @@
     },
     {
       "id": "u2l3",
-      "title": "Aplicacoes: Velocidade e Crescimento",
+      "title": "Aplicações: Velocidade e Crescimento",
       "steps": [
         {
           "type": "theory",
@@ -180,7 +180,7 @@
           "blocks": [
             {
               "type": "para",
-              "heading": "Posicao, velocidade e aceleração",
+              "heading": "Posição, velocidade e aceleração",
               "text": "Se s(t) é a posição de um objeto em função do tempo, então a <strong>velocidade instantânea</strong> e v(t) = s'(t) é a <strong>aceleração</strong> e a(t) = v'(t) = s''(t). Esta é a conexao entre Cálculo e Física."
             },
             {
@@ -250,7 +250,7 @@
     },
     {
       "id": "u2l4",
-      "title": "Máximos, Mínimos e Otimizacao",
+      "title": "Máximos, Mínimos e Otimização",
       "steps": [
         {
           "type": "theory",
